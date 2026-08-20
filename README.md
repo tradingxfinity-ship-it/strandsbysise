@@ -9,8 +9,8 @@ Open `index.html` in a browser and it works.
 ## 1. What's in here
 
 ```
-index.html          Home — hero, collections, best sellers, why us,
-                    Hair Bank scheme, testimonials, SBS Babes
+index.html          Home — hero, collections, best sellers, custom unit
+                    builder, why us, Hair Bank scheme, testimonials, SBS Babes
 shop.html           Full collection with texture filters and sorting
 product.html        Product detail — gallery, options, reviews, related
 about.html          Brand story
@@ -156,6 +156,27 @@ replaced**, or the button goes nowhere:
 The matching FAQ entry ("How does the Hair Bank scheme work?") lives in
 `templates/faq.template.html`. Edit the terms there to match how you actually run it,
 then run `python3 build.py`.
+
+### The custom unit builder
+
+The "Create a Custom Unit" section on the home page collects a full specification —
+hair grade, hair type, length, weight, a colour reference picture, plus the customer's
+name, number and notes — and opens WhatsApp with it all written out, so you receive a
+tidy brief instead of a back-and-forth.
+
+Two things to know:
+
+**The length list follows the grade.** Virgin hair offers 10"–30" and raw hair 10"–40",
+in 2" steps. If a customer picks 38" as raw and then switches to virgin, the length
+resets rather than leaving an impossible order. To change these ranges, edit the
+`data-max` values on the grade buttons in `index.html`.
+
+**The colour picture is not sent automatically.** A static site has no server to receive
+an upload, and WhatsApp links can carry text but not attachments. So the customer picks
+their picture, sees it previewed, and the message says they're sending it — then they
+attach it in the chat that opens. If you'd rather the photo arrive by itself, a paid
+Formspree plan accepts file uploads and would email it to you; point the `<form>` at
+their endpoint and remove the WhatsApp handler in `assets/js/main.js`.
 
 ### The contact form
 

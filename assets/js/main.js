@@ -537,6 +537,101 @@
     }
   }
 
+  /* --- Create a Custom Unit --------------------------------- */
+  var custom = $("[data-custom-form]");
+  if (custom) {
+    var WA_NUMBER = "2348030000000";
+    var grades = $("[data-custom-grade]", custom);
+    var lengthSel = $("[data-custom-length]", custom);
+    var hint = $("[data-grade-hint]", custom);
+    var fileInput = $("[data-colour-input]", custom);
+    var zone = $("[data-dropzone]", custom);
+    var preview = $(".dropzone__preview", custom);
+    var empty = $(".dropzone__empty", custom);
+
+    /* Length choices depend on grade: raw reaches 40", virgin 30". */
+    function fillLengths() {
+      var checked = $("[aria-checked='true']", grades);
+      var max = parseInt(checked ? checked.getAttribute("data-max") : "30", 10);
+      var keep = lengthSel.value;
+      lengthSel.innerHTML = "";
+      for (var n = 10; n <= max; n += 2) {
+        var o = document.createElement("option");
+        o.value = o.textContent = n + '"';
+        lengthSel.appendChild(o);
+      }
+      /* Keep the chosen length if the new grade still offers it. */
+      lengthSel.value = keep && parseInt(keep, 10) <= max ? keep : '20"';
+      if (hint && checked) {
+        hint.textContent = checked.getAttribute("data-value") +
+          ' is available from 10" to ' + max + '".';
+      }
+    }
+    if (grades) grades.addEventListener("click", function () { setTimeout(fillLengths, 0); });
+    fillLengths();
+
+    /* Colour reference preview */
+    function showFile(file) {
+      if (!file || file.type.indexOf("image/") !== 0) return;
+      $("[data-colour-preview]", custom).src = URL.createObjectURL(file);
+      $("[data-colour-name]", custom).textContent = file.name;
+      preview.hidden = false;
+      empty.hidden = true;
+    }
+    if (fileInput) {
+      fileInput.addEventListener("change", function () { showFile(fileInput.files[0]); });
+    }
+    if (zone) {
+      ["dragenter", "dragover"].forEach(function (ev) {
+        zone.addEventListener(ev, function (e) { e.preventDefault(); zone.classList.add("is-dragging"); });
+      });
+      ["dragleave", "drop"].forEach(function (ev) {
+        zone.addEventListener(ev, function (e) { e.preventDefault(); zone.classList.remove("is-dragging"); });
+      });
+      zone.addEventListener("drop", function (e) {
+        var file = e.dataTransfer && e.dataTransfer.files[0];
+        if (!file) return;
+        try { fileInput.files = e.dataTransfer.files; } catch (err) { /* older browsers */ }
+        showFile(file);
+      });
+    }
+
+    custom.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!custom.checkValidity()) { custom.reportValidity(); return; }
+
+      var pick = function (group) {
+        var el = $("[data-option='" + group + "'] [aria-checked='true']", custom);
+        return el ? el.getAttribute("data-value") : "";
+      };
+      var val = function (sel) { var el = $(sel, custom); return el ? el.value.trim() : ""; };
+
+      var lines = [
+        "Hello StrandsBySise, I'd like a custom unit.",
+        "",
+        "Name: " + val("#cu-name"),
+        "Phone: " + val("#cu-phone"),
+        "Hair grade: " + pick("grade"),
+        "Hair type: " + pick("type"),
+        "Length: " + val("#cu-length"),
+        "Weight: " + val("#cu-weight")
+      ];
+      var notes = val("#cu-notes");
+      if (notes) lines.push("Notes: " + notes);
+      lines.push("");
+      lines.push(fileInput && fileInput.files[0]
+        ? "Colour reference: sending the picture now."
+        : "Colour reference: I'll send a picture shortly.");
+
+      window.open("https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(lines.join("\n")),
+                  "_blank", "noopener");
+
+      toast(fileInput && fileInput.files[0]
+        ? "Opening WhatsApp — attach your colour picture there"
+        : "Opening WhatsApp with your specification");
+    });
+  }
+
   /* --- Forms (demo handlers) -------------------------------- */
   $$("[data-demo-form]").forEach(function (form) {
     form.addEventListener("submit", function (e) {
