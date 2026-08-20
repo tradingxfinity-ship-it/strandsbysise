@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+._*
+
+# Editor / tooling
+.claude/settings.local.json
+*.log
+
+# Python
+__pycache__/
+*.pyc
