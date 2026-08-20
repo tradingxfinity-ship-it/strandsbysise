@@ -423,6 +423,83 @@
     go(0);
   }
 
+  /* --- SBS Babes social rows -------------------------------- */
+  $$("[data-social-row]").forEach(function (row) {
+    var track = $("[data-social-track]", row);
+    var prev = $("[data-social-prev]", row);
+    var next = $("[data-social-next]", row);
+    if (!track) return;
+
+    function step() {
+      var card = $(".social-card", track);
+      if (!card) return track.clientWidth;
+      var gap = parseFloat(getComputedStyle(track).columnGap || "0") || 0;
+      /* Advance by whole cards, as many as fit minus one for context. */
+      var per = Math.max(1, Math.floor(track.clientWidth / (card.offsetWidth + gap)) - 1);
+      return (card.offsetWidth + gap) * per;
+    }
+
+    function sync() {
+      var max = track.scrollWidth - track.clientWidth;
+      if (prev) prev.disabled = track.scrollLeft <= 2;
+      if (next) next.disabled = track.scrollLeft >= max - 2;
+    }
+
+    /* Animated by hand rather than with `behavior: "smooth"`: scroll
+       snapping cancels the native smooth scroll in some browsers and
+       springs the track back to where it started. */
+    var raf, guard;
+    function nudge(dir) {
+      var max = track.scrollWidth - track.clientWidth;
+      var from = track.scrollLeft;
+      var to = Math.max(0, Math.min(max, from + dir * step()));
+      if (to === from) return;
+
+      if (reduceMotion) { track.scrollLeft = to; sync(); return; }
+
+      cancelAnimationFrame(raf);
+      clearTimeout(guard);
+      var snap = track.style.scrollSnapType;
+      track.style.scrollSnapType = "none";
+      var start = performance.now();
+      var dur = 520;
+      var done = false;
+
+      /* The eased scroll is a nicety; landing on `to` is not. If frames
+         never arrive (hidden tab, throttled renderer) this still ends up
+         in the right place with snapping restored. */
+      function finish() {
+        if (done) return;
+        done = true;
+        cancelAnimationFrame(raf);
+        track.scrollLeft = to;
+        track.style.scrollSnapType = snap;
+        sync();
+      }
+      guard = setTimeout(finish, dur + 120);
+
+      raf = requestAnimationFrame(function frame(now) {
+        if (done) return;
+        var p = Math.min(1, (now - start) / dur);
+        track.scrollLeft = from + (to - from) * (1 - Math.pow(1 - p, 3));
+        if (p < 1) raf = requestAnimationFrame(frame);
+        else finish();
+      });
+    }
+
+    if (prev) prev.addEventListener("click", function () { nudge(-1); });
+    if (next) next.addEventListener("click", function () { nudge(1); });
+
+    var tick;
+    track.addEventListener("scroll", function () {
+      clearTimeout(tick);
+      tick = setTimeout(sync, 80);
+    }, { passive: true });
+
+    window.addEventListener("resize", function () { clearTimeout(tick); tick = setTimeout(sync, 150); });
+    sync();
+  });
+
   /* --- Shop filters ----------------------------------------- */
   var shop = $("[data-shop]");
   if (shop) {

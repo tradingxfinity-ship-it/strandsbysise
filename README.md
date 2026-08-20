@@ -10,7 +10,7 @@ Open `index.html` in a browser and it works.
 
 ```
 index.html          Home — hero, collections, best sellers, why us,
-                    before & after, testimonials, Instagram, newsletter
+                    Hair Bank scheme, testimonials, SBS Babes
 shop.html           Full collection with texture filters and sorting
 product.html        Product detail — gallery, options, reviews, related
 about.html          Brand story
@@ -18,7 +18,7 @@ contact.html        Contact form, direct channels, hours, map slot
 faq.html            Grouped, searchable-by-section FAQs
 
 assets/css/styles.css   The whole design system (one file, sectioned + commented)
-assets/js/main.js       Cart, carousel, filters, gallery zoom, accordions, animations
+assets/js/main.js       Cart, carousels, filters, gallery zoom, accordions, animations
 assets/img/             Placeholder imagery — replace with your photography
 
 templates/          Editable sources for every page except index.html
@@ -107,10 +107,11 @@ the filename of the slot you want to change, and that spot updates on its own:
 | Slot | Filename | Shape | Suggested size |
 |---|---|---|---|
 | Hero | `hero-model.jpg` | Portrait 4:5 | 1100 × 1375 |
+| Hair Bank section | `hair-bank.jpg` | Portrait 4:5 | 900 × 1125 |
 | Collection cards | `collection-*.jpg` | Portrait 4:5 | 760 × 950 |
 | Products | `product-<id>-1..4.jpg` | Portrait 4:5 | 900 × 1125 |
-| Before / After | `before.jpg`, `after.jpg` | Portrait 4:5 | 800 × 1000 |
-| Instagram grid | `gram-1..8.jpg` | Portrait or square | 600 × 750 |
+| SBS Babes — Instagram row | `ig-1..8.jpg` | Portrait 4:5 | 600 × 750 |
+| SBS Babes — TikTok row | `tt-1..8.jpg` | Portrait 4:5 | 600 × 750 |
 | Reviewer photos | `avatar-1..5.jpg` | Portrait or square | 240 × 300 |
 | About page | `about-founder/studio/detail.jpg` | Portrait 4:5 | 700–900 wide |
 
@@ -129,7 +130,7 @@ screen readers announce and what Google reads.
 python3 tools-generate-placeholders.py assets/img/your-photo.jpg
 ```
 
-That regenerates all 57 files at the right sizes. The original full-size
+That regenerates all 64 files at the right sizes. The original full-size
 `IMG_7195.JPG.jpeg` is kept in `assets/img/` as the source — it's 4.7 MB and isn't
 loaded by any page, so you can delete it once you no longer need to regenerate from it.
 

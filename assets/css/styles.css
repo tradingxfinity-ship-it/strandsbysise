@@ -12,7 +12,7 @@
    8.  Product cards & grids
    9.  Feature cards
    11. Testimonials
-   12. Instagram gallery
+   12. SBS Babes carousels
    13. Newsletter
    14. Footer
    15. Product detail page
@@ -131,7 +131,6 @@ img, svg, video { display: block; max-width: 100%; height: auto; }
 /* Photography is shot portrait (4:5). Slots that are square or landscape
    crop from the top so faces stay in frame — adjust the second value if
    your own photos sit differently. */
-.gram img,
 .thumb img,
 .review__person img,
 .split__media--wide img { object-position: 50% 15%; }
@@ -907,30 +906,104 @@ select.field {
 }
 .reviews__dots button[aria-current="true"] { width: 26px; border-radius: var(--r-pill); background: var(--gold); }
 
-/* 12. Instagram gallery ================================================== */
-.gram-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(0.5rem, 0.25rem + 0.8vw, 1rem);
+/* 12. SBS Babes — social carousels ======================================= */
+.social-row { margin-top: clamp(2rem, 1.4rem + 2vw, 3.25rem); }
+
+.social-row__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.1rem;
 }
-.gram {
+
+.social-row__title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+}
+.social-row__title a { color: var(--gold-deep); }
+.social-row__title a:hover { text-decoration: underline; }
+
+.social-row__icon {
+  display: grid;
+  place-items: center;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 1px solid var(--line);
+  color: var(--charcoal);
+  flex: none;
+}
+
+.social-row__nav { display: flex; gap: 0.5rem; flex: none; }
+.social-row__nav button {
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--charcoal);
+  cursor: pointer;
+  transition: border-color 0.3s var(--ease), color 0.3s var(--ease), transform 0.3s var(--ease-out);
+}
+.social-row__nav button:hover:not(:disabled) { border-color: var(--gold); color: var(--gold-deep); transform: translateY(-2px); }
+.social-row__nav button:disabled { opacity: 0.3; cursor: default; }
+
+.social-row__track {
+  display: flex;
+  gap: clamp(0.6rem, 0.35rem + 0.8vw, 1rem);
+  overflow-x: auto;
+  /* `proximity`, not `mandatory`: mandatory snapping fights the arrow
+     buttons' programmatic scroll and springs the track back to 0. */
+  scroll-snap-type: x proximity;
+  padding-inline: var(--gutter);
+  padding-block: 4px;
+  /* Snap points must respect the edge padding, or the first card starts
+     clipped against the viewport edge. */
+  scroll-padding-inline: var(--gutter);
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+.social-row__track::-webkit-scrollbar { display: none; }
+
+.social-card {
   position: relative;
-  display: block;
+  flex: 0 0 clamp(160px, 20vw, 250px);
+  scroll-snap-align: start;
   overflow: hidden;
   border-radius: var(--r-md);
-  aspect-ratio: 1;
+  aspect-ratio: 4 / 5;
   background: var(--ivory-deep);
+  box-shadow: var(--shadow-xs);
+  transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
 }
-.gram img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--ease-out); }
-.gram:hover img { transform: scale(1.08); }
-.gram::after {
+.social-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+.social-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: 50% 15%;
+  transition: transform 0.9s var(--ease-out);
+}
+.social-card:hover img { transform: scale(1.07); }
+.social-card::after {
   content: "";
   position: absolute; inset: 0;
-  background: rgba(43, 43, 43, 0.32);
+  background: rgba(43, 43, 43, 0.3);
   opacity: 0;
   transition: opacity 0.4s var(--ease);
 }
-.gram__icon {
+.social-card:hover::after { opacity: 1; }
+
+.social-card__icon {
   position: absolute;
   inset: 0;
   z-index: 2;
@@ -938,11 +1011,17 @@ select.field {
   place-items: center;
   color: #fff;
   opacity: 0;
-  transform: scale(0.8);
+  transform: scale(0.82);
   transition: opacity 0.4s var(--ease), transform 0.5s var(--ease-out);
 }
-.gram:hover::after { opacity: 1; }
-.gram:hover .gram__icon { opacity: 1; transform: none; }
+.social-card:hover .social-card__icon,
+.social-card:focus-visible .social-card__icon { opacity: 1; transform: none; }
+
+@media (hover: none) {
+  .social-card__icon { opacity: 0.9; transform: none; }
+  .social-card::after { opacity: 0.18; }
+  .social-row__nav { display: none; }
+}
 
 /* 13. Newsletter ========================================================= */
 .newsletter {
@@ -1634,7 +1713,6 @@ select.field {
 
   .contact-grid { grid-template-columns: 1fr; }
   .stat-row { grid-template-columns: repeat(2, 1fr); row-gap: 2.25rem; }
-  .gram-grid { grid-template-columns: repeat(3, 1fr); }
 
   .sticky-buy { display: flex; }
   .fab { display: flex; }
@@ -1654,7 +1732,6 @@ select.field {
   .collections-grid .collection-card__body h3 { font-size: 1.05rem; }
 
   .review { flex-basis: 100%; }
-  .gram-grid { grid-template-columns: repeat(2, 1fr); }
   .footer__grid { grid-template-columns: 1fr; gap: 2.25rem; }
   .newsletter__form { flex-direction: column; border-radius: var(--r-lg); padding: 0.75rem; }
   .newsletter__form .field { padding-left: 1rem; text-align: center; }
