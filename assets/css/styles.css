@@ -973,53 +973,6 @@ select.field {
 .newsletter__form .field:focus { box-shadow: none; }
 .newsletter .form-note { margin-top: 1rem; }
 
-/* Pay Little by Little — steps */
-.plbl-steps {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(0.75rem, 0.4rem + 1.2vw, 1.25rem);
-  margin-top: 2.75rem;
-  text-align: center;
-  counter-reset: plbl;
-}
-.plbl-steps li {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.3rem;
-  padding: 1.5rem 1.1rem 1.35rem;
-  border-radius: var(--r-md);
-  background: rgba(255, 255, 255, 0.62);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  box-shadow: var(--shadow-xs);
-  transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
-}
-.plbl-steps li:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
-.plbl-steps__num {
-  display: grid;
-  place-items: center;
-  width: 34px; height: 34px;
-  margin-bottom: 0.6rem;
-  border-radius: 50%;
-  border: 1px solid rgba(212, 175, 55, 0.5);
-  background: var(--white);
-  font-family: var(--font-display);
-  font-size: 0.92rem;
-  color: var(--gold-deep);
-}
-.plbl-steps b { font-family: var(--font-display); font-size: 1.05rem; font-weight: 500; }
-.plbl-steps span:not(.plbl-steps__num) { font-size: var(--fs-small); color: var(--charcoal-soft); line-height: 1.55; }
-
-@media (max-width: 640px) {
-  .plbl-steps { grid-template-columns: 1fr; }
-  .plbl-steps li { flex-direction: row; align-items: center; text-align: left; flex-wrap: wrap; padding: 1.1rem 1.25rem; }
-  .plbl-steps__num { margin: 0 0.9rem 0 0; flex: none; }
-  .plbl-steps b { flex: 1; }
-  .plbl-steps span:not(.plbl-steps__num) { flex-basis: 100%; padding-left: calc(34px + 0.9rem); }
-}
-
 /* 14. Footer ============================================================= */
 .footer {
   background: var(--charcoal);

@@ -141,20 +141,18 @@ directly in `index.html`. The phone number `+234 803 000 0000` and the WhatsApp 
 across all `.html` files plus `templates/` catches every one. Same for
 `hello@strandsbysise.com` and the `instagram.com/strandsbysise` handle.
 
-### The Pay Little by Little group — set this link before you go live
+### The Hair Bank group — set this link before you go live
 
-The last section of the home page invites customers into your Pay Little by Little
-WhatsApp group. **The invite link is a placeholder and must be replaced**, or the
-button goes nowhere:
+The Hair Bank section in the middle of the home page invites customers into your
+savings-scheme WhatsApp group. **The invite link is a placeholder and must be
+replaced**, or the button goes nowhere:
 
 1. Open the group in WhatsApp → **Group info** → **Invite via link** → **Copy link**.
    You'll get something like `https://chat.whatsapp.com/HcW2kL9xYz3AbCdEf`.
-2. In `index.html`, find `YOUR-GROUP-INVITE-CODE` and replace the whole URL with yours.
+2. In `index.html`, find `YOUR-HAIR-BANK-GROUP-INVITE-CODE` and replace the whole URL
+   with yours.
 
-The second button beside it opens a one-to-one chat with you, pre-filled with a
-question about the scheme — that one already uses your normal WhatsApp number.
-
-The matching FAQ entry ("How does Pay Little by Little work?") lives in
+The matching FAQ entry ("How does the Hair Bank scheme work?") lives in
 `templates/faq.template.html`. Edit the terms there to match how you actually run it,
 then run `python3 build.py`.
 
