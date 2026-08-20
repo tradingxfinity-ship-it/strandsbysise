@@ -24,6 +24,7 @@ assets/img/             Placeholder imagery — replace with your photography
 templates/          Editable sources for every page except index.html
 build.py            Rebuilds those pages (see §4)
 tools-generate-placeholders.py   Regenerates the placeholder images
+tools-fit-images.py              Resizes/compresses photos you drop in
 ```
 
 ## 2. Viewing it locally
@@ -166,7 +167,21 @@ each card.
 
 **The thumbnails don't match the posts yet.** Every card still shows the same
 placeholder photo. Save a screenshot of each post as `assets/img/ig-1.jpg` through
-`ig-9.jpg`, in the same order as the links, and the row becomes a real feed.
+`ig-9.jpg`, in the same order as the links, and the row becomes a real feed. Capture
+just the image, not the Instagram chrome around it — the CSS crops to 4:5 from the top,
+so the framing sorts itself out.
+
+Phone screenshots are usually 2-4 MB, which would bloat the repo and slow the page
+badly. After dropping them in, run:
+
+```bash
+python3 tools-fit-images.py
+```
+
+It finds any oversized image, resizes it to what the site actually displays and
+compresses it in place — typically 4 MB down to about 70 KB with no visible difference.
+Run it any time you add a photo; it skips anything already the right size. Keep your
+originals elsewhere, since it rewrites the files.
 
 The TikTok row still points at your profile page rather than individual videos — send
 the video links whenever you have them and they can be wired the same way.
