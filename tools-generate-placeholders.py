@@ -26,8 +26,7 @@ SLOTS = {
     "about-founder": 900,
     "about-studio": 900,
     "about-detail": 700,
-    "before": 800,
-    "after": 800,
+    "hair-bank": 900,
 }
 
 for name in ["straight-wigs", "curly-wigs", "body-wave", "bob-wigs", "closure-wigs", "frontal-wigs"]:
