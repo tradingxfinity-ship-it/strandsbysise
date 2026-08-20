@@ -110,7 +110,7 @@ the filename of the slot you want to change, and that spot updates on its own:
 | Hair Bank section | `hair-bank.jpg` | Portrait 4:5 | 900 × 1125 |
 | Collection cards | `collection-*.jpg` | Portrait 4:5 | 760 × 950 |
 | Products | `product-<id>-1..4.jpg` | Portrait 4:5 | 900 × 1125 |
-| SBS Babes — Instagram row | `ig-1..8.jpg` | Portrait 4:5 | 600 × 750 |
+| SBS Babes — Instagram row | `ig-1..9.jpg` | Portrait 4:5 | 600 × 750 |
 | SBS Babes — TikTok row | `tt-1..8.jpg` | Portrait 4:5 | 600 × 750 |
 | Reviewer photos | `avatar-1..5.jpg` | Portrait or square | 240 × 300 |
 | About page | `about-founder/studio/detail.jpg` | Portrait 4:5 | 700–900 wide |
@@ -156,6 +156,20 @@ replaced**, or the button goes nowhere:
 The matching FAQ entry ("How does the Hair Bank scheme work?") lives in
 `templates/faq.template.html`. Edit the terms there to match how you actually run it,
 then run `python3 build.py`.
+
+### The SBS Babes carousels
+
+The Instagram row links to nine real posts, in the order you gave them. The links live
+directly on the `<a class="social-card">` tags inside `index.html` — to change one,
+edit its `href`. Reels get a play icon and posts get a heart, set by the `<svg>` inside
+each card.
+
+**The thumbnails don't match the posts yet.** Every card still shows the same
+placeholder photo. Save a screenshot of each post as `assets/img/ig-1.jpg` through
+`ig-9.jpg`, in the same order as the links, and the row becomes a real feed.
+
+The TikTok row still points at your profile page rather than individual videos — send
+the video links whenever you have them and they can be wired the same way.
 
 ### The custom unit builder
 
