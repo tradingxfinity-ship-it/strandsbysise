@@ -1018,6 +1018,39 @@ select.field {
 .social-card:hover .social-card__icon,
 .social-card:focus-visible .social-card__icon { opacity: 1; transform: none; }
 
+/* Real platform embeds (Instagram / TikTok) sit in the same track as the
+   image cards. The iframe is taller than its frame on purpose: we show the
+   profile header and the media, and clip the caption and comment box that
+   follow. Only the bottom is truncated, so an Instagram markup change can
+   shorten or lengthen that tail without breaking the layout. */
+.social-embed {
+  flex: 0 0 clamp(300px, 27vw, 340px);
+  scroll-snap-align: start;
+  position: relative;
+  height: clamp(430px, 34vw + 90px, 480px);
+  overflow: hidden;
+  border-radius: var(--r-md);
+  background: var(--white);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-xs);
+  transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+}
+.social-embed:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+
+.social-embed iframe {
+  display: block;
+  width: 100%;
+  height: 760px;
+  border: 0;
+  background: var(--white);
+}
+
+/* Arrows must stay on touch for embed rows: a finger landing on an iframe
+   cannot swipe the track underneath it. */
+@media (hover: none) {
+  .social-row--embeds .social-row__nav { display: flex; }
+}
+
 @media (hover: none) {
   .social-card__icon { opacity: 0.9; transform: none; }
   .social-card::after { opacity: 0.18; }

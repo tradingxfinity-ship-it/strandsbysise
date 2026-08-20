@@ -37,9 +37,7 @@ for name in ["silk-straight", "cascade-curls", "body-wave-luxe", "blunt-bob",
     for view in range(1, 5):
         SLOTS["product-%s-%d" % (name, view)] = 900
 
-for i in range(1, 10):
-    SLOTS["ig-%d" % i] = 600     # Instagram row of the SBS Babes carousel
-
+# The Instagram row of SBS Babes uses real post embeds, not images.
 for i in range(1, 9):
     SLOTS["tt-%d" % i] = 600     # TikTok row
 

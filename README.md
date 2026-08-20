@@ -111,8 +111,9 @@ the filename of the slot you want to change, and that spot updates on its own:
 | Hair Bank section | `hair-bank.jpg` | Portrait 4:5 | 900 × 1125 |
 | Collection cards | `collection-*.jpg` | Portrait 4:5 | 760 × 950 |
 | Products | `product-<id>-1..4.jpg` | Portrait 4:5 | 900 × 1125 |
-| SBS Babes — Instagram row | `ig-1..9.jpg` | Portrait 4:5 | 600 × 750 |
 | SBS Babes — TikTok row | `tt-1..8.jpg` | Portrait 4:5 | 600 × 750 |
+
+(The Instagram row uses live embeds, not image files.)
 | Reviewer photos | `avatar-1..5.jpg` | Portrait or square | 240 × 300 |
 | About page | `about-founder/studio/detail.jpg` | Portrait 4:5 | 700–900 wide |
 
@@ -131,7 +132,7 @@ screen readers announce and what Google reads.
 python3 tools-generate-placeholders.py assets/img/your-photo.jpg
 ```
 
-That regenerates all 64 files at the right sizes. The original full-size
+That regenerates all 56 files at the right sizes. The original full-size
 `IMG_7195.JPG.jpeg` is kept in `assets/img/` as the source — it's 4.7 MB and isn't
 loaded by any page, so you can delete it once you no longer need to regenerate from it.
 
@@ -160,31 +161,24 @@ then run `python3 build.py`.
 
 ### The SBS Babes carousels
 
-The Instagram row links to nine real posts, in the order you gave them. The links live
-directly on the `<a class="social-card">` tags inside `index.html` — to change one,
-edit its `href`. Reels get a play icon and posts get a heart, set by the `<svg>` inside
-each card.
+**Instagram row — real embeds.** Nine posts play inline on the page, video and all,
+using Instagram's own embed. The links live on the `<iframe src>` inside `index.html`;
+to swap a post, change its URL (keep the trailing `embed/`). To add or remove one,
+copy or delete a whole `<div class="social-embed">` block.
 
-**The thumbnails don't match the posts yet.** Every card still shows the same
-placeholder photo. Save a screenshot of each post as `assets/img/ig-1.jpg` through
-`ig-9.jpg`, in the same order as the links, and the row becomes a real feed. Capture
-just the image, not the Instagram chrome around it — the CSS crops to 4:5 from the top,
-so the framing sorts itself out.
+The iframe is deliberately taller than the frame around it. Instagram's embed renders a
+profile header, then the media, then a tall caption and comment block — we show the
+first two and clip the rest. Only the bottom is truncated, so if Instagram changes that
+tail the layout still holds. If a card ever looks wrong, adjust the `height` on
+`.social-embed` in `assets/css/styles.css`.
 
-Phone screenshots are usually 2-4 MB, which would bloat the repo and slow the page
-badly. After dropping them in, run:
+Two trade-offs worth knowing. Embeds load from Instagram, so the row is slower than
+plain images and sets Meta cookies — if you ever add a cookie banner, this is the part
+that needs consent. And a post that gets deleted or set to private shows an empty card,
+so it's worth a glance now and then.
 
-```bash
-python3 tools-fit-images.py
-```
-
-It finds any oversized image, resizes it to what the site actually displays and
-compresses it in place — typically 4 MB down to about 70 KB with no visible difference.
-Run it any time you add a photo; it skips anything already the right size. Keep your
-originals elsewhere, since it rewrites the files.
-
-The TikTok row still points at your profile page rather than individual videos — send
-the video links whenever you have them and they can be wired the same way.
+**TikTok row — still placeholder.** It shows `tt-1..8.jpg`, the same photo eight times.
+Send the video links and it can be rebuilt as embeds like the Instagram row.
 
 ### The custom unit builder
 

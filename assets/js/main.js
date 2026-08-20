@@ -431,7 +431,7 @@
     if (!track) return;
 
     function step() {
-      var card = $(".social-card", track);
+      var card = $(".social-card, .social-embed", track);
       if (!card) return track.clientWidth;
       var gap = parseFloat(getComputedStyle(track).columnGap || "0") || 0;
       /* Advance by whole cards, as many as fit minus one for context. */
