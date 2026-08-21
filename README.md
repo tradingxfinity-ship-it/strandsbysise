@@ -96,6 +96,26 @@ Save, run `python3 build.py`, and the product appears on the shop page and in th
 Its photo should be saved as `assets/img/product-<id>-1.jpg`. The product detail page
 uses images `-1` through `-4` for its gallery.
 
+### The hero slideshow
+
+The hero crossfades through four photos, `hero-1.jpg` to `hero-4.jpg`, changing every
+5.2 seconds. `hero-1.jpg` shows first and is the one used for link previews on
+WhatsApp and social, so make it your strongest shot.
+
+To change a slide, replace that file. To add or remove one, copy or delete an `<img>`
+inside `<div class="hero__frame" data-hero-slides>` in `index.html` — the rotation
+counts whatever is there. Only the first slide should carry `fetchpriority="high"`;
+the rest stay `loading="lazy"`.
+
+**Shoot these portrait.** The frame is 4:5, so a landscape photo loses its left and
+right edges. `hero-3.jpg` is landscape and is cropped this way — if that matters,
+replace it with a portrait shot, or use it on the About page instead, where
+`.split__media--wide` expects a landscape image. Per-slide framing is nudged with the
+`object-position` rules just under `.hero__frame img` in `assets/css/styles.css`.
+
+The slideshow pauses while the browser tab is in the background, and holds on the
+first slide for anyone who has reduced motion turned on.
+
 ### The photography
 
 **Every image slot currently shows the same photo** (`IMG_7195.JPG.jpeg`), resized to
@@ -107,7 +127,7 @@ the filename of the slot you want to change, and that spot updates on its own:
 
 | Slot | Filename | Shape | Suggested size |
 |---|---|---|---|
-| Hero | `hero-model.jpg` | Portrait 4:5 | 1100 × 1375 |
+| Hero slides | `hero-1..4.jpg` | Portrait 4:5 | 900–1100 wide |
 | Hair Bank section | `hair-bank.jpg` | Portrait 4:5 | 900 × 1125 |
 | Collection cards | `collection-*.jpg` | Portrait 4:5 | 760 × 950 |
 | Products | `product-<id>-1..4.jpg` | Portrait 4:5 | 900 × 1125 |
@@ -131,7 +151,9 @@ screen readers announce and what Google reads.
 python3 tools-generate-placeholders.py assets/img/your-photo.jpg
 ```
 
-That regenerates all 48 files at the right sizes. The original full-size
+That regenerates all 51 files at the right sizes — **including the hero slides and
+any other real photos you've added**, so only run it when you genuinely want to reset
+every image back to one source picture. The original full-size
 `IMG_7195.JPG.jpeg` is kept in `assets/img/` as the source — it's 4.7 MB and isn't
 loaded by any page, so you can delete it once you no longer need to regenerate from it.
 

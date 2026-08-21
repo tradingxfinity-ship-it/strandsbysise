@@ -50,6 +50,32 @@
     });
   }
 
+  /* --- Hero slideshow --------------------------------------- */
+  var heroFrame = $("[data-hero-slides]");
+  if (heroFrame) {
+    var slides = $$("img", heroFrame);
+    if (slides.length > 1 && !reduceMotion) {
+      var current = 0;
+      var timer;
+
+      function showSlide(i) {
+        slides[current].classList.remove("is-active");
+        current = (i + slides.length) % slides.length;
+        slides[current].classList.add("is-active");
+      }
+
+      function play() { timer = setInterval(function () { showSlide(current + 1); }, 5200); }
+      function pause() { clearInterval(timer); }
+
+      /* Don't burn cycles advancing a slideshow nobody is looking at. */
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden) pause(); else { pause(); play(); }
+      });
+
+      play();
+    }
+  }
+
   /* --- Scroll reveal ---------------------------------------- */
   var revealables = $$("[data-reveal]");
   if (revealables.length) {

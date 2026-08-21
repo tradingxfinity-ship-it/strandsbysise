@@ -22,7 +22,12 @@ SOURCE = os.path.join(OUT, "IMG_7195.JPG.jpeg")
 # name -> width. Every slot is rendered with CSS `object-fit: cover`, so only
 # the width matters for quality; height follows the source's aspect ratio.
 SLOTS = {
-    "hero-model": 1100,
+    # hero-1..4 are the rotating hero slides. These hold real photography —
+    # running this script overwrites them with the placeholder source.
+    "hero-1": 900,
+    "hero-2": 1100,
+    "hero-3": 1100,
+    "hero-4": 760,
     "about-founder": 900,
     "about-studio": 900,
     "about-detail": 700,
