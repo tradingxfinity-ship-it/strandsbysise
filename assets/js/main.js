@@ -61,15 +61,30 @@
     if (heroSlides.length > 1 && !reduceMotion) {
       var heroIndex = 0;
       var heroTimer;
+      var heroSettle;
+      /* Must match the transition duration on .hero__frame img in the CSS. */
+      var FADE_MS = 1800;
 
       var showHeroSlide = function (i) {
-        heroSlides[heroIndex].classList.remove("is-active");
+        var outgoing = heroSlides[heroIndex];
         heroIndex = (i + heroSlides.length) % heroSlides.length;
+
+        /* Hold the outgoing frame opaque beneath the incoming one, so the
+           blend never dips through the background mid-fade. */
+        outgoing.classList.add("is-prev");
+        outgoing.classList.remove("is-active");
         heroSlides[heroIndex].classList.add("is-active");
+
+        clearTimeout(heroSettle);
+        heroSettle = setTimeout(function () {
+          heroSlides.forEach(function (s) {
+            if (!s.classList.contains("is-active")) s.classList.remove("is-prev");
+          });
+        }, FADE_MS);
       };
 
       var playHero = function () {
-        heroTimer = setInterval(function () { showHeroSlide(heroIndex + 1); }, 5200);
+        heroTimer = setInterval(function () { showHeroSlide(heroIndex + 1); }, 6000);
       };
       var pauseHero = function () { clearInterval(heroTimer); };
 
