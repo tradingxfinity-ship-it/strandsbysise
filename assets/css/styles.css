@@ -1360,6 +1360,25 @@ select.field {
   background: linear-gradient(165deg, var(--white) 0%, var(--blush-soft) 45%, #fbf1e8 100%);
 }
 
+/* A hero photo faded into the ground behind the panel. It reuses hero-3
+   — already downloaded for the slideshow, so this costs no extra
+   request — and that shot is landscape, which suits a wide band far
+   better than the portrait hero frame it gets cropped into up top.
+   Masked to nothing at the edges so it reads as light rather than as a
+   photo with a hard rectangular border. */
+.bank::before {
+  content: "";
+  position: absolute;
+  inset: -24px;
+  z-index: 0;
+  background: url("../img/hero-3.jpg") center 28% / cover no-repeat;
+  opacity: 0.22;
+  filter: blur(3px);
+  -webkit-mask-image: radial-gradient(115% 95% at 50% 42%, #000 20%, transparent 72%);
+  mask-image: radial-gradient(115% 95% at 50% 42%, #000 20%, transparent 72%);
+  pointer-events: none;
+}
+
 .bank__panel {
   position: relative;
   z-index: 1;
