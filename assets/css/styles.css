@@ -697,7 +697,10 @@ select.field {
   border-radius: var(--r-lg);
   overflow: hidden;
   background: var(--ivory-deep);
-  aspect-ratio: 4 / 5;
+  /* 3:4 rather than 4:5: the collection shots are wigs on stands, shot
+     tall (9:16 and 3:4). A taller frame shows more of each piece and
+     fits two of them exactly. */
+  aspect-ratio: 3 / 4;
   box-shadow: var(--shadow-sm);
   transition: transform 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out);
 }
@@ -706,6 +709,9 @@ select.field {
 .collection-card img {
   width: 100%; height: 100%;
   object-fit: cover;
+  /* Biased above centre so the crown and parting survive the crop on
+     9:16 shots — that's the part buyers actually judge. */
+  object-position: 50% 32%;
   transition: transform 1.1s var(--ease-out);
 }
 .collection-card:hover img { transform: scale(1.07); }
