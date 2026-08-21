@@ -34,7 +34,7 @@ SLOTS = {
     "hair-bank": 900,
 }
 
-for name in ["straight-wigs", "curly-wigs", "body-wave", "bob-wigs", "closure-wigs", "frontal-wigs"]:
+for name in ["wavy", "bouncy", "bonestraight", "deepwave"]:
     SLOTS["collection-" + name] = 760
 
 for name in ["silk-straight", "cascade-curls", "body-wave-luxe", "blunt-bob",
