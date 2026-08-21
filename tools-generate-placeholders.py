@@ -1,13 +1,19 @@
 #!/usr/bin/env python3
-"""Fill every image slot on the site from a single source photograph.
+"""Fill EMPTY image slots from a single source photograph.
 
-Point SOURCE at any photo and run this script: it produces a correctly
-sized, compressed JPEG for every image slot the site uses, keeping the
-filenames the markup expects. Swap slots out one at a time later by
-simply replacing an individual file with a real photo of the same name.
+Produces a correctly sized, compressed JPEG for every slot the site uses,
+keeping the filenames the markup expects.
 
-    python3 tools-generate-placeholders.py
-    python3 tools-generate-placeholders.py path/to/another-photo.jpg
+    python3 tools-generate-placeholders.py                 # fill empty slots only
+    python3 tools-generate-placeholders.py photo.jpg       # use a different source
+    python3 tools-generate-placeholders.py --force         # overwrite EVERYTHING
+
+**It never overwrites an existing file unless you pass --force.** That
+guard exists because it was learned the hard way: an earlier version
+regenerated every slot on each run, and running it after real photos had
+been dropped in silently replaced four different hero shots with four
+copies of the placeholder. The hero looked like a broken slideshow when
+it was really rotating four identical pictures.
 
 Uses `sips`, which ships with macOS — nothing to install.
 """
@@ -48,19 +54,31 @@ for i in range(1, 6):
 
 
 def main():
-    source = sys.argv[1] if len(sys.argv) > 1 else SOURCE
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    force = "--force" in sys.argv[1:]
+    source = args[0] if args else SOURCE
     if not os.path.exists(source):
         sys.exit("Source photo not found: %s\nPass one as an argument, or drop it in assets/img/." % source)
 
+    written, kept = 0, []
     for name, width in sorted(SLOTS.items()):
         dest = os.path.join(OUT, name + ".jpg")
+        if os.path.exists(dest) and not force:
+            kept.append(name)
+            continue
         subprocess.run(
             ["sips", "-s", "format", "jpeg", "-s", "formatOptions", "62",
              "--resampleWidth", str(width), source, "--out", dest],
             check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        written += 1
 
-    total = sum(os.path.getsize(os.path.join(OUT, n + ".jpg")) for n in SLOTS)
-    print("%d images written to %s (%.1f MB total)" % (len(SLOTS), OUT, total / 1e6))
+    if written:
+        print("Filled %d empty slot(s)." % written)
+    else:
+        print("Nothing to fill — every slot already has an image.")
+    if kept:
+        print("Left %d existing image(s) untouched. Use --force to overwrite them,\n"
+              "which replaces ALL photography with the source picture." % len(kept))
 
 
 if __name__ == "__main__":
