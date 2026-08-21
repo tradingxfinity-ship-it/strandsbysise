@@ -34,9 +34,6 @@ SLOTS = {
     "hero-2": 1100,
     "hero-3": 1100,
     "hero-4": 760,
-    "about-founder": 900,
-    "about-studio": 900,
-    "about-detail": 700,
 }
 
 for name in ["wavy", "bouncy", "bonestraight", "deepwave", "pixie-curls"]:

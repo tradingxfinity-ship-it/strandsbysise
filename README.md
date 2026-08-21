@@ -14,9 +14,7 @@ index.html          Home — hero, collections, best sellers, custom unit
                     Hair Bank
 shop.html           Full collection with texture filters and sorting
 product.html        Product detail — gallery, options, reviews, related
-about.html          Brand story
 contact.html        Contact form, direct channels, hours, map slot
-faq.html            Grouped, searchable-by-section FAQs
 
 assets/css/styles.css   The whole design system (one file, sectioned + commented)
 assets/js/main.js       Cart, carousels, filters, gallery zoom, accordions, animations
@@ -52,7 +50,7 @@ point your own domain at it afterwards.
 `index.html` is the **source of truth for the shared parts** of the site: the
 announcement bar, the header, the mobile menu, the footer and the cart drawer.
 
-The other five pages are generated from the files in `templates/`, which pull those
+The other three pages are generated from the files in `templates/`, which pull those
 shared parts in automatically. So:
 
 - **Changing the menu, footer, phone number, or announcement bar?**
@@ -61,15 +59,15 @@ shared parts in automatically. So:
   python3 build.py
   ```
   Every other page picks the change up. Never edit the header or footer inside
-  `shop.html`, `product.html`, `about.html`, `contact.html` or `faq.html` directly —
-  the next build overwrites it.
+  `shop.html`, `product.html` or `contact.html` directly — the next build overwrites
+  it.
 
 - **Changing the words on one page only?**
   Edit that page's file in `templates/` (e.g. `templates/about.template.html`),
   then run `python3 build.py`.
 
 If you'd rather not deal with the build step at all, you can delete `templates/` and
-`build.py` and edit the five `.html` files directly — they're complete, standalone
+`build.py` and edit the three `.html` files directly — they're complete, standalone
 pages. You'll just have to update the header and footer on each one by hand.
 
 ## 5. Everyday tasks
@@ -125,7 +123,7 @@ values. Four copies of one photo look exactly like a broken slideshow.
 ### The photography
 
 The hero slides, the five collection cards and the product cards use real
-photography. The reviewer photos and About page still show `IMG_7195.JPG.jpeg` resized
+photography. The reviewer photos still show `IMG_7195.JPG.jpeg` resized
 to fit each spot — your own photo, so the site looks like your brand rather than a
 template, but it repeats.
 
@@ -144,7 +142,6 @@ the filename of the slot you want to change, and that spot updates on its own:
 | Collection cards | `collection-{wavy,bouncy,bonestraight,deepwave,pixie-curls}.jpg` | Portrait 4:5 | 760 × 950 |
 | Products | `product-<id>-1..4.jpg` | Portrait 3:4 or taller | 760–900 wide |
 | Reviewer photos | `avatar-1..5.jpg` | Portrait or square | 240 × 300 |
-| About page | `about-founder/studio/detail.jpg` | Portrait 4:5 | 700–900 wide |
 
 Both SBS Babes rows use live platform embeds, so they have no image files.
 

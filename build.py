@@ -144,8 +144,6 @@ RELATED_GRID = "\n\n".join(product_card(p, i) for i, p in enumerate(PRODUCTS[1:5
 NAV_TARGETS = {
     "shop.html": "shop.html",
     "product.html": "shop.html",
-    "about.html": "about.html",
-    "faq.html": "faq.html",
     "contact.html": "contact.html",
 }
 
