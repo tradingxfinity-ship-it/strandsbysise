@@ -98,6 +98,23 @@
     }
   }
 
+  /* --- Packaging video -------------------------------------- */
+  $$("[data-video-frame]").forEach(function (frame) {
+    var video = $("video", frame);
+    var playBtn = $("[data-video-play]", frame);
+    if (!video || !playBtn) return;
+
+    playBtn.addEventListener("click", function () {
+      /* preload="none" means nothing is fetched until this point. */
+      video.play();
+    });
+
+    /* Track the element rather than the button, so the overlay also
+       clears when playback starts from the native controls. */
+    video.addEventListener("play", function () { frame.classList.add("is-playing"); });
+    video.addEventListener("ended", function () { frame.classList.remove("is-playing"); });
+  });
+
   /* --- Scroll reveal ---------------------------------------- */
   var revealables = $$("[data-reveal]");
   if (revealables.length) {

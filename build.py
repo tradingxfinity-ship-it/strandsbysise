@@ -57,7 +57,9 @@ if stamped != index:
 
 HEAD = slice_between(index, '<link rel="icon"', '\n<script type="application/ld+json">').strip()
 HEADER = slice_between(index, "<!-- ============ Announcement ============ -->", '<main id="main">').strip()
-FOOTER = slice_between(index, "<!-- ============ 9. Footer ============ -->", "</body>").strip()
+# Anchored on the tag, not the numbered comment, so inserting a section
+# above the footer cannot silently break the build.
+FOOTER = slice_between(index, '<footer class="footer">', "</body>").strip()
 
 # ---------------------------------------------------------------- catalogue
 PRODUCTS = [

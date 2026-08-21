@@ -14,13 +14,14 @@
    10. Testimonials
    11. SBS Babes carousels
    12. Create a Custom Unit
-   13. Newsletter
-   14. Footer
-   15. Product detail page
-   16. About / Contact / FAQ
-   17. Cart drawer & toasts
-   18. Motion & reveal
-   19. Responsive
+   13. Packaging unveiling
+   14. Newsletter
+   15. Footer
+   16. Product detail page
+   17. About / Contact / FAQ
+   18. Cart drawer & toasts
+   19. Motion & reveal
+   20. Responsive
    ========================================================================== */
 
 /* 1. Tokens ============================================================== */
@@ -1177,7 +1178,56 @@ select.field {
   .custom__aside { position: static; }
 }
 
-/* 13. Newsletter ========================================================= */
+/* 13. Packaging unveiling =============================================== */
+.video-frame {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  margin-inline: auto;
+  aspect-ratio: 9 / 16;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--charcoal);
+  box-shadow: var(--shadow-lg);
+}
+.video-frame video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* The poster carries a play affordance of its own; the native controls
+   only appear once playback starts. */
+.video-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 78px;
+  height: 78px;
+  padding-left: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.92);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: var(--shadow-gold);
+  transition: transform 0.45s var(--ease-out), background-color 0.3s var(--ease), opacity 0.4s var(--ease);
+}
+.video-play:hover { transform: translate(-50%, -50%) scale(1.07); background: var(--gold-deep); }
+.video-frame.is-playing .video-play { opacity: 0; pointer-events: none; }
+
+@media (max-width: 960px) {
+  .video-frame { max-width: 340px; }
+}
+
+/* 14. Newsletter ========================================================= */
 .newsletter {
   position: relative;
   overflow: hidden;
@@ -1206,7 +1256,7 @@ select.field {
 .newsletter__form .field:focus { box-shadow: none; }
 .newsletter .form-note { margin-top: 1rem; }
 
-/* 14. Footer ============================================================= */
+/* 15. Footer ============================================================= */
 .footer {
   background: var(--charcoal);
   color: rgba(255, 255, 255, 0.68);
@@ -1264,7 +1314,7 @@ select.field {
 }
 .footer__bottom a:hover { color: var(--gold); }
 
-/* 15. Product detail page ================================================ */
+/* 16. Product detail page ================================================ */
 .crumbs {
   display: flex;
   flex-wrap: wrap;
@@ -1540,7 +1590,7 @@ select.field {
 .sticky-buy__info span { font-size: var(--fs-micro); color: var(--muted); }
 .sticky-buy .btn { margin-left: auto; }
 
-/* 16. About / Contact / FAQ ============================================== */
+/* 17. About / Contact / FAQ ============================================== */
 .page-head {
   position: relative;
   overflow: hidden;
@@ -1685,7 +1735,7 @@ select.field {
 .filters__group { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .filters .count { font-size: var(--fs-small); color: var(--muted); }
 
-/* 17. Cart drawer & toast =============================================== */
+/* 18. Cart drawer & toast =============================================== */
 .overlay {
   position: fixed;
   inset: 0;
@@ -1800,7 +1850,7 @@ select.field {
 .fab:hover { background: var(--gold-deep); }
 .fab .cart-count { top: 2px; right: 0; background: var(--charcoal); }
 
-/* 18. Motion & reveal ==================================================== */
+/* 19. Motion & reveal ==================================================== */
 [data-reveal] {
   opacity: 0;
   transform: translateY(26px);
@@ -1835,7 +1885,7 @@ select.field {
   [data-reveal] { opacity: 1 !important; transform: none !important; }
 }
 
-/* 19. Responsive ========================================================= */
+/* 20. Responsive ========================================================= */
 @media (max-width: 1080px) {
   .footer__grid { grid-template-columns: 1fr 1fr; }
   .review { flex-basis: calc((100% - clamp(1rem, 0.5rem + 1.4vw, 1.75rem)) / 2); }

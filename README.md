@@ -20,6 +20,7 @@ faq.html            Grouped, searchable-by-section FAQs
 assets/css/styles.css   The whole design system (one file, sectioned + commented)
 assets/js/main.js       Cart, carousels, filters, gallery zoom, accordions, animations
 assets/img/             Placeholder imagery — replace with your photography
+assets/video/           The packaging unveiling clip
 
 templates/          Editable sources for every page except index.html
 build.py            Rebuilds those pages (see §4)
@@ -179,6 +180,22 @@ replaced**, or the button goes nowhere:
 The matching FAQ entry ("How does the Hair Bank scheme work?") lives in
 `templates/faq.template.html`. Edit the terms there to match how you actually run it,
 then run `python3 build.py`.
+
+### The packaging unveiling video
+
+`assets/video/packaging-unveil.mp4` plays in the "Unveiling Our New Packaging"
+section. It's 8 MB, which would be punishing to load on a phone — so the video is set
+to `preload="none"` and shows a poster image instead. Nothing downloads until someone
+presses play, so the section costs the page nothing.
+
+To swap the clip, replace that file (keep it MP4/H.264 — it plays everywhere). Vertical
+9:16 suits the frame; other shapes get cropped to fit.
+
+The poster is `assets/img/packaging-poster.jpg`, currently a copy of the packaging photo
+rather than a frame from the video, so there's a slight jump when playback starts. To
+remove that, screenshot the video's opening frame, save it over that file, and run
+`python3 tools-fit-images.py packaging-poster` — you'll need to add it to `SLOTS` in
+`tools-generate-placeholders.py` first, or just compress it yourself.
 
 ### The SBS Babes carousels
 
