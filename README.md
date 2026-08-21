@@ -20,12 +20,12 @@ faq.html            Grouped, searchable-by-section FAQs
 
 assets/css/styles.css   The whole design system (one file, sectioned + commented)
 assets/js/main.js       Cart, carousels, filters, gallery zoom, accordions, animations
-assets/img/             Placeholder imagery — replace with your photography
+assets/img/             Site photography (some slots still placeholder)
 assets/video/           The packaging unveiling clip
 
 templates/          Editable sources for every page except index.html
 build.py            Rebuilds those pages (see §4)
-tools-generate-placeholders.py   Regenerates the placeholder images
+tools-generate-placeholders.py   Fills empty image slots (never overwrites)
 tools-fit-images.py              Resizes/compresses photos you drop in
 ```
 
@@ -115,14 +115,19 @@ replace it with a portrait shot, or use it on the About page instead, where
 `.split__media--wide` expects a landscape image. Per-slide framing is nudged with the
 `object-position` rules just under `.hero__frame img` in `assets/css/styles.css`.
 
-The slideshow pauses while the browser tab is in the background, and holds on the
-first slide for anyone who has reduced motion turned on.
+The slideshow pauses while the browser tab is in the background. Under reduced
+motion it still rotates, but cuts between photos instead of fading.
+
+**If the hero looks like it isn't changing, check the four files are actually
+different pictures** — `md5 -q assets/img/hero-*.jpg` should print four different
+values. Four copies of one photo look exactly like a broken slideshow.
 
 ### The photography
 
-**Every image slot currently shows the same photo** (`IMG_7195.JPG.jpeg`), resized to
-fit each spot. It's a placeholder in the sense that it repeats — but it's your real
-photo, so the site looks like your brand today rather than like a template.
+The hero slides and the five collection cards use real photography. The product
+cards, reviewer photos and About page still show `IMG_7195.JPG.jpeg` resized to fit
+each spot — your own photo, so the site looks like your brand rather than a template,
+but it repeats.
 
 Replace them one at a time as you shoot more. Drop a new photo into `assets/img/` using
 the filename of the slot you want to change, and that spot updates on its own:
