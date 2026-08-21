@@ -146,17 +146,19 @@ Compress before uploading (TinyPNG or Squoosh) — it's the single biggest thing
 do for page speed. And update the `alt=""` text on any image you change: it's what
 screen readers announce and what Google reads.
 
-**To refill every slot from a different photo**, drop it in and run:
+**To fill any slots that are still empty**, run:
 
 ```bash
 python3 tools-generate-placeholders.py assets/img/your-photo.jpg
 ```
 
-That regenerates all 49 files at the right sizes — **including the hero slides and
-any other real photos you've added**, so only run it when you genuinely want to reset
-every image back to one source picture. The original full-size
-`IMG_7195.JPG.jpeg` is kept in `assets/img/` as the source — it's 4.7 MB and isn't
-loaded by any page, so you can delete it once you no longer need to regenerate from it.
+It only fills slots with no image yet — **it will never overwrite a photo you've
+already put in place.** To deliberately reset every slot back to one source picture,
+add `--force`. That flag replaces all your photography, so it's worth being sure.
+
+The original full-size `IMG_7195.JPG.jpeg` is kept in `assets/img/` as the source —
+it's 4.7 MB and isn't loaded by any page, so you can delete it once you no longer
+need to regenerate from it.
 
 ### Changing prices, phone number, social links
 
