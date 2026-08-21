@@ -50,29 +50,36 @@
     });
   }
 
-  /* --- Hero slideshow --------------------------------------- */
+  /* --- Hero slideshow ---------------------------------------
+     Everything in this file shares one function scope, so names declared
+     with `var` here are visible to every other block. Keep them prefixed:
+     a plain `slides` collided with the testimonial carousel's `slides`,
+     which reassigned it and left this timer animating the wrong nodes. */
   var heroFrame = $("[data-hero-slides]");
   if (heroFrame) {
-    var slides = $$("img", heroFrame);
-    if (slides.length > 1 && !reduceMotion) {
-      var current = 0;
-      var timer;
+    var heroSlides = $$("img", heroFrame);
+    if (heroSlides.length > 1 && !reduceMotion) {
+      var heroIndex = 0;
+      var heroTimer;
 
-      function showSlide(i) {
-        slides[current].classList.remove("is-active");
-        current = (i + slides.length) % slides.length;
-        slides[current].classList.add("is-active");
-      }
+      var showHeroSlide = function (i) {
+        heroSlides[heroIndex].classList.remove("is-active");
+        heroIndex = (i + heroSlides.length) % heroSlides.length;
+        heroSlides[heroIndex].classList.add("is-active");
+      };
 
-      function play() { timer = setInterval(function () { showSlide(current + 1); }, 5200); }
-      function pause() { clearInterval(timer); }
+      var playHero = function () {
+        heroTimer = setInterval(function () { showHeroSlide(heroIndex + 1); }, 5200);
+      };
+      var pauseHero = function () { clearInterval(heroTimer); };
 
       /* Don't burn cycles advancing a slideshow nobody is looking at. */
       document.addEventListener("visibilitychange", function () {
-        if (document.hidden) pause(); else { pause(); play(); }
+        pauseHero();
+        if (!document.hidden) playHero();
       });
 
-      play();
+      playHero();
     }
   }
 

@@ -14,6 +14,7 @@ page is written as a template containing these tokens:
 Run `python3 build.py` after editing a `*.template.html` file and the
 finished `.html` pages are rewritten. Templates live in `templates/`.
 """
+import hashlib
 import os
 import re
 
@@ -27,8 +28,32 @@ def slice_between(text, start, end):
     return text[a:b]
 
 
+# ---------------------------------------------------------------- cache busting
+# Browsers hold on to styles.css and main.js hard, so a returning visitor can
+# run week-old JS against fresh HTML. Stamping a content hash onto the asset
+# URLs makes every change a new URL, which no cache can serve stale.
+def asset_version(rel_path):
+    with open(os.path.join(ROOT, rel_path), "rb") as fh:
+        return hashlib.md5(fh.read()).hexdigest()[:8]
+
+
+def stamp_assets(html):
+    for rel in ("assets/css/styles.css", "assets/js/main.js"):
+        html = re.sub(re.escape(rel) + r"(\?v=[0-9a-f]+)?",
+                      rel + "?v=" + asset_version(rel), html)
+    return html
+
+
 with open(os.path.join(ROOT, "index.html")) as fh:
     index = fh.read()
+
+# index.html is hand-edited, so stamp it in place before anything is copied
+# out of it into the other pages.
+stamped = stamp_assets(index)
+if stamped != index:
+    with open(os.path.join(ROOT, "index.html"), "w") as fh:
+        fh.write(stamped)
+    index = stamped
 
 HEAD = slice_between(index, '<link rel="icon"', '\n<script type="application/ld+json">').strip()
 HEADER = slice_between(index, "<!-- ============ Announcement ============ -->", '<main id="main">').strip()
