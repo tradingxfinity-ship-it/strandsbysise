@@ -1,9 +1,19 @@
 #!/usr/bin/env python3
 """StrandsBySise — tiny static build step.
 
-`index.html` is the source of truth for the shared chrome (head links,
-announcement bar, header, mobile menu, footer, cart drawer). Every other
-page is written as a template containing these tokens:
+Content lives in `data/`, not in code:
+
+    data/settings.json   phone, WhatsApp, email, socials, announcement bar
+    data/products.json   the catalogue
+
+Both are plain files the admin panel at /admin edits and commits. Every
+page is generated from `templates/`, so nothing needs hand-editing to
+change a price or a phone number.
+
+`templates/index.template.html` is the source of the shared chrome (head
+links, announcement bar, header, mobile menu, footer, cart drawer) — it
+is rendered first, and the other pages take their chrome from it. Each
+template may contain these tokens:
 
     {{HEAD}}          shared <head> links
     {{HEADER}}        announcement + header + mobile menu
@@ -11,10 +21,13 @@ page is written as a template containing these tokens:
     {{PRODUCTS}}      the full product grid (shop page only)
     {{RELATED}}       four related-product cards (product page only)
 
-Run `python3 build.py` after editing a `*.template.html` file and the
-finished `.html` pages are rewritten. Templates live in `templates/`.
+plus any key from settings.json as {{key}} — e.g. {{whatsapp_number}}.
+
+Run `python3 build.py` after editing a template or a data file, and the
+finished `.html` pages are rewritten.
 """
 import hashlib
+import json
 import os
 import re
 
@@ -44,50 +57,39 @@ def stamp_assets(html):
     return html
 
 
-with open(os.path.join(ROOT, "index.html")) as fh:
-    index = fh.read()
+# ---------------------------------------------------------------- content
+def load(name):
+    with open(os.path.join(ROOT, "data", name)) as fh:
+        return json.load(fh)
 
-# index.html is hand-edited, so stamp it in place before anything is copied
-# out of it into the other pages.
-stamped = stamp_assets(index)
-if stamped != index:
-    with open(os.path.join(ROOT, "index.html"), "w") as fh:
-        fh.write(stamped)
-    index = stamped
+
+SETTINGS = load("settings.json")
+PRODUCTS = load("products.json")
+
+SETTINGS = dict(SETTINGS)
+# The admin types the announcement as plain text; any currency amount in it
+# is emphasised here, so nobody has to write HTML into a settings field.
+SETTINGS["announcement_html"] = re.sub(r"(₦[\d,]+)", r"<b>\1</b>", SETTINGS["announcement"])
+
+
+def apply_settings(html):
+    for key, value in SETTINGS.items():
+        html = html.replace("{{%s}}" % key, str(value))
+    return html
+
+
+# index.html is generated like every other page; it just happens to also be
+# where the shared chrome is defined.
+with open(os.path.join(ROOT, "templates", "index.template.html")) as fh:
+    index = stamp_assets(apply_settings(fh.read()))
+with open(os.path.join(ROOT, "index.html"), "w") as fh:
+    fh.write(index)
 
 HEAD = slice_between(index, '<link rel="icon"', '\n<script type="application/ld+json">').strip()
 HEADER = slice_between(index, "<!-- ============ Announcement ============ -->", '<main id="main">').strip()
 # Anchored on the tag, not the numbered comment, so inserting a section
 # above the footer cannot silently break the build.
 FOOTER = slice_between(index, '<footer class="footer">', "</body>").strip()
-
-# ---------------------------------------------------------------- catalogue
-PRODUCTS = [
-    dict(id="silk-straight", name="Silk Straight", cat="bonestraight", price=185000, old=None,
-         rating=4.9, reviews=128, length='20"', texture="Bonestraight", density="180%",
-         tag="Best Seller", tag_dark=False),
-    dict(id="cascade-curls", name="Cascade Curls", cat="bouncy", price=215000, old=None,
-         rating=4.8, reviews=96, length='22"', texture="Bouncy", density="200%",
-         tag="New In", tag_dark=True),
-    dict(id="body-wave-luxe", name="Body Wave Luxe", cat="wavy", price=245000, old=275000,
-         rating=4.9, reviews=141, length='24"', texture="Wavy", density="180%",
-         tag=None, tag_dark=False),
-    dict(id="blunt-bob", name="Blunt Bob", cat="bonestraight", price=135000, old=None,
-         rating=4.7, reviews=73, length='12"', texture="Bonestraight", density="150%",
-         tag="Editor's Pick", tag_dark=False),
-    dict(id="closure-classic", name="Closure Classic", cat="bouncy", price=165000, old=None,
-         rating=4.8, reviews=88, length='18"', texture="Bouncy", density="180%",
-         tag=None, tag_dark=False),
-    dict(id="frontal-glam", name="Frontal Glam", cat="wavy", price=268000, old=None,
-         rating=4.9, reviews=112, length='26"', texture="Wavy", density="200%",
-         tag="Signature", tag_dark=True),
-    dict(id="deep-wave", name="Deep Wave Dream", cat="deepwave", price=232000, old=None,
-         rating=4.8, reviews=64, length='22"', texture="Deepwave", density="200%",
-         tag=None, tag_dark=False),
-    dict(id="pixie-chic", name="Pixie Chic", cat="pixie-curls", price=112000, old=135000,
-         rating=4.6, reviews=41, length='8"', texture="Pixie Curls", density="150%",
-         tag="Sale", tag_dark=False),
-]
 
 HEART = ('<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">'
          '<path d="M12 20s-7-4.4-7-9.3A3.9 3.9 0 0 1 12 8a3.9 3.9 0 0 1 7 2.7C19 15.6 12 20 12 20Z"/></svg>')
@@ -149,8 +151,8 @@ NAV_TARGETS = {
 
 built = []
 for fname in sorted(os.listdir(TPL)):
-    if not fname.endswith(".template.html"):
-        continue
+    if not fname.endswith(".template.html") or fname == "index.template.html":
+        continue  # index is rendered above, with its asset hashes stamped
     out_name = fname.replace(".template.html", ".html")
     with open(os.path.join(TPL, fname)) as fh:
         page = fh.read()
@@ -165,13 +167,14 @@ for fname in sorted(os.listdir(TPL)):
             '<a class="nav__link" href="%s">' % current,
             '<a class="nav__link" href="%s" aria-current="page">' % current, 1)
 
+    page = apply_settings(page)
     page = page.replace("{{HEAD}}", HEAD)
     page = page.replace("{{HEADER}}", header)
     page = page.replace("{{FOOTER}}", FOOTER)
     page = page.replace("{{PRODUCTS}}", PRODUCT_GRID)
     page = page.replace("{{RELATED}}", RELATED_GRID)
 
-    leftover = re.findall(r"\{\{[A-Z_]+\}\}", page)
+    leftover = re.findall(r"\{\{[A-Za-z_]+\}\}", page)
     if leftover:
         raise SystemExit("Unresolved token(s) in %s: %s" % (fname, ", ".join(sorted(set(leftover)))))
 
@@ -179,4 +182,4 @@ for fname in sorted(os.listdir(TPL)):
         fh.write(page)
     built.append(out_name)
 
-print("Built: " + ", ".join(built))
+print("Built: index.html, " + ", ".join(built))

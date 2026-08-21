@@ -21,8 +21,10 @@ assets/js/main.js       Cart, carousels, filters, gallery zoom, accordions, anim
 assets/img/             Site photography (some slots still placeholder)
 assets/video/           The packaging unveiling clip
 
-templates/          Editable sources for every page except index.html
-build.py            Rebuilds those pages (see §4)
+data/settings.json  Phone, WhatsApp, email, socials, announcement bar
+data/products.json  The catalogue
+templates/          Editable sources for every page
+build.py            Rebuilds every page from data/ + templates/ (see §4)
 tools-generate-placeholders.py   Fills empty image slots (never overwrites)
 tools-fit-images.py              Resizes/compresses photos you drop in
 ```
@@ -47,20 +49,23 @@ point your own domain at it afterwards.
 
 ## 4. The one thing to know before editing
 
-`index.html` is the **source of truth for the shared parts** of the site: the
-announcement bar, the header, the mobile menu, the footer and the cart drawer.
+**Content lives in `data/`, not in the code.** Prices, products, the phone number,
+WhatsApp links and the announcement bar are all in `data/settings.json` and
+`data/products.json`. Change one there and every page picks it up on the next build.
 
-The other three pages are generated from the files in `templates/`, which pull those
-shared parts in automatically. So:
+**Every page is generated**, including `index.html` — edit
+`templates/index.template.html`, never `index.html` itself, or the next build
+overwrites your change. `templates/index.template.html` is also where the shared
+chrome lives (announcement bar, header, mobile menu, footer, cart drawer); the other
+pages pull it in automatically. So:
 
-- **Changing the menu, footer, phone number, or announcement bar?**
-  Edit `index.html`, then run:
+- **Changing the phone number, WhatsApp link, socials or announcement bar?**
+  Edit `data/settings.json`, then run:
   ```bash
   python3 build.py
   ```
-  Every other page picks the change up. Never edit the header or footer inside
-  `shop.html`, `product.html` or `contact.html` directly — the next build overwrites
-  it.
+  Every other page picks the change up. Never edit any `.html` file in the project
+  root directly — they are all generated.
 
 - **Changing the words on one page only?**
   Edit that page's file in `templates/` (e.g. `templates/about.template.html`),
@@ -74,12 +79,15 @@ pages. You'll just have to update the header and footer on each one by hand.
 
 ### Adding or editing a product
 
-Open `build.py` and find the `PRODUCTS` list near the top. Each product is one entry:
+Open `data/products.json`. Each product is one entry:
 
-```python
-dict(id="silk-straight", name="Silk Straight", cat="bonestraight", price=185000, old=None,
-     rating=4.9, reviews=128, length='20"', texture="Bonestraight", density="180%",
-     tag="Best Seller", tag_dark=False),
+```json
+{
+  "id": "silk-straight", "name": "Silk Straight", "cat": "bonestraight",
+  "price": 185000, "old": null, "rating": 4.9, "reviews": 128,
+  "length": "20\"", "texture": "Bonestraight", "density": "180%",
+  "tag": "Best Seller", "tag_dark": false
+}
 ```
 
 - `id` — lowercase, hyphenated. Also decides the image filename (below).
@@ -170,11 +178,10 @@ need to regenerate from it.
 
 ### Changing prices, phone number, social links
 
-Prices live in `build.py` (`PRODUCTS`) and, for the featured four on the home page,
-directly in `index.html`. The phone number `+234 803 000 0000` and the WhatsApp link
-`wa.me/2348030000000` appear in the header, footer and contact page — a find-and-replace
-across all `.html` files plus `templates/` catches every one. Same for
-`hello@strandsbysise.com` and the `instagram.com/strandsbysise` handle.
+All of it lives in `data/settings.json` — phone, WhatsApp number, email, the three
+social links, the announcement bar and the Hair Bank group URL. Change a value, run
+`python3 build.py`, and every page updates. Product prices are in
+`data/products.json`.
 
 ### The Hair Bank group — set this link before you go live
 
