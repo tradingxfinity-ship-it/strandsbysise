@@ -764,6 +764,13 @@ select.field {
 }
 .collection-card:hover .collection-card__ring { opacity: 1; transform: scale(1); }
 
+/* On touch there is no hover, so the gold ring and the Explore link would
+   never appear at all. Show them by default there. */
+@media (hover: none) {
+  .collection-card__ring { opacity: 1; transform: scale(1); }
+  .collection-card__cta { opacity: 1; transform: none; }
+}
+
 /* 8. Product cards ======================================================= */
 .product-card {
   display: flex;
