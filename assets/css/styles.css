@@ -1351,13 +1351,13 @@ select.field {
 }
 
 /* 14. Hair Bank — closing invitation ==================================== */
-/* Shares the packaging section's dark ground. The panel itself stays
-   light — white glass on charcoal is what stops this section merging
-   into the charcoal footer directly below it. */
+/* Light ground, dark card. The panel carries the packaging section's
+   charcoal, and the warm ground around it keeps the card from running
+   into the charcoal footer below. */
 .bank {
   position: relative;
   overflow: hidden;
-  background: var(--dark-ground);
+  background: linear-gradient(165deg, var(--white) 0%, var(--blush-soft) 45%, #fbf1e8 100%);
 }
 
 .bank__panel {
@@ -1367,14 +1367,17 @@ select.field {
   margin-inline: auto;
   padding: clamp(2.5rem, 1.8rem + 3vw, 4.5rem) clamp(1.5rem, 0.8rem + 3vw, 4rem);
   text-align: center;
-  /* Near-opaque, not glass: at 78% the charcoal ground bled through and
-     turned the panel a muddy grey, dulling the text contrast with it. */
-  background: rgba(255, 250, 246, 0.97);
-  border: 1px solid rgba(212, 175, 55, 0.45);
+  background: var(--dark-ground);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  color: rgba(255, 255, 255, 0.7);
   border-radius: var(--r-xl);
   box-shadow: 0 50px 100px -50px rgba(0, 0, 0, 0.85);
 }
-.bank__panel .lede { max-width: 54ch; margin-inline: auto; }
+.bank__panel .lede { max-width: 54ch; margin-inline: auto; color: rgba(255, 255, 255, 0.68); }
+.bank__panel h2 { color: #fff; }
+.bank__panel .eyebrow { color: var(--gold); }
+.bank__panel .eyebrow--line::before { background: var(--gold); }
+.bank__note { color: rgba(255, 255, 255, 0.45); }
 
 /* Hairline dividers rather than boxed cards — lighter, and it keeps the
    panel reading as one object instead of a panel full of panels. */
@@ -1397,18 +1400,18 @@ select.field {
   font-family: var(--font-display);
   font-size: 0.85rem;
   letter-spacing: 0.14em;
-  color: var(--gold-deep);
+  color: var(--gold);
 }
 .bank__steps b {
   font-family: var(--font-display);
   font-size: 1.08rem;
   font-weight: 500;
-  color: var(--charcoal);
+  color: #fff;
 }
 .bank__steps li > span:not(.bank__num) {
   font-size: 0.92rem;
   line-height: 1.6;
-  color: var(--charcoal-soft);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .bank__cta { margin-top: clamp(2.25rem, 1.6rem + 2vw, 3rem); }
