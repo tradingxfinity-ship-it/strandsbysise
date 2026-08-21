@@ -1360,25 +1360,6 @@ select.field {
   background: linear-gradient(165deg, var(--white) 0%, var(--blush-soft) 45%, #fbf1e8 100%);
 }
 
-/* A hero photo faded into the ground behind the panel. It reuses hero-3
-   — already downloaded for the slideshow, so this costs no extra
-   request — and that shot is landscape, which suits a wide band far
-   better than the portrait hero frame it gets cropped into up top.
-   Masked to nothing at the edges so it reads as light rather than as a
-   photo with a hard rectangular border. */
-.bank::before {
-  content: "";
-  position: absolute;
-  inset: -24px;
-  z-index: 0;
-  background: url("../img/hero-3.jpg") center 28% / cover no-repeat;
-  opacity: 0.22;
-  filter: blur(3px);
-  -webkit-mask-image: radial-gradient(115% 95% at 50% 42%, #000 20%, transparent 72%);
-  mask-image: radial-gradient(115% 95% at 50% 42%, #000 20%, transparent 72%);
-  pointer-events: none;
-}
-
 .bank__panel {
   position: relative;
   z-index: 1;
@@ -1386,13 +1367,22 @@ select.field {
   margin-inline: auto;
   padding: clamp(2.5rem, 1.8rem + 3vw, 4.5rem) clamp(1.5rem, 0.8rem + 3vw, 4rem);
   text-align: center;
-  background: var(--dark-ground);
+  /* A hero photo faded into the panel's own dark ground. Layer order is
+     veil, photo, ground: the veil keeps the type legible, and the ground
+     underneath means the panel never depends on the image loading.
+     hero-3 is already downloaded for the slideshow, so this costs no
+     extra request, and it is the landscape shot — a wide panel suits it
+     better than the portrait hero frame it gets cropped into up top. */
+  background:
+    linear-gradient(160deg, rgba(22, 19, 18, 0.93) 0%, rgba(22, 19, 18, 0.87) 100%),
+    url("../img/hero-3.jpg") center 26% / cover no-repeat,
+    var(--dark-ground);
   border: 1px solid rgba(212, 175, 55, 0.4);
   color: rgba(255, 255, 255, 0.7);
   border-radius: var(--r-xl);
   box-shadow: 0 50px 100px -50px rgba(0, 0, 0, 0.85);
 }
-.bank__panel .lede { max-width: 54ch; margin-inline: auto; color: rgba(255, 255, 255, 0.68); }
+.bank__panel .lede { max-width: 54ch; margin-inline: auto; color: rgba(255, 255, 255, 0.78); }
 .bank__panel h2 { color: #fff; }
 .bank__panel .eyebrow { color: var(--gold); }
 .bank__panel .eyebrow--line::before { background: var(--gold); }
@@ -1430,7 +1420,7 @@ select.field {
 .bank__steps li > span:not(.bank__num) {
   font-size: 0.92rem;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .bank__cta { margin-top: clamp(2.25rem, 1.6rem + 2vw, 3rem); }
