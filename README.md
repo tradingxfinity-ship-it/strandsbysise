@@ -10,8 +10,8 @@ Open `index.html` in a browser and it works.
 
 ```
 index.html          Home — hero, collections, best sellers, custom unit
-                    builder, packaging unveiling, Hair Bank, testimonials,
-                    SBS Babes
+                    builder, packaging unveiling, testimonials, SBS Babes,
+                    Hair Bank
 shop.html           Full collection with texture filters and sorting
 product.html        Product detail — gallery, options, reviews, related
 about.html          Brand story
@@ -130,7 +130,6 @@ the filename of the slot you want to change, and that spot updates on its own:
 | Slot | Filename | Shape | Suggested size |
 |---|---|---|---|
 | Hero slides | `hero-1..4.jpg` | Portrait 4:5 | 900–1100 wide |
-| Hair Bank section | `hair-bank.jpg` | Portrait 4:5 | 900 × 1125 |
 | Collection cards | `collection-{wavy,bouncy,bonestraight,deepwave,pixie-curls}.jpg` | Portrait 4:5 | 760 × 950 |
 | Products | `product-<id>-1..4.jpg` | Portrait 4:5 | 900 × 1125 |
 | Reviewer photos | `avatar-1..5.jpg` | Portrait or square | 240 × 300 |
@@ -153,7 +152,7 @@ screen readers announce and what Google reads.
 python3 tools-generate-placeholders.py assets/img/your-photo.jpg
 ```
 
-That regenerates all 50 files at the right sizes — **including the hero slides and
+That regenerates all 49 files at the right sizes — **including the hero slides and
 any other real photos you've added**, so only run it when you genuinely want to reset
 every image back to one source picture. The original full-size
 `IMG_7195.JPG.jpeg` is kept in `assets/img/` as the source — it's 4.7 MB and isn't
@@ -169,7 +168,7 @@ across all `.html` files plus `templates/` catches every one. Same for
 
 ### The Hair Bank group — set this link before you go live
 
-The Hair Bank section in the middle of the home page invites customers into your
+The Hair Bank section closes the home page, inviting customers into your
 savings-scheme WhatsApp group. **The invite link is a placeholder and must be
 replaced**, or the button goes nowhere:
 

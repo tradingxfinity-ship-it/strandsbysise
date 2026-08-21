@@ -15,7 +15,7 @@
    11. SBS Babes carousels
    12. Create a Custom Unit
    13. Packaging unveiling
-   14. Newsletter
+   14. Hair Bank — closing invitation
    15. Footer
    16. Product detail page
    17. About / Contact / FAQ
@@ -1346,34 +1346,81 @@ select.field {
   .video-frame { max-width: 340px; }
 }
 
-/* 14. Newsletter ========================================================= */
-.newsletter {
+/* 14. Hair Bank — closing invitation ==================================== */
+/* The last thing before a charcoal footer, so it stays light: a raised
+   panel on a warm ground reads as a closing card rather than yet another
+   photo-and-text split. */
+.bank {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(140deg, var(--ivory) 0%, var(--blush-soft) 55%, #fdf6ee 100%);
+  background: linear-gradient(165deg, var(--white) 0%, var(--blush-soft) 45%, #fbf1e8 100%);
 }
-.newsletter__inner { position: relative; z-index: 1; max-width: 760px; margin-inline: auto; text-align: center; }
-.newsletter__inner > .lede { max-width: 52ch; margin-inline: auto; }
-.newsletter__form {
-  display: flex;
-  gap: 0.6rem;
-  margin-top: 2rem;
-  padding: 0.45rem;
-  border-radius: var(--r-pill);
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  box-shadow: var(--shadow-md);
+
+.bank__panel {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin-inline: auto;
+  padding: clamp(2.5rem, 1.8rem + 3vw, 4.5rem) clamp(1.5rem, 0.8rem + 3vw, 4rem);
+  text-align: center;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-lg);
 }
-.newsletter__form .field {
-  flex: 1;
-  border: 0;
-  background: transparent;
-  padding-left: 1.4rem;
+.bank__panel .lede { max-width: 54ch; margin-inline: auto; }
+
+/* Hairline dividers rather than boxed cards — lighter, and it keeps the
+   panel reading as one object instead of a panel full of panels. */
+.bank__steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.25rem, 0.6rem + 2vw, 2.5rem);
+  margin-top: clamp(2.25rem, 1.6rem + 2vw, 3.25rem);
+  text-align: left;
 }
-.newsletter__form .field:focus { box-shadow: none; }
-.newsletter .form-note { margin-top: 1rem; }
+.bank__steps li {
+  display: grid;
+  gap: 0.3rem;
+  padding-left: clamp(1.25rem, 0.6rem + 2vw, 2.5rem);
+  border-left: 1px solid rgba(212, 175, 55, 0.35);
+}
+.bank__steps li:first-child { padding-left: 0; border-left: 0; }
+
+.bank__num {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  color: var(--gold-deep);
+}
+.bank__steps b {
+  font-family: var(--font-display);
+  font-size: 1.08rem;
+  font-weight: 500;
+  color: var(--charcoal);
+}
+.bank__steps li > span:not(.bank__num) {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--charcoal-soft);
+}
+
+.bank__cta { margin-top: clamp(2.25rem, 1.6rem + 2vw, 3rem); }
+.bank__note { margin-top: 1rem; }
+
+@media (max-width: 780px) {
+  .bank__steps {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .bank__steps li {
+    padding: 1.15rem 0 1.15rem 1.25rem;
+    border-left: 2px solid rgba(212, 175, 55, 0.35);
+  }
+  .bank__steps li:first-child { padding-left: 1.25rem; border-left: 2px solid rgba(212, 175, 55, 0.35); }
+}
 
 /* 15. Footer ============================================================= */
 .footer {
@@ -2061,8 +2108,6 @@ select.field {
 
   .review { flex-basis: 100%; }
   .footer__grid { grid-template-columns: 1fr; gap: 2.25rem; }
-  .newsletter__form { flex-direction: column; border-radius: var(--r-lg); padding: 0.75rem; }
-  .newsletter__form .field { padding-left: 1rem; text-align: center; }
   .review-summary { grid-template-columns: 1fr; text-align: center; }
   .thumbs { grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
   .btn { padding: 1rem 1.6rem; }
