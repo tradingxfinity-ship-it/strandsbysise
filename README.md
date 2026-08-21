@@ -84,7 +84,7 @@ dict(id="silk-straight", name="Silk Straight", cat="straight", price=185000, old
 ```
 
 - `id` — lowercase, hyphenated. Also decides the image filename (below).
-- `cat` — one of `wavy`, `bouncy`, `bonestraight`, `deepwave`.
+- `cat` — one of `wavy`, `bouncy`, `bonestraight`, `deepwave`, `pixie-curls`.
   This is what the shop filters and the home page collections use.
 - `price` — plain number, no commas or currency symbol.
 - `old` — the crossed-out "was" price, or `None`.
@@ -130,7 +130,7 @@ the filename of the slot you want to change, and that spot updates on its own:
 |---|---|---|---|
 | Hero slides | `hero-1..4.jpg` | Portrait 4:5 | 900–1100 wide |
 | Hair Bank section | `hair-bank.jpg` | Portrait 4:5 | 900 × 1125 |
-| Collection cards | `collection-{wavy,bouncy,bonestraight,deepwave}.jpg` | Portrait 4:5 | 760 × 950 |
+| Collection cards | `collection-{wavy,bouncy,bonestraight,deepwave,pixie-curls}.jpg` | Portrait 4:5 | 760 × 950 |
 | Products | `product-<id>-1..4.jpg` | Portrait 4:5 | 900 × 1125 |
 | Reviewer photos | `avatar-1..5.jpg` | Portrait or square | 240 × 300 |
 | About page | `about-founder/studio/detail.jpg` | Portrait 4:5 | 700–900 wide |

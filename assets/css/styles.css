@@ -224,6 +224,7 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 0; }
 .grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.grid--5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 
 .center { text-align: center; }
 .stack-cta { display: flex; flex-wrap: wrap; gap: 0.9rem; }
@@ -1992,6 +1993,7 @@ select.field {
 
 /* 20. Responsive ========================================================= */
 @media (max-width: 1080px) {
+  .grid--5 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .footer__grid { grid-template-columns: 1fr 1fr; }
   .review { flex-basis: calc((100% - clamp(1rem, 0.5rem + 1.4vw, 1.75rem)) / 2); }
 }

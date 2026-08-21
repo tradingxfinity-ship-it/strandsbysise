@@ -84,8 +84,8 @@ PRODUCTS = [
     dict(id="deep-wave", name="Deep Wave Dream", cat="deepwave", price=232000, old=None,
          rating=4.8, reviews=64, length='22"', texture="Deepwave", density="200%",
          tag=None, tag_dark=False),
-    dict(id="pixie-chic", name="Pixie Chic", cat="deepwave", price=112000, old=135000,
-         rating=4.6, reviews=41, length='8"', texture="Deepwave", density="150%",
+    dict(id="pixie-chic", name="Pixie Chic", cat="pixie-curls", price=112000, old=135000,
+         rating=4.6, reviews=41, length='8"', texture="Pixie Curls", density="150%",
          tag="Sale", tag_dark=False),
 ]
 
