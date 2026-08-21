@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..600&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..600&family=Inter:wght@400;500;600;700&display=swap"></noscript>
 
-<link rel="stylesheet" href="assets/css/styles.css?v=0a469859">
+<link rel="stylesheet" href="assets/css/styles.css?v=10b82af1">
 
 <script type="application/ld+json">
 {
@@ -525,52 +525,52 @@
   </section>
 
   <!-- ============ 5. Packaging Unveiling ============ -->
-  <section class="section section--ivory" id="packaging" aria-labelledby="unveil-title">
+  <section class="section unveil" id="packaging" aria-labelledby="unveil-title">
+    <span class="orb orb--1" style="top:-40px;left:-60px;right:auto;opacity:.35" aria-hidden="true"></span>
+    <span class="orb orb--4" style="top:22%;right:8%" aria-hidden="true"></span>
+
     <div class="wrap">
-      <div class="split">
-        <div class="video-frame" data-video-frame data-reveal="left">
-          <video preload="none" playsinline controls
-                 poster="assets/img/packaging-poster.jpg"
-                 width="464" height="832">
-            <source src="assets/video/packaging-unveil.mp4" type="video/mp4">
-            <p>Your browser can't play this video.
-              <a href="assets/video/packaging-unveil.mp4">Open it directly</a> instead.</p>
-          </video>
-          <button class="video-play" type="button" data-video-play aria-label="Play the packaging unveiling">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
-          </button>
+      <div class="unveil__grid">
+        <div class="unveil__media" data-reveal="left">
+          <div class="video-frame" data-video-frame>
+            <video preload="none" playsinline controls
+                   poster="assets/img/packaging-poster.jpg"
+                   width="464" height="832">
+              <source src="assets/video/packaging-unveil.mp4" type="video/mp4">
+              <p>Your browser can't play this video.
+                <a href="assets/video/packaging-unveil.mp4">Open it directly</a> instead.</p>
+            </video>
+            <button class="video-play" type="button" data-video-play aria-label="Play the packaging unveiling">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+            </button>
+          </div>
+          <p class="unveil__caption">The unboxing film <span aria-hidden="true">·</span> 0:39</p>
         </div>
 
-        <div data-reveal="right" data-delay="0.1">
-          <span class="eyebrow">Just landed</span>
-          <h2 id="unveil-title">Unveiling Our New Packaging</h2>
-          <p>Your wig should feel like a gift before you've even worn it. Every piece now arrives in our signature ribboned box — made to be kept, not thrown away.</p>
+        <div class="unveil__copy" data-reveal="right" data-delay="0.1">
+          <span class="eyebrow eyebrow--line">Just landed</span>
+          <h2 id="unveil-title">Unveiling Our<br><em>New Packaging</em></h2>
+          <p class="lede">Your wig should feel like a gift before you've even worn it. Every piece now arrives in our signature ribboned box — made to be kept, not thrown away.</p>
 
-          <div class="values" style="margin-top:2rem">
-            <div class="value">
-              <span class="value__num">01</span>
-              <div>
-                <h3>Made to be reopened</h3>
-                <p>A rigid magnetic box that doubles as storage between installs.</p>
-              </div>
-            </div>
-            <div class="value">
-              <span class="value__num">02</span>
-              <div>
-                <h3>Protected in transit</h3>
-                <p>Your piece arrives shaped, wrapped and exactly as it left us.</p>
-              </div>
-            </div>
-            <div class="value">
-              <span class="value__num">03</span>
-              <div>
-                <h3>Ready to gift</h3>
-                <p>Beautiful enough to hand over as it is — no wrapping needed.</p>
-              </div>
-            </div>
-          </div>
+          <ol class="unveil__points">
+            <li>
+              <span class="unveil__num">01</span>
+              <b>Made to be reopened</b>
+              <span>A rigid magnetic box that doubles as storage between installs.</span>
+            </li>
+            <li>
+              <span class="unveil__num">02</span>
+              <b>Protected in transit</b>
+              <span>Your piece arrives shaped, wrapped and exactly as it left us.</span>
+            </li>
+            <li>
+              <span class="unveil__num">03</span>
+              <b>Ready to gift</b>
+              <span>Beautiful enough to hand over as it is — no wrapping needed.</span>
+            </li>
+          </ol>
 
-          <div class="stack-cta" style="margin-top:2.25rem">
+          <div class="stack-cta" style="margin-top:2.5rem">
             <a class="btn btn--gold btn--lg" href="shop.html">Shop the Collection</a>
           </div>
         </div>
@@ -921,6 +921,6 @@
 
 <div class="toast-stack" aria-live="polite"></div>
 
-<script src="assets/js/main.js?v=2bdb70fd" defer></script>
+<script src="assets/js/main.js?v=1082b01b" defer></script>
 </body>
 </html>

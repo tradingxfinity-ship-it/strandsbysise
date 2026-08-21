@@ -1179,6 +1179,98 @@ select.field {
 }
 
 /* 13. Packaging unveiling =============================================== */
+/* A deliberate dark break in an otherwise ivory page: the red boxes and
+   gold read far stronger against charcoal, and it stops this section and
+   the Hair Bank split below it from looking like the same slide twice. */
+.unveil {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 90% at 15% 0%, #38302c 0%, transparent 55%),
+    linear-gradient(160deg, #2b2523 0%, #211d1b 55%, #171413 100%);
+  color: rgba(255, 255, 255, 0.72);
+}
+.unveil h2 { color: #fff; }
+.unveil h2 em { font-style: italic; color: var(--gold); }
+.unveil .lede { color: rgba(255, 255, 255, 0.68); }
+.unveil .eyebrow { color: var(--gold); }
+.unveil .eyebrow--line::before { background: var(--gold); }
+
+.unveil__grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 0.85fr 1fr;
+  align-items: center;
+  gap: clamp(2.5rem, 1.5rem + 5vw, 6rem);
+}
+
+.unveil__media { position: relative; }
+
+/* Offset gold hairline behind the video — an editorial frame rather than
+   a plain rectangle sitting on a flat background. */
+.unveil__media::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 26px;
+  bottom: -26px;
+  left: calc(50% - 190px + 26px);
+  width: 380px;
+  max-width: 100%;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: var(--r-lg);
+  pointer-events: none;
+}
+
+.unveil__media .video-frame { position: relative; z-index: 1; }
+
+.unveil__caption {
+  position: relative;
+  z-index: 1;
+  margin: 1.35rem auto 0;
+  max-width: 380px;
+  font-size: var(--fs-micro);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  text-align: center;
+}
+
+.unveil__points {
+  display: grid;
+  gap: 0;
+  margin-top: 2.5rem;
+  counter-reset: unveil;
+}
+.unveil__points li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.2rem 1.25rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.unveil__points li:last-child { border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+.unveil__num {
+  grid-row: span 2;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  padding-top: 0.3rem;
+}
+.unveil__points b {
+  font-family: var(--font-display);
+  font-size: 1.12rem;
+  font-weight: 500;
+  color: #fff;
+}
+.unveil__points li > span:not(.unveil__num) {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+}
+
 .video-frame {
   position: relative;
   width: 100%;
@@ -1187,8 +1279,8 @@ select.field {
   aspect-ratio: 9 / 16;
   border-radius: var(--r-lg);
   overflow: hidden;
-  background: var(--charcoal);
-  box-shadow: var(--shadow-lg);
+  background: #000;
+  box-shadow: 0 40px 90px -40px rgba(0, 0, 0, 0.9);
 }
 .video-frame video {
   display: block;
@@ -1197,8 +1289,8 @@ select.field {
   object-fit: cover;
 }
 
-/* The poster carries a play affordance of its own; the native controls
-   only appear once playback starts. */
+/* The poster carries its own play affordance; the native controls are
+   withheld until playback starts so the still stays clean. */
 .video-play {
   position: absolute;
   left: 50%;
@@ -1210,20 +1302,33 @@ select.field {
   width: 78px;
   height: 78px;
   padding-left: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  border: 0;
   border-radius: 50%;
-  background: rgba(212, 175, 55, 0.92);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: var(--gold);
   color: #fff;
   cursor: pointer;
-  box-shadow: var(--shadow-gold);
+  box-shadow: 0 10px 40px -8px rgba(212, 175, 55, 0.7);
   transition: transform 0.45s var(--ease-out), background-color 0.3s var(--ease), opacity 0.4s var(--ease);
+}
+.video-play::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 175, 55, 0.65);
+  animation: playPulse 2.8s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes playPulse {
+  0%   { transform: scale(1);    opacity: 0.85; }
+  100% { transform: scale(1.75); opacity: 0; }
 }
 .video-play:hover { transform: translate(-50%, -50%) scale(1.07); background: var(--gold-deep); }
 .video-frame.is-playing .video-play { opacity: 0; pointer-events: none; }
 
 @media (max-width: 960px) {
+  .unveil__grid { grid-template-columns: 1fr; }
+  .unveil__media::before { left: calc(50% - 170px + 20px); width: 340px; top: 20px; bottom: -20px; }
   .video-frame { max-width: 340px; }
 }
 

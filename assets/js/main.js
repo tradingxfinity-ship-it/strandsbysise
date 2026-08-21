@@ -104,6 +104,11 @@
     var playBtn = $("[data-video-play]", frame);
     if (!video || !playBtn) return;
 
+    /* The control bar is ugly over a poster still. It ships in the markup
+       so the video is usable without JS, and is taken away only once we
+       know JS is here to offer the play button instead. */
+    video.removeAttribute("controls");
+
     playBtn.addEventListener("click", function () {
       /* preload="none" means nothing is fetched until this point. */
       video.play();
@@ -111,7 +116,10 @@
 
     /* Track the element rather than the button, so the overlay also
        clears when playback starts from the native controls. */
-    video.addEventListener("play", function () { frame.classList.add("is-playing"); });
+    video.addEventListener("play", function () {
+      frame.classList.add("is-playing");
+      video.controls = true;
+    });
     video.addEventListener("ended", function () { frame.classList.remove("is-playing"); });
   });
 
