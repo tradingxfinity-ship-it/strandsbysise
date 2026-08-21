@@ -1835,7 +1835,11 @@ select.field {
   .hero__copy { margin-inline: auto; }
   .hero .stack-cta { justify-content: center; }
   .hero__proof { justify-content: center; text-align: center; }
-  .hero__media { order: -1; max-width: 460px; margin-inline: auto; }
+  /* `width: 100%` is load-bearing: `margin-inline: auto` makes this grid
+     item shrink-to-fit, and the slideshow's slides are all absolutely
+     positioned, so without it the frame has no content to size against
+     and collapses to zero. */
+  .hero__media { order: -1; width: 100%; max-width: 460px; margin-inline: auto; }
   .hero__frame { aspect-ratio: 1 / 1.15; border-radius: 200px 200px var(--r-lg) var(--r-lg); }
   .hero__badge { left: auto; right: -4%; bottom: 6%; }
 
