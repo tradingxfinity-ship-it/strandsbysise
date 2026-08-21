@@ -553,24 +553,6 @@ select.field {
   margin-bottom: 2.2rem;
 }
 
-.hero__proof {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: clamp(1.2rem, 0.6rem + 1.8vw, 2.6rem);
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--line);
-}
-.hero__proof div { line-height: 1.35; }
-.hero__proof b {
-  display: block;
-  font-family: var(--font-display);
-  font-size: 1.7rem;
-  font-weight: 500;
-}
-.hero__proof span { font-size: var(--fs-micro); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
-
 .hero__media { position: relative; }
 .hero__frame {
   position: relative;
@@ -2099,7 +2081,6 @@ select.field {
   }
   .hero__copy { margin-inline: auto; }
   .hero .stack-cta { justify-content: center; }
-  .hero__proof { justify-content: center; text-align: center; }
   /* `width: 100%` is load-bearing: `margin-inline: auto` makes this grid
      item shrink-to-fit, and the slideshow's slides are all absolutely
      positioned, so without it the frame has no content to size against

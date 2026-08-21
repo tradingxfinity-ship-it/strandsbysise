@@ -58,12 +58,15 @@
   var heroFrame = $("[data-hero-slides]");
   if (heroFrame) {
     var heroSlides = $$("img", heroFrame);
-    if (heroSlides.length > 1 && !reduceMotion) {
+    if (heroSlides.length > 1) {
       var heroIndex = 0;
       var heroTimer;
       var heroSettle;
-      /* Must match the transition duration on .hero__frame img in the CSS. */
-      var FADE_MS = 1800;
+      /* Must match the transition duration on .hero__frame img in the CSS.
+         Under reduced motion the stylesheet drops that transition, so the
+         hold-the-outgoing-slide step is pointless and slides cut instead
+         of fading — the photos still rotate, there is just no animation. */
+      var FADE_MS = reduceMotion ? 0 : 1800;
 
       var showHeroSlide = function (i) {
         var outgoing = heroSlides[heroIndex];
