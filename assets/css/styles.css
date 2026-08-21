@@ -1024,10 +1024,13 @@ select.field {
    follow. Only the bottom is truncated, so an Instagram markup change can
    shorten or lengthen that tail without breaking the layout. */
 .social-embed {
+  /* One knob per platform: how much of the embed to show before clipping. */
+  --embed-h: clamp(430px, 34vw + 90px, 480px);
+
   flex: 0 0 clamp(300px, 27vw, 340px);
   scroll-snap-align: start;
   position: relative;
-  height: clamp(430px, 34vw + 90px, 480px);
+  height: var(--embed-h);
   overflow: hidden;
   border-radius: var(--r-md);
   background: var(--white);
@@ -1040,10 +1043,20 @@ select.field {
 .social-embed iframe {
   display: block;
   width: 100%;
-  height: 760px;
+  height: 800px;
   border: 0;
   background: var(--white);
 }
+
+/* TikTok centres its player: profile header, then the video, then the
+   caption and sound row. The video sits lower than Instagram's, so this
+   frame is taller to clear it. */
+.social-embed--tiktok {
+  --embed-h: clamp(500px, 38vw + 100px, 560px);
+  flex-basis: clamp(300px, 27vw, 330px);
+  background: #000;
+}
+.social-embed--tiktok iframe { background: #000; }
 
 /* Arrows must stay on touch for embed rows: a finger landing on an iframe
    cannot swipe the track underneath it. */

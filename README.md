@@ -177,8 +177,17 @@ plain images and sets Meta cookies — if you ever add a cookie banner, this is 
 that needs consent. And a post that gets deleted or set to private shows an empty card,
 so it's worth a glance now and then.
 
-**TikTok row — still placeholder.** It shows `tt-1..8.jpg`, the same photo eight times.
-Send the video links and it can be rebuilt as embeds like the Instagram row.
+**TikTok row — real embeds.** Four videos play inline the same way. TikTok's embed
+needs the numeric video id, not a `vt.tiktok.com` share link — open the share link in a
+browser and the address bar shows the full URL ending in `/video/7674599998390160647`.
+That number goes in `https://www.tiktok.com/embed/v2/<id>`. The canonical URL is kept
+in an HTML comment above each iframe so you can tell which video is which.
+
+**Adjusting the crop.** Each row's visible height is one variable. In
+`assets/css/styles.css`, `--embed-h` on `.social-embed` controls the Instagram row and
+`--embed-h` on `.social-embed--tiktok` the TikTok row. TikTok's frame is taller because
+it centres its player lower down. If a card ever shows too much caption or cuts the
+video, change that one number.
 
 ### The custom unit builder
 
