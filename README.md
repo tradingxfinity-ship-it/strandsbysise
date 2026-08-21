@@ -21,6 +21,9 @@ assets/js/main.js       Cart, carousels, filters, gallery zoom, accordions, anim
 assets/img/             Site photography (some slots still placeholder)
 assets/video/           The packaging unveiling clip
 
+admin/              The admin panel served at /admin
+api/                Sign-in handlers for the panel (no secrets in here)
+
 data/settings.json  Phone, WhatsApp, email, socials, announcement bar
 data/products.json  The catalogue
 templates/          Editable sources for every page
@@ -313,3 +316,62 @@ text is Inter, both loaded from Google Fonts.
   results in Google.
 - **Fast** — no frameworks, one stylesheet, one script, lazy-loaded images,
   non-blocking fonts.
+
+
+## 7. The admin panel
+
+Sise edits the site at **strandsbysise.vercel.app/admin** — products, prices, badges,
+the WhatsApp number, the announcement bar and the Hair Bank link, from a phone or a
+laptop. Saving commits to GitHub, a workflow rebuilds the pages, and Vercel publishes.
+About a minute end to end.
+
+### One-time setup
+
+Two steps, both on your own accounts. **I can't do these — they involve a secret that
+should only ever be seen by you.**
+
+**1. Create a GitHub OAuth app.** Go to GitHub → Settings → Developer settings →
+OAuth Apps → New OAuth App:
+
+| Field | Value |
+|---|---|
+| Application name | `StrandsBySise Admin` |
+| Homepage URL | `https://strandsbysise.vercel.app` |
+| Authorization callback URL | `https://strandsbysise.vercel.app/api/callback` |
+
+Register it, then **Generate a new client secret**. You'll have a Client ID and a
+Client Secret. Copy both — the secret is shown only once.
+
+**2. Give them to Vercel.** In the Vercel project → Settings → Environment Variables,
+add two, for all environments:
+
+| Name | Value |
+|---|---|
+| `GITHUB_CLIENT_ID` | the Client ID |
+| `GITHUB_CLIENT_SECRET` | the Client Secret |
+
+Redeploy, then open `/admin` and sign in with GitHub.
+
+Keep the secret out of this repo. It belongs in Vercel's settings only — anything
+committed here is public.
+
+### Who can edit
+
+Anyone with write access to the GitHub repo. To let someone else in, add them as a
+collaborator on the repository; to remove them, remove that access. There's no separate
+password to manage.
+
+### What the panel can and can't do
+
+It edits `data/products.json` and `data/settings.json`, and uploads photos to
+`assets/img`. That covers prices, products, badges, contact details and links.
+
+It does **not** edit page wording, section layouts or the design — those live in
+`templates/` and the stylesheet. Ask for those changes, or edit the templates directly.
+
+### If a change doesn't appear
+
+Saving commits to GitHub, then the **Build site** workflow regenerates the HTML. Check
+the repo's Actions tab: a red run means the rebuild failed and the site is still
+serving the previous version — which is deliberate, so a bad edit can't take the shop
+down. The commit is in `main` either way, so nothing is lost.

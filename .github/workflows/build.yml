@@ -1,0 +1,50 @@
+# Regenerates the HTML whenever content or templates change.
+#
+# The admin panel commits data/*.json; without this, those edits would sit
+# in the repo without ever reaching a page. Vercel only serves files — it
+# does not run build.py — so the built HTML is committed here instead.
+#
+# Deliberately does NOT change how Vercel deploys: if this workflow ever
+# fails, the site keeps serving the last good HTML rather than going down.
+name: Build site
+
+on:
+  push:
+    branches: [main]
+    # Note the absence of '*.html': this workflow commits those, and
+    # listing them here would make it re-trigger itself forever.
+    paths:
+      - 'data/**'
+      - 'templates/**'
+      - 'assets/css/**'
+      - 'assets/js/**'
+      - 'build.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Rebuild pages
+        run: python3 build.py
+
+      - name: Commit if anything changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- '*.html'; then
+            echo "No page changes — nothing to commit."
+          else
+            git add -- '*.html'
+            git commit -m "Rebuild pages from content changes"
+            git push
+          fi

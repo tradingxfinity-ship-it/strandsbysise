@@ -1,0 +1,115 @@
+# StrandsBySise admin panel — what Sise can edit and how it's presented.
+#
+# Everything here maps onto the files in data/. Saving commits to GitHub,
+# which triggers the Build site workflow, which regenerates the pages.
+
+backend:
+  name: github
+  repo: tradingxfinity-ship-it/strandsbysise
+  branch: main
+  # The sign-in handler lives with the site — see api/auth.js.
+  base_url: https://strandsbysise.vercel.app
+  auth_endpoint: api/auth
+
+# Photos uploaded through the panel land where the site already looks for them.
+media_folder: assets/img
+public_folder: /assets/img
+
+# Save shows a live preview link rather than a confusing "publish" workflow.
+publish_mode: simple
+site_url: https://strandsbysise.vercel.app
+
+collections:
+  # ---------------------------------------------------------------- products
+  - name: products
+    label: Products
+    label_singular: product
+    files:
+      - name: catalogue
+        label: The catalogue
+        file: data/products.json
+        description: >-
+          Every piece in the shop. Drag to reorder — the order here is the
+          order shoppers see. Photos are separate: save each product's photo
+          as product-<id>-1.jpg through -4.jpg in assets/img.
+        fields:
+          - name: products
+            label: Products
+            label_singular: product
+            widget: list
+            summary: '{{fields.name}} — ₦{{fields.price}}'
+            fields:
+              - { name: name, label: Name, widget: string }
+              - name: id
+                label: ID
+                widget: string
+                pattern: ['^[a-z0-9-]+$', 'Lowercase letters, numbers and hyphens only']
+                hint: >-
+                  Lowercase, hyphenated, no spaces. This also names the photo
+                  files, so avoid changing it once photos are in place.
+              - name: cat
+                label: Collection
+                widget: select
+                options: [wavy, bouncy, bonestraight, deepwave, pixie-curls]
+              - { name: price, label: Price (₦), widget: number, value_type: int, min: 0 }
+              - name: old
+                label: Was price (₦)
+                widget: number
+                value_type: int
+                required: false
+                hint: Shows as a crossed-out price. Leave empty for no discount.
+              - { name: length, label: Length, widget: string, hint: 'e.g. 20"' }
+              - { name: texture, label: Texture, widget: string }
+              - { name: density, label: Density, widget: string, hint: 'e.g. 180%' }
+              - name: tag
+                label: Badge
+                widget: select
+                required: false
+                options: ['Best Seller', 'New In', 'Sale', "Editor's Pick", 'Signature']
+                hint: The small label on the card. Leave empty for none.
+              - name: tag_dark
+                label: Dark badge
+                widget: boolean
+                default: false
+                required: false
+              - { name: rating, label: Rating, widget: number, value_type: float, min: 0, max: 5, step: 0.1 }
+              - { name: reviews, label: Review count, widget: number, value_type: int, min: 0 }
+
+  # ---------------------------------------------------------------- settings
+  - name: settings
+    label: Settings
+    files:
+      - name: contact
+        label: Contact & links
+        file: data/settings.json
+        description: >-
+          Used across every page. Changing the WhatsApp number here updates
+          the header, the footer, the contact page and every order button.
+        fields:
+          - name: announcement
+            label: Announcement bar
+            widget: string
+            hint: >-
+              The strip at the very top. Any ₦ amount is emphasised
+              automatically — just write it as normal text.
+          - { name: phone_display, label: Phone (as shown), widget: string }
+          - name: phone_link
+            label: Phone (for dialling)
+            widget: string
+            hint: Same number, no spaces, with country code — e.g. +2348030000000
+          - name: whatsapp_number
+            label: WhatsApp number
+            widget: string
+            hint: >-
+              Digits only, country code first, no + or spaces — e.g.
+              2348030000000. Powers every WhatsApp button on the site.
+          - name: hair_bank_group_url
+            label: Hair Bank group invite link
+            widget: string
+            hint: >-
+              WhatsApp → the group → Group info → Invite via link → Copy link.
+          - { name: email, label: Email, widget: string }
+          - { name: instagram_url, label: Instagram, widget: string }
+          - { name: tiktok_url, label: TikTok, widget: string }
+          - { name: facebook_url, label: Facebook, widget: string }
+          - { name: opening_hours_short, label: Opening hours (short), widget: string }

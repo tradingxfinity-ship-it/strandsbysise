@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StrandsBySise — Admin</title>
+<!-- Keep the panel out of Google. It is not a page for customers. -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23FFF9F5'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Georgia,serif' font-size='16' fill='%23D4AF37'%3ES%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@400;500;600&display=swap">
+
+<style>
+  :root { --gold: #d4af37; --charcoal: #2b2b2b; --ivory: #fff9f5; }
+
+  /* Shown only until the panel loads, so a slow connection doesn't look
+     like a broken page. Decap replaces the whole body once it boots. */
+  .boot {
+    position: fixed; inset: 0;
+    display: grid; place-content: center; justify-items: center;
+    gap: 1rem; text-align: center; padding: 2rem;
+    background: var(--ivory);
+    font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #6b6360;
+  }
+  .boot__brand {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 1.6rem; color: var(--charcoal);
+  }
+  .boot__brand span { color: var(--gold); }
+  .boot__ring {
+    width: 34px; height: 34px; border-radius: 50%;
+    border: 2px solid rgba(212,175,55,.25); border-top-color: var(--gold);
+    animation: spin 0.9s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .boot small { font-size: .82rem; max-width: 34ch; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div class="boot" id="boot">
+  <span class="boot__brand">Strands<span>BySise</span></span>
+  <span class="boot__ring" role="status" aria-label="Loading the admin panel"></span>
+  <small>Loading your admin panel. You'll be asked to sign in with GitHub the first time.</small>
+</div>
+
+<script src="https://unpkg.com/decap-cms@^3.8.4/dist/decap-cms.js"></script>
+<script>
+  (function () {
+    var boot = document.getElementById('boot');
+    if (!boot) return;
+
+    /* Decap renders into its own root and leaves this overlay in place, so
+       it has to take itself down — otherwise it covers the panel forever. */
+    var poll = setInterval(function () {
+      var root = document.getElementById('nc-root');
+      if (root && root.children.length) {
+        clearInterval(poll);
+        clearTimeout(stall);
+        boot.style.transition = 'opacity .4s ease';
+        boot.style.opacity = '0';
+        setTimeout(function () { boot.remove(); }, 450);
+      }
+    }, 200);
+
+    /* If it genuinely never arrives, say so plainly rather than leaving a
+       spinner turning. */
+    var stall = setTimeout(function () {
+      clearInterval(poll);
+      boot.querySelector('small').textContent =
+        "Still loading. Check your connection, then reload. If it keeps failing, " +
+        "the site itself is unaffected — only this panel is.";
+      boot.querySelector('.boot__ring').style.animation = 'none';
+    }, 15000);
+  })();
+</script>
+</body>
+</html>
