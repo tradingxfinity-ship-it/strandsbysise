@@ -75,6 +75,12 @@
   --shadow-lg: 0 40px 80px -40px rgba(43, 43, 43, 0.32);
   --shadow-gold: 0 22px 48px -26px rgba(184, 148, 42, 0.45);
 
+  /* Shared dark ground for the packaging and Hair Bank sections. Defined
+     once so the two cannot drift apart. */
+  --dark-ground:
+    radial-gradient(120% 90% at 15% 0%, #38302c 0%, transparent 55%),
+    linear-gradient(160deg, #2b2523 0%, #211d1b 55%, #171413 100%);
+
   /* Motion */
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -1199,9 +1205,7 @@ select.field {
 .unveil {
   position: relative;
   overflow: hidden;
-  background:
-    radial-gradient(120% 90% at 15% 0%, #38302c 0%, transparent 55%),
-    linear-gradient(160deg, #2b2523 0%, #211d1b 55%, #171413 100%);
+  background: var(--dark-ground);
   color: rgba(255, 255, 255, 0.72);
 }
 .unveil h2 { color: #fff; }
@@ -1347,13 +1351,13 @@ select.field {
 }
 
 /* 14. Hair Bank — closing invitation ==================================== */
-/* The last thing before a charcoal footer, so it stays light: a raised
-   panel on a warm ground reads as a closing card rather than yet another
-   photo-and-text split. */
+/* Shares the packaging section's dark ground. The panel itself stays
+   light — white glass on charcoal is what stops this section merging
+   into the charcoal footer directly below it. */
 .bank {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(165deg, var(--white) 0%, var(--blush-soft) 45%, #fbf1e8 100%);
+  background: var(--dark-ground);
 }
 
 .bank__panel {
@@ -1363,12 +1367,12 @@ select.field {
   margin-inline: auto;
   padding: clamp(2.5rem, 1.8rem + 3vw, 4.5rem) clamp(1.5rem, 0.8rem + 3vw, 4rem);
   text-align: center;
-  background: rgba(255, 255, 255, 0.78);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(212, 175, 55, 0.28);
+  /* Near-opaque, not glass: at 78% the charcoal ground bled through and
+     turned the panel a muddy grey, dulling the text contrast with it. */
+  background: rgba(255, 250, 246, 0.97);
+  border: 1px solid rgba(212, 175, 55, 0.45);
   border-radius: var(--r-xl);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 50px 100px -50px rgba(0, 0, 0, 0.85);
 }
 .bank__panel .lede { max-width: 54ch; margin-inline: auto; }
 
