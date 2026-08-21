@@ -10,7 +10,8 @@ Open `index.html` in a browser and it works.
 
 ```
 index.html          Home — hero, collections, best sellers, custom unit
-                    builder, why us, Hair Bank scheme, testimonials, SBS Babes
+                    builder, packaging unveiling, Hair Bank, testimonials,
+                    SBS Babes
 shop.html           Full collection with texture filters and sorting
 product.html        Product detail — gallery, options, reviews, related
 about.html          Brand story
@@ -78,8 +79,8 @@ pages. You'll just have to update the header and footer on each one by hand.
 Open `build.py` and find the `PRODUCTS` list near the top. Each product is one entry:
 
 ```python
-dict(id="silk-straight", name="Silk Straight", cat="straight", price=185000, old=None,
-     rating=4.9, reviews=128, length='20"', texture="Straight", density="180%",
+dict(id="silk-straight", name="Silk Straight", cat="bonestraight", price=185000, old=None,
+     rating=4.9, reviews=128, length='20"', texture="Bonestraight", density="180%",
      tag="Best Seller", tag_dark=False),
 ```
 
@@ -100,7 +101,7 @@ uses images `-1` through `-4` for its gallery.
 ### The hero slideshow
 
 The hero crossfades through four photos, `hero-1.jpg` to `hero-4.jpg`, changing every
-5.2 seconds. `hero-1.jpg` shows first and is the one used for link previews on
+6 seconds. `hero-1.jpg` shows first and is the one used for link previews on
 WhatsApp and social, so make it your strongest shot.
 
 To change a slide, replace that file. To add or remove one, copy or delete an `<img>`
@@ -152,7 +153,7 @@ screen readers announce and what Google reads.
 python3 tools-generate-placeholders.py assets/img/your-photo.jpg
 ```
 
-That regenerates all 51 files at the right sizes — **including the hero slides and
+That regenerates all 50 files at the right sizes — **including the hero slides and
 any other real photos you've added**, so only run it when you genuinely want to reset
 every image back to one source picture. The original full-size
 `IMG_7195.JPG.jpeg` is kept in `assets/img/` as the source — it's 4.7 MB and isn't
