@@ -124,10 +124,16 @@ values. Four copies of one photo look exactly like a broken slideshow.
 
 ### The photography
 
-The hero slides and the five collection cards use real photography. The product
-cards, reviewer photos and About page still show `IMG_7195.JPG.jpeg` resized to fit
-each spot — your own photo, so the site looks like your brand rather than a template,
-but it repeats.
+The hero slides, the five collection cards and the product cards use real
+photography. The reviewer photos and About page still show `IMG_7195.JPG.jpeg` resized
+to fit each spot — your own photo, so the site looks like your brand rather than a
+template, but it repeats.
+
+**Products currently share their texture's collection photo**, so the two bonestraight
+pieces show the same wig, as do the two bouncy and the two wavy. All four gallery
+views of a product are that one shot too, which makes the product page's thumbnails
+redundant. Shoot each piece separately — front, side, back, styled — and save them as
+`product-<id>-1.jpg` through `-4.jpg` to fix both at once.
 
 Replace them one at a time as you shoot more. Drop a new photo into `assets/img/` using
 the filename of the slot you want to change, and that spot updates on its own:
@@ -136,7 +142,7 @@ the filename of the slot you want to change, and that spot updates on its own:
 |---|---|---|---|
 | Hero slides | `hero-1..4.jpg` | Portrait 4:5 | 900–1100 wide |
 | Collection cards | `collection-{wavy,bouncy,bonestraight,deepwave,pixie-curls}.jpg` | Portrait 4:5 | 760 × 950 |
-| Products | `product-<id>-1..4.jpg` | Portrait 4:5 | 900 × 1125 |
+| Products | `product-<id>-1..4.jpg` | Portrait 3:4 or taller | 760–900 wide |
 | Reviewer photos | `avatar-1..5.jpg` | Portrait or square | 240 × 300 |
 | About page | `about-founder/studio/detail.jpg` | Portrait 4:5 | 700–900 wide |
 
