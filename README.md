@@ -111,11 +111,10 @@ the filename of the slot you want to change, and that spot updates on its own:
 | Hair Bank section | `hair-bank.jpg` | Portrait 4:5 | 900 × 1125 |
 | Collection cards | `collection-*.jpg` | Portrait 4:5 | 760 × 950 |
 | Products | `product-<id>-1..4.jpg` | Portrait 4:5 | 900 × 1125 |
-| SBS Babes — TikTok row | `tt-1..8.jpg` | Portrait 4:5 | 600 × 750 |
-
-(The Instagram row uses live embeds, not image files.)
 | Reviewer photos | `avatar-1..5.jpg` | Portrait or square | 240 × 300 |
 | About page | `about-founder/studio/detail.jpg` | Portrait 4:5 | 700–900 wide |
+
+Both SBS Babes rows use live platform embeds, so they have no image files.
 
 Shoot portrait where you can — every slot is set up for 4:5, and the square and
 landscape spots crop from the top so faces stay in frame. If your photos frame the
@@ -132,7 +131,7 @@ screen readers announce and what Google reads.
 python3 tools-generate-placeholders.py assets/img/your-photo.jpg
 ```
 
-That regenerates all 56 files at the right sizes. The original full-size
+That regenerates all 48 files at the right sizes. The original full-size
 `IMG_7195.JPG.jpeg` is kept in `assets/img/` as the source — it's 4.7 MB and isn't
 loaded by any page, so you can delete it once you no longer need to regenerate from it.
 
