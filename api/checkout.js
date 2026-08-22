@@ -10,11 +10,11 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import { createRequire } from "node:module";
-
 /* The same pricing function the checkout page uses, so what the customer
-   was shown and what they're charged cannot drift apart. */
-const shipping = createRequire(import.meta.url)("../assets/js/shipping.js");
+   was shown and what they're charged cannot drift apart. Imported
+   statically so Vercel's bundler traces it into the function — a
+   createRequire here threw at module load, before any handler ran. */
+import shipping from "../assets/js/shipping.js";
 
 const MAX_QTY = 20;
 
