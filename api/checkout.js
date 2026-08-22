@@ -30,6 +30,30 @@ function loadCatalogue() {
 }
 
 export default async function handler(req, res) {
+  /* A GET is a health check: it proves the catalogue and rate table are
+     actually bundled into the function. Vercel cannot trace files read
+     with fs at runtime, so this is the only way to catch a missing
+     data/ directory before a customer does. Counts only — no prices,
+     no keys. */
+  if (req.method === "GET") {
+    try {
+      const catalogue = loadCatalogue();
+      const rules = JSON.parse(
+        fs.readFileSync(path.join(process.cwd(), "data", "shipping.json"), "utf8")
+      );
+      res.status(200).json({
+        ok: true,
+        products: Object.keys(catalogue).length,
+        delivery_options: (rules.local || []).length + 1,
+        zones: (rules.international.zones || []).length,
+        payments_configured: Boolean(process.env.PAYSTACK_SECRET_KEY),
+      });
+    } catch (err) {
+      res.status(500).json({ ok: false, error: "Catalogue or rates missing from the deploy." });
+    }
+    return;
+  }
+
   if (req.method !== "POST") {
     res.status(405).json({ error: "Use POST." });
     return;
