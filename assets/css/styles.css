@@ -2074,6 +2074,39 @@ select.field {
   align-items: start;
 }
 .checkout__summary { position: sticky; top: calc(var(--header-h) + 24px); }
+.delivery-options { display: grid; gap: .6rem; margin-top: .75rem; }
+.delivery-option {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: .85rem;
+  padding: .95rem 1.15rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--white);
+  cursor: pointer;
+  transition: border-color .3s var(--ease), background-color .3s var(--ease);
+}
+.delivery-option:hover { border-color: rgba(212, 175, 55, .55); }
+.delivery-option:has(input:checked) {
+  border-color: var(--gold);
+  background: var(--blush-soft);
+}
+.delivery-option input { accent-color: var(--gold-deep); width: 18px; height: 18px; }
+.delivery-option b { font-size: .96rem; font-weight: 600; display: block; }
+.delivery-option small { font-size: var(--fs-small); color: var(--muted); }
+.delivery-option .delivery-option__price { font-family: var(--font-display); font-size: 1.02rem; }
+
+.checkout__line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: .6rem;
+  font-size: .95rem;
+  color: var(--charcoal-soft);
+}
+
 .checkout__total {
   display: flex;
   align-items: baseline;

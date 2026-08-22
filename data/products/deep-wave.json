@@ -11,6 +11,7 @@
   "length": "22\"",
   "texture": "Deepwave",
   "density": "200%",
+  "weight_kg": 0.4,
   "tag": null,
   "tag_dark": false
 }

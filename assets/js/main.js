@@ -339,6 +339,80 @@
     var errorEl = $("[data-checkout-error]", checkoutRoot);
     var payBtn = $("[data-checkout-pay]", checkoutRoot);
 
+    var rules = null;
+    var weights = {};
+    var chosen = { method: null, zone: null };
+
+    function parcelWeight() {
+      return cart.reduce(function (sum, l) {
+        return sum + (weights[l.id] || 0.4) * l.qty;
+      }, 0);
+    }
+
+    function deliveryQuote() {
+      if (!rules || !chosen.method) return null;
+      return window.SBSShipping.quote(rules, chosen, parcelWeight());
+    }
+
+    function renderTotals() {
+      $("[data-checkout-subtotal]", checkoutRoot).textContent = money(cartTotal());
+      var q = deliveryQuote();
+      var feeEl = $("[data-checkout-delivery]", checkoutRoot);
+      var labelEl = $("[data-checkout-deliverylabel]", checkoutRoot);
+      var noteEl = $("[data-zone-note]", checkoutRoot);
+
+      if (q && q.ok) {
+        feeEl.textContent = money(q.amount);
+        labelEl.textContent = q.label;
+        if (noteEl) noteEl.textContent = q.note || "";
+        $("[data-checkout-total]", checkoutRoot).textContent = money(cartTotal() + q.amount);
+        $("[data-checkout-paytotal]", checkoutRoot).textContent = money(cartTotal() + q.amount);
+      } else {
+        feeEl.textContent = q && q.error ? "—" : "—";
+        labelEl.textContent = "Delivery";
+        if (noteEl) noteEl.textContent = q && q.error ? q.error : "";
+        $("[data-checkout-total]", checkoutRoot).textContent = money(cartTotal());
+        $("[data-checkout-paytotal]", checkoutRoot).textContent = "";
+      }
+    }
+
+    function renderDeliveryOptions() {
+      var box = $("[data-delivery-options]", checkoutRoot);
+      if (!box || !rules) return;
+      var options = (rules.local || []).map(function (o) {
+        return { id: o.id, label: o.label, detail: o.detail, price: money(o.price) };
+      });
+      options.push({
+        id: "international",
+        label: rules.international.label,
+        detail: rules.international.detail,
+        price: "From " + money(rules.international.bands[0].rates[0])
+      });
+
+      box.innerHTML = options.map(function (o) {
+        return '<label class="delivery-option">' +
+          '<input type="radio" name="delivery" value="' + o.id + '">' +
+          "<span><b>" + o.label + "</b><small>" + o.detail + "</small></span>" +
+          '<span class="delivery-option__price">' + o.price + "</span></label>";
+      }).join("");
+
+      var zoneSel = $("[data-zone]", checkoutRoot);
+      zoneSel.innerHTML = '<option value="">Choose a region…</option>' +
+        rules.international.zones.map(function (z) {
+          return '<option value="' + z.id + '">' + z.label + "</option>";
+        }).join("");
+
+      box.addEventListener("change", function (e) {
+        chosen.method = e.target.value;
+        $("[data-zone-wrap]", checkoutRoot).hidden = chosen.method !== "international";
+        renderTotals();
+      });
+      zoneSel.addEventListener("change", function () {
+        chosen.zone = zoneSel.value;
+        renderTotals();
+      });
+    }
+
     function renderSummary() {
       var box = $("[data-checkout-items]", checkoutRoot);
       if (!cart.length) {
@@ -353,11 +427,28 @@
           "<small>Qty " + l.qty + '</small><span class="price">' +
           money(l.price * l.qty) + "</span></div></div>";
       }).join("");
-      $("[data-checkout-total]", checkoutRoot).textContent = money(cartTotal());
-      var payTotal = $("[data-checkout-paytotal]", checkoutRoot);
-      if (payTotal) payTotal.textContent = money(cartTotal());
+      renderTotals();
     }
     renderSummary();
+
+    /* Rates and per-product weights come from the same files the server
+       prices from, so the quote shown matches the amount charged. */
+    Promise.all([
+      fetch("data/shipping.json").then(function (r) { return r.json(); }),
+      Promise.all(cart.map(function (l) {
+        return fetch("data/products/" + l.id + ".json")
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .catch(function () { return null; });
+      }))
+    ]).then(function (out) {
+      rules = out[0];
+      out[1].forEach(function (p) { if (p) weights[p.id] = Number(p.weight_kg) || 0.4; });
+      renderDeliveryOptions();
+      renderTotals();
+    }).catch(function () {
+      var box = $("[data-delivery-options]", checkoutRoot);
+      if (box) box.innerHTML = '<p class="form-note">Couldn\'t load delivery options. Please reload.</p>';
+    });
 
     function fail(message) {
       errorEl.textContent = message;
@@ -371,6 +462,8 @@
         e.preventDefault();
         if (!form.checkValidity()) { form.reportValidity(); return; }
         if (!cart.length) { fail("Your bag is empty."); return; }
+        var q = deliveryQuote();
+        if (!q || !q.ok) { fail((q && q.error) || "Please choose a delivery option."); return; }
 
         errorEl.hidden = true;
         payBtn.disabled = true;
@@ -383,6 +476,7 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             items: cart.map(function (l) { return { id: l.id, qty: l.qty, meta: l.meta }; }),
+            delivery: chosen,
             customer: {
               name: $("#co-name").value.trim(),
               email: $("#co-email").value.trim(),

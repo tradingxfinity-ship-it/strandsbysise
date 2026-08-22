@@ -10,6 +10,11 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { createRequire } from "node:module";
+
+/* The same pricing function the checkout page uses, so what the customer
+   was shown and what they're charged cannot drift apart. */
+const shipping = createRequire(import.meta.url)("../assets/js/shipping.js");
 
 const MAX_QTY = 20;
 
@@ -49,6 +54,7 @@ export default async function handler(req, res) {
   const catalogue = loadCatalogue();
   const lines = [];
   let total = 0;
+  let weight = 0;
 
   for (const item of items) {
     const product = catalogue[item.id];
@@ -59,6 +65,7 @@ export default async function handler(req, res) {
     const qty = Math.min(MAX_QTY, Math.max(1, parseInt(item.qty, 10) || 1));
     const amount = product.price * qty;
     total += amount;
+    weight += (Number(product.weight_kg) || 0.4) * qty;
     lines.push({
       id: product.id,
       name: product.name,
@@ -68,6 +75,18 @@ export default async function handler(req, res) {
       line_total: amount,
     });
   }
+
+  /* Delivery is priced here too — a figure posted by the browser could be
+     anything. */
+  const rules = JSON.parse(
+    fs.readFileSync(path.join(process.cwd(), "data", "shipping.json"), "utf8")
+  );
+  const delivery = shipping.quote(rules, req.body.delivery || {}, weight);
+  if (!delivery.ok) {
+    res.status(400).json({ error: delivery.error });
+    return;
+  }
+  const grandTotal = total + delivery.amount;
 
   try {
     const response = await fetch("https://api.paystack.co/transaction/initialize", {
@@ -79,7 +98,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         email: String(customer.email).slice(0, 120),
         /* Paystack works in kobo. */
-        amount: total * 100,
+        amount: grandTotal * 100,
         currency: "NGN",
         callback_url: `https://${req.headers["x-forwarded-host"] || req.headers.host}/order-complete.html`,
         /* The order itself rides along with the transaction, so Paystack's
@@ -90,12 +109,18 @@ export default async function handler(req, res) {
           delivery_address: String(customer.address).slice(0, 400),
           notes: String(customer.notes || "").slice(0, 500),
           items: lines,
+          items_total: total,
+          delivery_method: delivery.label,
+          delivery_fee: delivery.amount,
+          parcel_weight_kg: Math.round(weight * 100) / 100,
           custom_fields: [
             { display_name: "Customer", variable_name: "customer_name", value: String(customer.name).slice(0, 120) },
             { display_name: "Phone", variable_name: "phone", value: String(customer.phone).slice(0, 40) },
             { display_name: "Deliver to", variable_name: "delivery_address", value: String(customer.address).slice(0, 400) },
             { display_name: "Order", variable_name: "order_summary",
               value: lines.map((l) => `${l.name} x${l.qty}`).join(", ").slice(0, 400) },
+            { display_name: "Delivery", variable_name: "delivery",
+              value: `${delivery.label} — ₦${delivery.amount.toLocaleString()}` },
           ],
         },
       }),
@@ -107,7 +132,7 @@ export default async function handler(req, res) {
       return;
     }
 
-    res.status(200).json({ url: data.data.authorization_url, reference: data.data.reference, total });
+    res.status(200).json({ url: data.data.authorization_url, reference: data.data.reference, total: grandTotal });
   } catch (err) {
     res.status(502).json({ error: "Could not reach the payment provider. Please try again." });
   }

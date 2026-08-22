@@ -11,6 +11,7 @@
   "length": "18\"",
   "texture": "Bouncy",
   "density": "180%",
+  "weight_kg": 0.4,
   "tag": null,
   "tag_dark": false
 }

@@ -26,6 +26,7 @@ api/                Sign-in handlers for the panel (no secrets in here)
 
 data/settings.json  Phone, WhatsApp, email, socials, announcement bar
 data/products/      One JSON file per product
+data/shipping.json  Delivery options and the international rate table
 templates/          Editable sources for every page
 build.py            Rebuilds every page from data/ + templates/ (see §4)
 tools-generate-placeholders.py   Fills empty image slots (never overwrites)
@@ -440,3 +441,33 @@ That is enough for a boutique, and it has real limits: no stock counts, so nothi
 stops the same piece selling twice, and no order status to work through. That's the
 point at which a platform like Shopify starts earning its fee.
 
+
+
+## 9. Delivery
+
+Three options at checkout:
+
+| Option | Price |
+|---|---|
+| Benin City | ₦5,000 |
+| Elsewhere in Nigeria | ₦15,000 |
+| International | By region and parcel weight |
+
+International uses the Parcels Nigeria express table (3–5 business days). The customer
+picks a region — UK & Ireland, West Africa, Rest of Africa, USA & Canada, Europe,
+Middle East, Asia or Caribbean — and the rate comes from the weight band, plus ₦2,500
+packaging. Over 40kg it refuses and asks them to contact you.
+
+**Parcel weight is the sum of each product's `weight_kg`**, editable per product in the
+panel and defaulting to 0.4kg. That matters: it decides the band, so an under-estimate
+costs you money on every overseas order. Weigh a boxed piece once and set it properly.
+
+Rates live in `data/shipping.json` — the two local prices, the zone list and the whole
+table. Edit that file when the carrier changes its prices.
+
+**Both the browser and the server price delivery with the same function**
+(`assets/js/shipping.js`), so the figure a customer is shown is the figure they're
+charged. The server's answer is the one that counts; the browser's is only for display.
+
+Import duty is charged by the destination country and paid by the recipient — that's
+noted at checkout, not added to the total.

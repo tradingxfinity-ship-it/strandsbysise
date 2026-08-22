@@ -60,6 +60,18 @@
                       placeholder="Street, area, city, state"></textarea>
           </div>
 
+          <div class="option" style="margin:1.75rem 0">
+            <span class="label" id="co-delivery-label">Delivery</span>
+            <div class="delivery-options" role="radiogroup" aria-labelledby="co-delivery-label"
+                 data-delivery-options></div>
+
+            <div data-zone-wrap hidden style="margin-top:1rem">
+              <label class="label" for="co-zone">Delivering to</label>
+              <select class="field" id="co-zone" data-zone></select>
+              <p class="form-note" data-zone-note style="margin-top:.5rem"></p>
+            </div>
+          </div>
+
           <div class="form-row">
             <label class="label" for="co-notes">Anything else? <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
             <textarea class="field" id="co-notes" name="notes" style="min-height:80px"
@@ -81,11 +93,16 @@
           <h2 style="font-size:var(--fs-h3)">Your order</h2>
           <div data-checkout-items style="margin-top:1.25rem"></div>
 
+          <div class="checkout__line">
+            <span>Items</span><span data-checkout-subtotal>₦0</span>
+          </div>
+          <div class="checkout__line">
+            <span data-checkout-deliverylabel>Delivery</span><span data-checkout-delivery>—</span>
+          </div>
           <div class="checkout__total">
             <span>Total</span>
             <b data-checkout-total>₦0</b>
           </div>
-          <p class="form-note">Delivery is arranged after checkout — we'll confirm the cost with you.</p>
           <a class="link-arrow" href="shop.html" style="margin-top:1.25rem">Keep shopping
             <svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 5h11M8.5 1.5 12 5l-3.5 3.5"/></svg>
           </a>
@@ -96,6 +113,7 @@
   </section>
 </main>
 
+<script src="assets/js/shipping.js" defer></script>
 {{FOOTER}}
 </body>
 </html>

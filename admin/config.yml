@@ -99,6 +99,17 @@ collections:
       - { name: texture, label: Texture, widget: string, hint: 'e.g. Bonestraight' }
       - { name: density, label: Density, widget: string, hint: 'e.g. 180%' }
 
+      - name: weight_kg
+        label: Shipping weight (kg)
+        widget: number
+        value_type: float
+        min: 0.1
+        step: 0.05
+        default: 0.4
+        hint: >-
+          Boxed weight of this piece. Used to price international delivery,
+          so an under-estimate costs you money on every overseas order.
+
       - name: tag
         label: Badge
         widget: select
