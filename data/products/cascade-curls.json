@@ -5,6 +5,7 @@
   "image": "/assets/img/product-cascade-curls-1.jpg",
   "cat": "bouncy",
   "price": 215000,
+  "paystack_url": "",
   "old": null,
   "rating": 4.8,
   "reviews": 96,

@@ -5,6 +5,7 @@
   "image": "/assets/img/product-pixie-chic-1.jpg",
   "cat": "pixie-curls",
   "price": 112000,
+  "paystack_url": "",
   "old": 135000,
   "rating": 4.6,
   "reviews": 41,

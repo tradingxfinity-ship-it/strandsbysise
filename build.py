@@ -27,6 +27,7 @@ Run `python3 build.py` after editing a template or a data file, and the
 finished `.html` pages are rewritten.
 """
 import hashlib
+import html
 import json
 import os
 import re
@@ -120,6 +121,15 @@ def stars(rating):
     return "★" * full + "☆" * (5 - full)
 
 
+def attr(value):
+    """Escape a value going into a double-quoted HTML attribute.
+
+    Lengths carry an inch mark — 20" — which closed the attribute early and
+    silently truncated it, so a bag line read "20" instead of the full
+    specification."""
+    return html.escape(str(value), quote=True)
+
+
 def product_card(p, order):
     # The panel stores a site-root path like /assets/img/foo.jpg; pages are
     # served from the root too, so it just needs the leading slash removed.
@@ -131,6 +141,30 @@ def product_card(p, order):
         tag = '<span class="%s">%s</span>' % (cls, p["tag"])
     old = '<s>%s</s>' % naira(p["old"]) if p["old"] else ""
     meta = "%s · %s density" % (p["length"], p["density"])
+
+    # A Paystack link covers one product at one price, so it can't check out
+    # a basket. Where a product has one, Buy Now pays for that piece directly
+    # and the bag stays for multi-item orders over WhatsApp. Products without
+    # a link keep the original single button.
+    # Built with the real values, not placeholders: this string is inserted
+    # into the card template by .format(), which does not recurse into what
+    # it inserts — leaving {id} and friends sitting in the markup.
+    bag = (
+        '<button class="btn btn--%s btn--sm" data-add-to-cart data-id="%s" data-name="%s"\n'
+        '                      data-price="%s" data-image="%s" data-meta="%s">%s</button>'
+    )
+    pay = (p.get("paystack_url") or "").strip()
+    if pay:
+        actions = (
+            '<div class="product-card__actions">\n'
+            '                <a class="btn btn--gold btn--sm" href="%s" target="_blank" rel="noopener">Buy Now</a>\n'
+            '                %s\n'
+            '              </div>'
+        ) % (attr(pay), bag % ("outline", attr(p["id"]), attr(p["name"]),
+                               attr(p["price"]), attr(img), attr(meta), "Add to bag"))
+    else:
+        actions = bag % ("dark", attr(p["id"]), attr(p["name"]),
+                         attr(p["price"]), attr(img), attr(meta), "Add to Cart")
     return """        <article class="product-card" data-reveal data-category="{cat}" data-price="{price}" data-rating="{rating}" data-order="{order}">
           <div class="product-card__media">
             <a href="product.html"><img src="{img}" alt="{name} luxury human hair wig" loading="lazy" width="900" height="1100"></a>
@@ -147,15 +181,15 @@ def product_card(p, order):
             </ul>
             <div class="product-card__foot">
               <span class="price">{price_f}{old}</span>
-              <button class="btn btn--dark btn--sm" data-add-to-cart data-id="{id}" data-name="{name}"
-                      data-price="{price}" data-image="{img}" data-meta="{meta}">Add to Cart</button>
+              {actions}
             </div>
           </div>
         </article>""".format(
-        cat=p["cat"], price=p["price"], rating=p["rating"], order=order, img=img, name=p["name"],
-        tag=tag, heart=HEART, stars=stars(p["rating"]), reviews=p["reviews"], length=p["length"],
-        texture=p["texture"], density=p["density"], price_f=naira(p["price"]), old=old,
-        id=p["id"], meta=meta)
+        cat=attr(p["cat"]), price=attr(p["price"]), rating=attr(p["rating"]), order=order,
+        img=attr(img), name=attr(p["name"]),
+        tag=tag, heart=HEART, stars=stars(p["rating"]), reviews=attr(p["reviews"]), length=attr(p["length"]),
+        texture=attr(p["texture"]), density=attr(p["density"]), price_f=naira(p["price"]), old=old,
+        id=attr(p["id"]), meta=attr(meta), actions=actions)
 
 
 PRODUCT_GRID = "\n\n".join(product_card(p, i) for i, p in enumerate(PRODUCTS))

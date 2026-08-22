@@ -387,3 +387,34 @@ Saving commits to GitHub, then the **Build site** workflow regenerates the HTML.
 the repo's Actions tab: a red run means the rebuild failed and the site is still
 serving the previous version — which is deliberate, so a bad edit can't take the shop
 down. The commit is in `main` either way, so nothing is lost.
+
+
+## 8. Taking card payments
+
+Each product can carry a **Paystack payment link**. Where one is set, its card shows a
+gold **Buy Now** button that goes straight to Paystack — card, bank transfer or USSD, in
+naira. Where it isn't, the piece is added to the bag and ordered over WhatsApp as before.
+The two coexist deliberately: a Paystack link covers one product at one price, so it
+can't check out a basket of several pieces.
+
+### Setting one up
+
+1. Create a Paystack account and complete business verification (paystack.com).
+2. Dashboard → **Payment Pages** → **Create Page**. Name it after the product and set
+   the amount to that product's price.
+3. Copy the page's link.
+4. In the admin panel → Products → the product → **Paystack payment link** → paste →
+   Publish.
+
+Repeat per product. If you change a price, change it in **both** places — the site and
+the Paystack page — or a customer will be charged the old amount.
+
+### What this gives you, and what it doesn't
+
+You get real payments and Paystack's own record of them, with no monthly fee (roughly
+1.5% + ₦100 per local transaction).
+
+You do **not** get order records, stock counts or confirmation emails. Paystack tells
+you money arrived; it doesn't tell you what to ship or stop you selling the same piece
+twice. That's the trade at this stage, and it's the point at which a platform like
+Shopify starts earning its fee.

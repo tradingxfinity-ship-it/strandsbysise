@@ -5,6 +5,7 @@
   "image": "/assets/img/product-blunt-bob-1.jpg",
   "cat": "bonestraight",
   "price": 135000,
+  "paystack_url": "",
   "old": null,
   "rating": 4.7,
   "reviews": 73,

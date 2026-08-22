@@ -5,6 +5,7 @@
   "image": "/assets/img/product-closure-classic-1.jpg",
   "cat": "bouncy",
   "price": 165000,
+  "paystack_url": "",
   "old": null,
   "rating": 4.8,
   "reviews": 88,

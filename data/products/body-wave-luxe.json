@@ -5,6 +5,7 @@
   "image": "/assets/img/product-body-wave-luxe-1.jpg",
   "cat": "wavy",
   "price": 245000,
+  "paystack_url": "",
   "old": 275000,
   "rating": 4.9,
   "reviews": 141,
