@@ -46,13 +46,20 @@ collections:
     summary: '{{name}} — ₦{{price}}'
     sortable_fields: [order, name, price]
     description: >-
-      Every piece in the shop. Add a product here, then upload its photos
-      under Photos, named product-<id>-1.jpg through -4.jpg.
+      Every piece in the shop. Press + Product to add one; each needs a name,
+      a photo and a price.
     fields:
       - name: name
         label: Product name
         widget: string
         hint: What shoppers see, e.g. Silk Straight.
+
+      - name: image
+        label: Photo
+        widget: image
+        hint: >-
+          The photo shown on the shop and home page. Upload a new one or pick
+          an existing one — no need to name the file anything in particular.
 
       - name: id
         label: Short ID
@@ -133,6 +140,11 @@ collections:
           Used across every page. Changing the WhatsApp number here updates
           the header, the footer, the contact page and every order button.
         fields:
+          - name: owner_name
+            label: Your first name
+            widget: string
+            hint: Used to greet you at the top of this panel.
+
           - name: announcement
             label: Announcement bar
             widget: string

@@ -122,12 +122,10 @@
     function addGreeting() {
       if (document.querySelector('.sbs-bar')) return;
 
-      var name = 'there';
-      try {
-        var raw = localStorage.getItem('decap-cms-user') || localStorage.getItem('netlify-cms-user');
-        var user = raw && JSON.parse(raw);
-        if (user) name = (user.name || user.login || 'there').split(' ')[0];
-      } catch (e) { /* not signed in yet — the generic greeting is fine */ }
+      /* Read from the site's own settings rather than guessing at Decap's
+         internal storage — an earlier attempt at that greeted people as
+         "Unknown". */
+      var name = window.__sbsOwner || 'there';
 
       var hour = new Date().getHours();
       var part = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
@@ -147,17 +145,15 @@
       document.body.insertBefore(bar, document.body.firstChild);
     }
 
-    /* The name only lands in storage after sign-in, so try again once the
-       user has logged in rather than only at first paint. */
-    setInterval(function () {
-      var bar = document.querySelector('.sbs-bar');
-      if (!bar) { addGreeting(); return; }
-      var b = bar.querySelector('b');
-      if (b && b.textContent === 'there') {
-        bar.remove();
-        addGreeting();
-      }
-    }, 3000);
+    /* Fetched once; the bar is redrawn if it rendered before this landed. */
+    fetch('/data/settings.json')
+      .then(function (r) { return r.json(); })
+      .then(function (s) {
+        window.__sbsOwner = (s.owner_name || '').split(' ')[0] || 'there';
+        var bar = document.querySelector('.sbs-bar');
+        if (bar) { bar.remove(); addGreeting(); }
+      })
+      .catch(function () { /* greeting just stays generic */ });
   })();
 </script>
 </body>

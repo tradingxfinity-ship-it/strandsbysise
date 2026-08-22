@@ -121,7 +121,10 @@ def stars(rating):
 
 
 def product_card(p, order):
-    img = "assets/img/product-%s-1.jpg" % p["id"]
+    # The panel stores a site-root path like /assets/img/foo.jpg; pages are
+    # served from the root too, so it just needs the leading slash removed.
+    # Falls back to the old id-based convention for anything added by hand.
+    img = (p.get("image") or "").lstrip("/") or ("assets/img/product-%s-1.jpg" % p["id"])
     tag = ""
     if p["tag"]:
         cls = "product-card__tag product-card__tag--dark" if p["tag_dark"] else "product-card__tag"
