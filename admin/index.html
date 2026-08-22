@@ -15,7 +15,8 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..600&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/admin/admin.css">
 
 <style>
   :root { --gold: #d4af37; --charcoal: #2b2b2b; --ivory: #fff9f5; }
@@ -42,17 +43,6 @@
   }
   @keyframes spin { to { transform: rotate(360deg); } }
   .boot small { font-size: .82rem; max-width: 34ch; line-height: 1.6; }
-
-  /* ---- Brand the panel -------------------------------------------------
-     Decap's internals use generated class names, so this stays to broad,
-     stable things: type, page colour, and our own greeting bar. If a future
-     Decap release changes its markup, the panel still works — it just looks
-     a little more like stock Decap. */
-  body { font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif; }
-  h1, h2, h3, [class*="CardHeading"] {
-    font-family: "Playfair Display", Georgia, serif !important;
-    font-weight: 500 !important;
-  }
 
   /* The greeting bar. Ours, not Decap's, so it can't break. */
   .sbs-bar {

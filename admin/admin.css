@@ -1,0 +1,184 @@
+/* =============================================================
+   StrandsBySise — admin panel branding
+
+   Decap builds its class names with emotion: css-<hash>-<ComponentName>.
+   The hash changes between releases but the component name survives, so
+   everything here matches on the name with [class*="…"]. A selector that
+   stops matching after a Decap update simply does nothing — the panel
+   keeps working and just loses that piece of styling. Nothing here is
+   load-bearing.
+
+   `!important` appears throughout on purpose: emotion injects its styles
+   at runtime, after this file, so ties would otherwise go to Decap.
+   ============================================================= */
+
+:root {
+  --sbs-gold: #d4af37;
+  --sbs-gold-deep: #b8942a;
+  --sbs-blush: #f8d7e6;
+  --sbs-blush-soft: #fdeef5;
+  --sbs-ivory: #fff9f5;
+  --sbs-charcoal: #2b2b2b;
+  --sbs-muted: #8b8280;
+  --sbs-line: rgba(43, 43, 43, 0.1);
+  --sbs-serif: "Playfair Display", Georgia, serif;
+  --sbs-sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* ---- Ground ---------------------------------------------------------- */
+body,
+[class*="StyledAuthenticationPage"],
+[class*="AppMainContainer"],
+[class*="AppWrapper"] {
+  background: var(--sbs-ivory) !important;
+  font-family: var(--sbs-sans) !important;
+}
+
+/* ---- Headings -------------------------------------------------------- */
+h1, h2, h3,
+[class*="CardHeading"],
+[class*="CollectionTopHeading"],
+[class*="SidebarHeading"],
+[class*="EditorTitle"] {
+  font-family: var(--sbs-serif) !important;
+  font-weight: 500 !important;
+  color: var(--sbs-charcoal) !important;
+  letter-spacing: -0.01em;
+}
+
+/* ---- App header ------------------------------------------------------ */
+[class*="AppHeader"] {
+  background: #fff !important;
+  border-bottom: 1px solid var(--sbs-line) !important;
+  box-shadow: 0 6px 24px -20px rgba(43, 43, 43, 0.5) !important;
+}
+[class*="AppHeaderNavLink"],
+[class*="AppHeaderButton"] {
+  color: var(--sbs-charcoal) !important;
+  font-weight: 500 !important;
+}
+[class*="AppHeaderNavLink"]:hover,
+[class*="AppHeaderButton"]:hover {
+  color: var(--sbs-gold-deep) !important;
+  background: var(--sbs-blush-soft) !important;
+}
+[class*="AppHeaderSiteLink"] { color: var(--sbs-muted) !important; }
+
+/* ---- Sidebar --------------------------------------------------------- */
+[class*="SidebarContainer"] {
+  background: #fff !important;
+  border: 1px solid var(--sbs-line) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 18px 40px -34px rgba(43, 43, 43, 0.45) !important;
+}
+[class*="SidebarNavLink"] {
+  color: var(--sbs-charcoal) !important;
+  border-left: 2px solid transparent !important;
+  border-radius: 0 10px 10px 0 !important;
+}
+[class*="SidebarNavLink"]:hover { background: var(--sbs-blush-soft) !important; }
+[class*="SidebarNavLink"][class*="active"],
+[class*="SidebarNavLink"].active {
+  background: var(--sbs-blush-soft) !important;
+  border-left-color: var(--sbs-gold) !important;
+  color: var(--sbs-gold-deep) !important;
+}
+
+/* ---- Collection header ----------------------------------------------- */
+[class*="CollectionTop"] {
+  background: #fff !important;
+  border: 1px solid var(--sbs-line) !important;
+  border-radius: 18px !important;
+}
+[class*="CollectionTopDescription"] { color: var(--sbs-muted) !important; }
+
+/* ---- Cards ----------------------------------------------------------- */
+[class*="-Card"],
+[class*="CardWrapper"] {
+  border: 1px solid var(--sbs-line) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 16px 36px -30px rgba(43, 43, 43, 0.5) !important;
+  overflow: hidden !important;
+  transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s ease, border-color .3s ease !important;
+}
+[class*="-Card"]:hover,
+[class*="CardWrapper"]:hover {
+  transform: translateY(-3px) !important;
+  border-color: rgba(212, 175, 55, .45) !important;
+  box-shadow: 0 26px 50px -32px rgba(43, 43, 43, .55) !important;
+}
+
+/* ---- Buttons --------------------------------------------------------- */
+[class*="LoginButton"] {
+  background: var(--sbs-gold) !important;
+  color: #fff !important;
+  border-radius: 999px !important;
+  padding: .9rem 1.9rem !important;
+  font-weight: 600 !important;
+  letter-spacing: .04em !important;
+  box-shadow: 0 16px 34px -18px rgba(184, 148, 42, .8) !important;
+}
+[class*="LoginButton"]:hover { background: var(--sbs-gold-deep) !important; }
+
+/* Primary actions: New, Publish, Save. */
+[class*="NewButton"],
+[class*="PublishButton"],
+[class*="SaveButton"],
+[class*="ToolbarButton"][class*="primary"] {
+  background: var(--sbs-gold) !important;
+  color: #fff !important;
+  border-radius: 999px !important;
+  font-weight: 600 !important;
+  letter-spacing: .03em !important;
+  border: 0 !important;
+}
+[class*="NewButton"]:hover,
+[class*="PublishButton"]:hover,
+[class*="SaveButton"]:hover { background: var(--sbs-gold-deep) !important; }
+
+[class*="DeleteButton"] { border-radius: 999px !important; }
+
+/* ---- Editor & fields -------------------------------------------------- */
+[class*="EditorToolbar"] {
+  background: #fff !important;
+  border-bottom: 1px solid var(--sbs-line) !important;
+}
+[class*="ControlContainer"],
+[class*="ControlPaneContainer"],
+[class*="card"] { border-radius: 14px !important; }
+
+[class*="FieldLabel"],
+[class*="WidgetLabel"],
+label {
+  font-family: var(--sbs-sans) !important;
+  font-weight: 600 !important;
+  color: var(--sbs-charcoal) !important;
+  letter-spacing: .01em;
+}
+[class*="ControlHint"] { color: var(--sbs-muted) !important; font-style: normal !important; }
+
+input[type="text"],
+input[type="number"],
+input[type="url"],
+input[type="email"],
+textarea,
+select,
+[class*="widget"] input {
+  border-radius: 10px !important;
+  border: 1px solid var(--sbs-line) !important;
+  font-family: var(--sbs-sans) !important;
+}
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--sbs-gold) !important;
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, .16) !important;
+  outline: none !important;
+}
+
+/* ---- Vendor credit --------------------------------------------------- */
+/* Kept, but quietened — it's an open-source project and the attribution
+   is fair; it just doesn't need to be the loudest thing on the page. */
+[class*="NetlifyCreditIcon"],
+[class*="CustomIconWrapper"] + a { opacity: .35 !important; }
