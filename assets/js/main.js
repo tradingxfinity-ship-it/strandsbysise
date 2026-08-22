@@ -249,6 +249,20 @@
 
     var totalEl = $("[data-cart-total]");
     if (totalEl) totalEl.textContent = money(cartTotal());
+
+    /* Put the basket into the checkout message. Without this the shop
+       owner receives "I'd like to place an order" and nothing else. */
+    var checkout = $("[data-cart-checkout]");
+    if (checkout) {
+      var lines = ["Hi StrandsBySise, I'd like to order:", ""];
+      cart.forEach(function (l) {
+        lines.push("• " + l.name + (l.meta ? " (" + l.meta + ")" : "") +
+                   " × " + l.qty + " — " + money(l.price * l.qty));
+      });
+      lines.push("", "Total: " + money(cartTotal()));
+      checkout.href = "https://wa.me/" + checkout.getAttribute("data-wa") +
+        "?text=" + encodeURIComponent(lines.join("\n"));
+    }
     var foot = $(".drawer__foot");
     if (foot) foot.style.display = cart.length ? "" : "none";
   }
