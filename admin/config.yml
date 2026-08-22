@@ -18,6 +18,9 @@ public_folder: /assets/img
 # Save shows a live preview link rather than a confusing "publish" workflow.
 publish_mode: simple
 site_url: https://strandsbysise.vercel.app
+# Sise's brand on the login screen rather than the CMS vendor's. A wordmark,
+# not a photo — a photo fills the whole screen and reads as a mistake.
+logo_url: https://strandsbysise.vercel.app/assets/img/admin-logo.svg
 
 collections:
   # ---------------------------------------------------------------- products
