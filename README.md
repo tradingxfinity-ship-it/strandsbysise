@@ -4,6 +4,8 @@ A hand-built, fully responsive storefront for StrandsBySise. No frameworks, no b
 tooling to install, no monthly platform fee — just HTML, one stylesheet and one script.
 Open `index.html` in a browser and it works.
 
+**Outstanding work is in [NEXT-STEPS.md](NEXT-STEPS.md)** — start there.
+
 ---
 
 ## 1. What's in here
