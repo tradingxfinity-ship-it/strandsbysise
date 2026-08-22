@@ -149,22 +149,11 @@ def product_card(p, order):
     # Built with the real values, not placeholders: this string is inserted
     # into the card template by .format(), which does not recurse into what
     # it inserts — leaving {id} and friends sitting in the markup.
-    bag = (
-        '<button class="btn btn--%s btn--sm" data-add-to-cart data-id="%s" data-name="%s"\n'
-        '                      data-price="%s" data-image="%s" data-meta="%s">%s</button>'
-    )
-    pay = (p.get("paystack_url") or "").strip()
-    if pay:
-        actions = (
-            '<div class="product-card__actions">\n'
-            '                <a class="btn btn--gold btn--sm" href="%s" target="_blank" rel="noopener">Buy Now</a>\n'
-            '                %s\n'
-            '              </div>'
-        ) % (attr(pay), bag % ("outline", attr(p["id"]), attr(p["name"]),
-                               attr(p["price"]), attr(img), attr(meta), "Add to bag"))
-    else:
-        actions = bag % ("dark", attr(p["id"]), attr(p["name"]),
-                         attr(p["price"]), attr(img), attr(meta), "Add to Cart")
+    actions = (
+        '<button class="btn btn--dark btn--sm" data-add-to-cart data-id="%s" data-name="%s"\n'
+        '                      data-price="%s" data-image="%s" data-meta="%s">Add to Cart</button>'
+    ) % (attr(p["id"]), attr(p["name"]), attr(p["price"]), attr(img), attr(meta))
+
     return """        <article class="product-card" data-reveal data-category="{cat}" data-price="{price}" data-rating="{rating}" data-order="{order}">
           <div class="product-card__media">
             <a href="product.html"><img src="{img}" alt="{name} luxury human hair wig" loading="lazy" width="900" height="1100"></a>

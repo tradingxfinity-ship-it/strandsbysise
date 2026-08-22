@@ -389,32 +389,54 @@ serving the previous version — which is deliberate, so a bad edit can't take t
 down. The commit is in `main` either way, so nothing is lost.
 
 
-## 8. Taking card payments
+## 8. Payments and orders
 
-Each product can carry a **Paystack payment link**. Where one is set, its card shows a
-gold **Buy Now** button that goes straight to Paystack — card, bank transfer or USSD, in
-naira. Where it isn't, the piece is added to the bag and ordered over WhatsApp as before.
-The two coexist deliberately: a Paystack link covers one product at one price, so it
-can't check out a basket of several pieces.
+The shop is a normal online shop: add to cart, checkout, pay by card, bank transfer
+or USSD through **Paystack**. WhatsApp is no longer an order route — it remains only
+for the Hair Bank group, custom unit enquiries, and as a contact link in the footer.
 
-### Setting one up
+### How an order flows
 
-1. Create a Paystack account and complete business verification (paystack.com).
-2. Dashboard → **Payment Pages** → **Create Page**. Name it after the product and set
-   the amount to that product's price.
-3. Copy the page's link.
-4. In the admin panel → Products → the product → **Paystack payment link** → paste →
-   Publish.
+1. Customer fills the bag and presses **Checkout**.
+2. On `checkout.html` they enter name, phone, email and delivery address.
+3. The browser sends **only product ids and quantities** to `/api/checkout`. That
+   function prices the order from `data/products/` on the server, so a customer
+   editing the page cannot pay ₦1 for a ₦185,000 wig. This is the reason a shop needs
+   a server at all.
+4. They pay on Paystack, then return to `order-complete.html`, which re-checks the
+   payment with Paystack before saying anything — the reference in the URL is not
+   trusted on its own.
+5. The bag is emptied **only after payment is confirmed**, so an abandoned checkout
+   never loses someone's basket.
 
-Repeat per product. If you change a price, change it in **both** places — the site and
-the Paystack page — or a customer will be charged the old amount.
+### The one-time setup
 
-### What this gives you, and what it doesn't
+Create a Paystack account and complete business verification, then add the secret key
+in Vercel → Settings → Environment Variables:
 
-You get real payments and Paystack's own record of them, with no monthly fee (roughly
-1.5% + ₦100 per local transaction).
+| Name | Value |
+|---|---|
+| `PAYSTACK_SECRET_KEY` | your Paystack **secret** key (`sk_live_…`) |
 
-You do **not** get order records, stock counts or confirmation emails. Paystack tells
-you money arrived; it doesn't tell you what to ship or stop you selling the same piece
-twice. That's the trade at this stage, and it's the point at which a platform like
-Shopify starts earning its fee.
+Redeploy afterwards — environment variables only reach the code on a fresh build.
+
+Use the **test** key (`sk_test_…`) first and put a test order through with Paystack's
+test cards. Everything works identically; no money moves.
+
+Until that key is set, checkout shows "Payments aren't configured yet. Please contact
+us to order." rather than failing silently.
+
+**Never put the secret key in this repo.** It belongs in Vercel's settings only —
+anything committed here is public.
+
+### Where orders live
+
+There is no separate database. Each order rides along with its Paystack transaction:
+customer name, phone, delivery address, notes and the full item list are attached as
+metadata, so your **Paystack dashboard is the order book**. Open any transaction to see
+exactly what to ship and where.
+
+That is enough for a boutique, and it has real limits: no stock counts, so nothing
+stops the same piece selling twice, and no order status to work through. That's the
+point at which a platform like Shopify starts earning its fee.
+

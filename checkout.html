@@ -3,13 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Contact Us — StrandsBySise</title>
-<meta name="description" content="Talk to StrandsBySise. Call, WhatsApp, email or visit the studio — a real person answers, Monday to Saturday.">
+<title>Checkout — StrandsBySise</title>
+<meta name="description" content="Complete your StrandsBySise order.">
 <meta name="theme-color" content="#FFF9F5">
-<link rel="canonical" href="https://strandsbysise.com/contact.html">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Contact Us — StrandsBySise">
-<meta property="og:description" content="Call, WhatsApp, email or visit the studio.">
+<meta name="robots" content="noindex">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23FFF9F5'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Georgia,serif' font-size='16' fill='%23D4AF37'%3ES%3C/text%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,9 +33,9 @@
       </a>
 
       <div class="nav__links">
-        <a class="nav__link" href="index.html">Home</a>
+        <a class="nav__link" href="index.html" aria-current="page">Home</a>
         <a class="nav__link" href="shop.html">Shop</a>
-        <a class="nav__link" href="contact.html" aria-current="page">Contact</a>
+        <a class="nav__link" href="contact.html">Contact</a>
       </div>
 
       <div class="nav__actions">
@@ -85,122 +82,85 @@
 </div>
 
 <main id="main">
-
-  <section class="page-head">
-    <span class="orb orb--3" aria-hidden="true"></span>
-    <div class="wrap">
-      <div class="page-head__inner">
-        <span class="eyebrow" data-reveal="fade">We'd love to hear from you</span>
-        <h1 data-reveal>Let's Find Your Perfect Piece</h1>
-        <p class="lede" data-reveal data-delay="0.1">Unsure about length, density or texture? Send us a note — a real person replies, usually within a few hours.</p>
-      </div>
-    </div>
-  </section>
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="index.html">Home</a><span aria-hidden="true">/</span>
+      <a href="shop.html">Shop</a><span aria-hidden="true">/</span>
+      <span aria-current="page" style="color:var(--charcoal-soft);opacity:1">Checkout</span>
+    </nav>
+  </div>
 
   <section class="section section--tight">
     <div class="wrap">
-      <div class="contact-grid">
+      <div class="section-head section-head--left" style="margin-bottom:2.5rem">
+        <span class="eyebrow eyebrow--line">Almost yours</span>
+        <h1>Checkout</h1>
+      </div>
 
-        <!-- Form -->
-        <div class="card" data-reveal="left">
-          <h2 style="font-size:var(--fs-h3)">Send a message</h2>
-          <p style="margin-bottom:1.75rem">Tell us a little about what you're looking for.</p>
+      <div class="checkout" data-checkout>
 
-          <form data-demo-form="Thank you — we'll be in touch shortly ✨" novalidate>
-            <div class="grid grid--2" style="gap:1.15rem">
-              <div class="form-row" style="margin:0">
-                <label class="label" for="c-name">Full name</label>
-                <input class="field" id="c-name" name="name" type="text" required autocomplete="name" placeholder="Your name">
-              </div>
-              <div class="form-row" style="margin:0">
-                <label class="label" for="c-phone">Phone</label>
-                <input class="field" id="c-phone" name="phone" type="tel" autocomplete="tel" placeholder="+234 800 000 0000">
-              </div>
+        <!-- Delivery details -->
+        <form class="card checkout__form" data-checkout-form novalidate>
+          <h2 style="font-size:var(--fs-h3)">Delivery details</h2>
+          <p style="margin-bottom:1.75rem">Where should we send your piece?</p>
+
+          <div class="grid grid--2" style="gap:1.15rem">
+            <div class="form-row" style="margin:0">
+              <label class="label" for="co-name">Full name</label>
+              <input class="field" id="co-name" name="name" type="text" required autocomplete="name" placeholder="Your name">
             </div>
-
-            <div class="form-row" style="margin-top:1.15rem">
-              <label class="label" for="c-email">Email</label>
-              <input class="field" id="c-email" name="email" type="email" required autocomplete="email" placeholder="you@email.com">
+            <div class="form-row" style="margin:0">
+              <label class="label" for="co-phone">Phone</label>
+              <input class="field" id="co-phone" name="phone" type="tel" required autocomplete="tel" placeholder="+234 800 000 0000">
             </div>
-
-            <div class="form-row">
-              <label class="label" for="c-topic">What can we help with?</label>
-              <select class="field" id="c-topic" name="topic">
-                <option>Choosing the right wig</option>
-                <option>An existing order</option>
-                <option>Shipping &amp; delivery</option>
-                <option>Returns or exchange</option>
-                <option>Wholesale enquiry</option>
-                <option>Something else</option>
-              </select>
-            </div>
-
-            <div class="form-row">
-              <label class="label" for="c-msg">Message</label>
-              <textarea class="field" id="c-msg" name="message" required placeholder="Tell us what you have in mind…"></textarea>
-            </div>
-
-            <button class="btn btn--gold btn--block btn--lg" type="submit">Send Message</button>
-            <p class="form-note" style="margin-top:1rem;text-align:center">We reply Monday to Saturday, 9am – 7pm.</p>
-          </form>
-        </div>
-
-        <!-- Details -->
-        <div data-reveal="right" data-delay="0.1">
-          <div class="card card--ivory">
-            <h2 style="font-size:var(--fs-h3)">Reach us directly</h2>
-            <ul class="contact-list" style="margin-top:1.5rem">
-              <li>
-                <span class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c0-1 .8-2 1.8-2h2c.8 0 1.5.5 1.7 1.3l.8 2.6c.2.7 0 1.4-.6 1.8l-1.3 1a13 13 0 0 0 5.9 5.9l1-1.3c.4-.6 1.1-.8 1.8-.6l2.6.8c.8.2 1.3.9 1.3 1.7v2c0 1-1 1.8-2 1.8A16 16 0 0 1 4 5Z"/></svg></span>
-                <div><b>Call us</b><a href="tel:+2348030000000">+234 803 000 0000</a></div>
-              </li>
-              <li>
-                <span class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 20.5l1.6-5.5A8.4 8.4 0 1 1 21 11.5Z"/></svg></span>
-                <div><b>WhatsApp</b><a href="https://wa.me/2348030000000" target="_blank" rel="noopener">Chat with us instantly</a></div>
-              </li>
-              <li>
-                <span class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg></span>
-                <div><b>Email</b><a href="mailto:hello@strandsbysise.com">hello@strandsbysise.com</a></div>
-              </li>
-              <li>
-                <span class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
-                <div><b>Instagram</b><a href="https://instagram.com/strandsbysise" target="_blank" rel="noopener">@StrandsBySise</a></div>
-              </li>
-              <li>
-                <span class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
-                <div><b>Studio</b><span>Lekki Phase 1, Lagos — by appointment</span></div>
-              </li>
-            </ul>
           </div>
 
-          <div class="card" style="margin-top:1.5rem">
-            <h3 style="font-size:1.1rem">Business hours</h3>
-            <ul class="hours" style="margin-top:1.15rem">
-              <li><b>Monday – Friday</b><span>9:00am – 7:00pm</span></li>
-              <li><b>Saturday</b><span>10:00am – 5:00pm</span></li>
-              <li><b>Sunday</b><span>Closed</span></li>
-              <li><b>Public holidays</b><span>Messages only</span></li>
-            </ul>
+          <div class="form-row" style="margin-top:1.15rem">
+            <label class="label" for="co-email">Email</label>
+            <input class="field" id="co-email" name="email" type="email" required autocomplete="email" placeholder="you@email.com">
+            <p class="form-note" style="margin-top:.5rem">Your receipt goes here.</p>
           </div>
-        </div>
+
+          <div class="form-row">
+            <label class="label" for="co-address">Delivery address</label>
+            <textarea class="field" id="co-address" name="address" required style="min-height:110px"
+                      placeholder="Street, area, city, state"></textarea>
+          </div>
+
+          <div class="form-row">
+            <label class="label" for="co-notes">Anything else? <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
+            <textarea class="field" id="co-notes" name="notes" style="min-height:80px"
+                      placeholder="Delivery instructions, a date you need it by…"></textarea>
+          </div>
+
+          <p class="checkout__error" data-checkout-error hidden role="alert"></p>
+
+          <button class="btn btn--gold btn--block btn--lg" type="submit" data-checkout-pay>
+            Pay <span data-checkout-paytotal></span>
+          </button>
+          <p class="form-note" style="margin-top:1rem;text-align:center">
+            You'll be taken to Paystack to pay by card, transfer or USSD.
+          </p>
+        </form>
+
+        <!-- Order summary -->
+        <aside class="card card--ivory checkout__summary">
+          <h2 style="font-size:var(--fs-h3)">Your order</h2>
+          <div data-checkout-items style="margin-top:1.25rem"></div>
+
+          <div class="checkout__total">
+            <span>Total</span>
+            <b data-checkout-total>₦0</b>
+          </div>
+          <p class="form-note">Delivery is arranged after checkout — we'll confirm the cost with you.</p>
+          <a class="link-arrow" href="shop.html" style="margin-top:1.25rem">Keep shopping
+            <svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 5h11M8.5 1.5 12 5l-3.5 3.5"/></svg>
+          </a>
+        </aside>
 
       </div>
     </div>
   </section>
-
-  <section class="section section--tight">
-    <div class="wrap">
-      <div class="map" data-reveal="scale" role="img" aria-label="Map placeholder showing the StrandsBySise studio in Lekki Phase 1, Lagos">
-        <div class="map__pin">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.5" stroke-linejoin="round"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
-          <b>StrandsBySise Studio</b>
-          <span>Lekki Phase 1, Lagos · Visits by appointment</span>
-        </div>
-      </div>
-      <p class="form-note center" style="margin-top:1rem">Replace this block with your Google Maps embed — see <code>README.md</code>.</p>
-    </div>
-  </section>
-
 </main>
 
 <footer class="footer">

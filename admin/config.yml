@@ -88,16 +88,6 @@ collections:
         min: 0
         hint: Numbers only — no commas or ₦ sign.
 
-      - name: paystack_url
-        label: Paystack payment link
-        widget: string
-        required: false
-        hint: >-
-          Paste the product's Paystack link and a gold Buy Now button appears
-          on its card. Leave empty and the piece is ordered over WhatsApp
-          instead. Paystack dashboard → Payment Pages → create a page for
-          this product at this price, then copy its link.
-
       - name: old
         label: Was price (₦)
         widget: number

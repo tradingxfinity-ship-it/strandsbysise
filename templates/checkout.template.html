@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout — StrandsBySise</title>
+<meta name="description" content="Complete your StrandsBySise order.">
+<meta name="theme-color" content="#FFF9F5">
+<meta name="robots" content="noindex">
+{{HEAD}}
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+{{HEADER}}
+
+<main id="main">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="index.html">Home</a><span aria-hidden="true">/</span>
+      <a href="shop.html">Shop</a><span aria-hidden="true">/</span>
+      <span aria-current="page" style="color:var(--charcoal-soft);opacity:1">Checkout</span>
+    </nav>
+  </div>
+
+  <section class="section section--tight">
+    <div class="wrap">
+      <div class="section-head section-head--left" style="margin-bottom:2.5rem">
+        <span class="eyebrow eyebrow--line">Almost yours</span>
+        <h1>Checkout</h1>
+      </div>
+
+      <div class="checkout" data-checkout>
+
+        <!-- Delivery details -->
+        <form class="card checkout__form" data-checkout-form novalidate>
+          <h2 style="font-size:var(--fs-h3)">Delivery details</h2>
+          <p style="margin-bottom:1.75rem">Where should we send your piece?</p>
+
+          <div class="grid grid--2" style="gap:1.15rem">
+            <div class="form-row" style="margin:0">
+              <label class="label" for="co-name">Full name</label>
+              <input class="field" id="co-name" name="name" type="text" required autocomplete="name" placeholder="Your name">
+            </div>
+            <div class="form-row" style="margin:0">
+              <label class="label" for="co-phone">Phone</label>
+              <input class="field" id="co-phone" name="phone" type="tel" required autocomplete="tel" placeholder="+234 800 000 0000">
+            </div>
+          </div>
+
+          <div class="form-row" style="margin-top:1.15rem">
+            <label class="label" for="co-email">Email</label>
+            <input class="field" id="co-email" name="email" type="email" required autocomplete="email" placeholder="you@email.com">
+            <p class="form-note" style="margin-top:.5rem">Your receipt goes here.</p>
+          </div>
+
+          <div class="form-row">
+            <label class="label" for="co-address">Delivery address</label>
+            <textarea class="field" id="co-address" name="address" required style="min-height:110px"
+                      placeholder="Street, area, city, state"></textarea>
+          </div>
+
+          <div class="form-row">
+            <label class="label" for="co-notes">Anything else? <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
+            <textarea class="field" id="co-notes" name="notes" style="min-height:80px"
+                      placeholder="Delivery instructions, a date you need it by…"></textarea>
+          </div>
+
+          <p class="checkout__error" data-checkout-error hidden role="alert"></p>
+
+          <button class="btn btn--gold btn--block btn--lg" type="submit" data-checkout-pay>
+            Pay <span data-checkout-paytotal></span>
+          </button>
+          <p class="form-note" style="margin-top:1rem;text-align:center">
+            You'll be taken to Paystack to pay by card, transfer or USSD.
+          </p>
+        </form>
+
+        <!-- Order summary -->
+        <aside class="card card--ivory checkout__summary">
+          <h2 style="font-size:var(--fs-h3)">Your order</h2>
+          <div data-checkout-items style="margin-top:1.25rem"></div>
+
+          <div class="checkout__total">
+            <span>Total</span>
+            <b data-checkout-total>₦0</b>
+          </div>
+          <p class="form-note">Delivery is arranged after checkout — we'll confirm the cost with you.</p>
+          <a class="link-arrow" href="shop.html" style="margin-top:1.25rem">Keep shopping
+            <svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 5h11M8.5 1.5 12 5l-3.5 3.5"/></svg>
+          </a>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+{{FOOTER}}
+</body>
+</html>

@@ -250,19 +250,6 @@
     var totalEl = $("[data-cart-total]");
     if (totalEl) totalEl.textContent = money(cartTotal());
 
-    /* Put the basket into the checkout message. Without this the shop
-       owner receives "I'd like to place an order" and nothing else. */
-    var checkout = $("[data-cart-checkout]");
-    if (checkout) {
-      var lines = ["Hi StrandsBySise, I'd like to order:", ""];
-      cart.forEach(function (l) {
-        lines.push("• " + l.name + (l.meta ? " (" + l.meta + ")" : "") +
-                   " × " + l.qty + " — " + money(l.price * l.qty));
-      });
-      lines.push("", "Total: " + money(cartTotal()));
-      checkout.href = "https://wa.me/" + checkout.getAttribute("data-wa") +
-        "?text=" + encodeURIComponent(lines.join("\n"));
-    }
     var foot = $(".drawer__foot");
     if (foot) foot.style.display = cart.length ? "" : "none";
   }
@@ -344,6 +331,117 @@
   });
 
   renderCart();
+
+  /* --- Checkout --------------------------------------------- */
+  var checkoutRoot = $("[data-checkout]");
+  if (checkoutRoot) {
+    var form = $("[data-checkout-form]", checkoutRoot);
+    var errorEl = $("[data-checkout-error]", checkoutRoot);
+    var payBtn = $("[data-checkout-pay]", checkoutRoot);
+
+    function renderSummary() {
+      var box = $("[data-checkout-items]", checkoutRoot);
+      if (!cart.length) {
+        box.innerHTML = '<p class="form-note">Your bag is empty.</p>';
+        if (form) form.hidden = true;
+        return;
+      }
+      box.innerHTML = cart.map(function (l) {
+        return '<div class="cart-line">' +
+          '<img src="' + l.image + '" alt="" loading="lazy">' +
+          "<div><b>" + l.name + "</b><small>" + (l.meta || "") + "</small>" +
+          "<small>Qty " + l.qty + '</small><span class="price">' +
+          money(l.price * l.qty) + "</span></div></div>";
+      }).join("");
+      $("[data-checkout-total]", checkoutRoot).textContent = money(cartTotal());
+      var payTotal = $("[data-checkout-paytotal]", checkoutRoot);
+      if (payTotal) payTotal.textContent = money(cartTotal());
+    }
+    renderSummary();
+
+    function fail(message) {
+      errorEl.textContent = message;
+      errorEl.hidden = false;
+      payBtn.disabled = false;
+      payBtn.textContent = "Try again";
+    }
+
+    if (form) {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        if (!form.checkValidity()) { form.reportValidity(); return; }
+        if (!cart.length) { fail("Your bag is empty."); return; }
+
+        errorEl.hidden = true;
+        payBtn.disabled = true;
+        payBtn.textContent = "Taking you to payment…";
+
+        /* Only ids, quantities and options are sent. The server prices the
+           order from the catalogue, so the total can't be tampered with. */
+        fetch("/api/checkout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            items: cart.map(function (l) { return { id: l.id, qty: l.qty, meta: l.meta }; }),
+            customer: {
+              name: $("#co-name").value.trim(),
+              email: $("#co-email").value.trim(),
+              phone: $("#co-phone").value.trim(),
+              address: $("#co-address").value.trim(),
+              notes: $("#co-notes").value.trim()
+            }
+          })
+        })
+          .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+          .then(function (res) {
+            if (!res.ok || !res.d.url) { fail(res.d.error || "Something went wrong. Please try again."); return; }
+            /* The bag is cleared only once payment is confirmed, so an
+               abandoned checkout doesn't lose someone's basket. */
+            window.location.href = res.d.url;
+          })
+          .catch(function () { fail("Couldn't reach the payment service. Check your connection and try again."); });
+      });
+    }
+  }
+
+  /* --- Order confirmation ----------------------------------- */
+  var orderResult = $("[data-order-result]");
+  if (orderResult) {
+    var reference = new URLSearchParams(window.location.search).get("reference");
+
+    function show(html) { orderResult.innerHTML = html; }
+
+    if (!reference) {
+      show('<h1>Nothing to show</h1><p>No order reference was given.</p>' +
+           '<a class="btn btn--gold" href="shop.html" style="margin-top:1.5rem">Back to the shop</a>');
+    } else {
+      fetch("/api/verify?reference=" + encodeURIComponent(reference))
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (d.status === "success") {
+            /* Paid — safe to empty the bag now. */
+            cart = [];
+            saveCart();
+            renderCart();
+            show('<span class="eyebrow eyebrow--line">Order confirmed</span>' +
+                 "<h1>Thank you" + (d.name ? ", " + d.name.split(" ")[0] : "") + "</h1>" +
+                 "<p>We've received your payment of <strong>" + money(d.amount) + "</strong>. " +
+                 "A receipt is on its way to your email, and we'll message you to arrange delivery.</p>" +
+                 '<p class="form-note" style="margin-top:1rem">Reference: ' + d.reference + "</p>" +
+                 '<a class="btn btn--gold" href="shop.html" style="margin-top:1.75rem">Keep shopping</a>');
+          } else {
+            show("<h1>Payment not completed</h1>" +
+                 "<p>Your bag is still saved, so nothing is lost. You can try again whenever you're ready.</p>" +
+                 '<a class="btn btn--gold" href="checkout.html" style="margin-top:1.5rem">Back to checkout</a>');
+          }
+        })
+        .catch(function () {
+          show("<h1>We couldn't confirm your payment</h1>" +
+               "<p>If money left your account, the order went through — send us a message and we'll confirm it.</p>" +
+               '<a class="btn btn--outline" href="contact.html" style="margin-top:1.5rem">Contact us</a>');
+        });
+    }
+  }
 
   /* --- Wishlist toggle -------------------------------------- */
   document.addEventListener("click", function (e) {

@@ -22,6 +22,7 @@
    18. Cart drawer & toasts
    19. Motion & reveal
    20. Responsive
+   21. Checkout
    ========================================================================== */
 
 /* 1. Tokens ============================================================== */
@@ -2063,6 +2064,42 @@ select.field {
     transition-duration: 0.001ms !important;
   }
   [data-reveal] { opacity: 1 !important; transform: none !important; }
+}
+
+/* 21. Checkout ========================================================== */
+.checkout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(1.5rem, 1rem + 2.5vw, 3rem);
+  align-items: start;
+}
+.checkout__summary { position: sticky; top: calc(var(--header-h) + 24px); }
+.checkout__total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1.25rem 0 .75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+.checkout__total b { font-family: var(--font-display); font-size: 1.5rem; }
+.checkout__error {
+  margin: 1.25rem 0 0;
+  padding: .9rem 1.1rem;
+  border-radius: var(--r-sm);
+  background: #fdf0f0;
+  border: 1px solid rgba(194, 91, 91, .3);
+  color: #a33f3f;
+  font-size: .92rem;
+}
+.checkout button[disabled] { opacity: .7; cursor: progress; }
+
+@media (max-width: 860px) {
+  .checkout { grid-template-columns: 1fr; }
+  /* Summary first on a phone: people want to see what they're paying for
+     before they start typing an address. */
+  .checkout__summary { position: static; order: -1; }
 }
 
 /* 20. Responsive ========================================================= */
