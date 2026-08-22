@@ -6,6 +6,11 @@
 <title>StrandsBySise — Admin</title>
 <!-- Keep the panel out of Google. It is not a page for customers. -->
 <meta name="robots" content="noindex, nofollow">
+<!-- Absolute, not relative. Vercel serves this page at /admin as well as
+     /admin/, and a relative "config.yml" resolves to /config.yml from the
+     former — a 404 that stops the panel loading entirely. -->
+<link href="/admin/config.yml" type="text/yaml" rel="cms-config-url">
+
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23FFF9F5'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Georgia,serif' font-size='16' fill='%23D4AF37'%3ES%3C/text%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
