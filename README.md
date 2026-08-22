@@ -337,10 +337,18 @@ OAuth Apps → New OAuth App:
 |---|---|
 | Application name | `StrandsBySise Admin` |
 | Homepage URL | `https://strandsbysise.vercel.app` |
-| Authorization callback URL | `https://strandsbysise.vercel.app/api/callback` |
+| Redirect URI | `https://strandsbysise.vercel.app/api/callback` |
+
+Leave *Allow wildcard matching* and *Enable Device Flow* unchecked. Leave *Expire user
+access tokens* checked — it's the safer default, and the only effect is having to sign
+in again every so often.
 
 Register it, then **Generate a new client secret**. You'll have a Client ID and a
-Client Secret. Copy both — the secret is shown only once.
+Client Secret. Copy both — the secret is shown only once, and it should never be
+pasted into a chat, a file in this repo, or anywhere other than Vercel's settings.
+
+If you later put the site on a custom domain, come back and add a second redirect URI
+for it — `https://yourdomain.com/api/callback`.
 
 **2. Give them to Vercel.** In the Vercel project → Settings → Environment Variables,
 add two, for all environments:
