@@ -1,0 +1,15 @@
+{
+  "order": 10,
+  "id": "silk-straight",
+  "name": "Silk Straight",
+  "cat": "bonestraight",
+  "price": 185000,
+  "old": null,
+  "rating": 4.9,
+  "reviews": 128,
+  "length": "20\"",
+  "texture": "Bonestraight",
+  "density": "180%",
+  "tag": "Best Seller",
+  "tag_dark": false
+}

@@ -1,0 +1,15 @@
+{
+  "order": 60,
+  "id": "frontal-glam",
+  "name": "Frontal Glam",
+  "cat": "wavy",
+  "price": 268000,
+  "old": null,
+  "rating": 4.9,
+  "reviews": 112,
+  "length": "26\"",
+  "texture": "Wavy",
+  "density": "200%",
+  "tag": "Signature",
+  "tag_dark": true
+}

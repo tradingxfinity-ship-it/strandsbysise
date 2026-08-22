@@ -10,6 +10,12 @@ backend:
   # The sign-in handler lives with the site — see api/auth.js.
   base_url: https://strandsbysise.vercel.app
   auth_endpoint: api/auth
+  commit_messages:
+    create: 'Add {{collection}} "{{slug}}"'
+    update: 'Update {{collection}} "{{slug}}"'
+    delete: 'Remove {{collection}} "{{slug}}"'
+    uploadMedia: 'Upload {{path}}'
+    deleteMedia: 'Remove {{path}}'
 
 # Photos uploaded through the panel land where the site already looks for them.
 media_folder: assets/img
@@ -24,59 +30,97 @@ logo_url: https://strandsbysise.vercel.app/assets/img/admin-logo.svg
 
 collections:
   # ---------------------------------------------------------------- products
+  # A folder collection, one file per product. This is what gives the panel a
+  # real "New Product" button — as a single file holding a list, adding a
+  # product meant scrolling to the bottom of one very long form, which nobody
+  # would find.
   - name: products
     label: Products
-    label_singular: product
-    files:
-      - name: catalogue
-        label: The catalogue
-        file: data/products.json
-        description: >-
-          Every piece in the shop. Drag to reorder — the order here is the
-          order shoppers see. Photos are separate: save each product's photo
-          as product-<id>-1.jpg through -4.jpg in assets/img.
-        fields:
-          - name: products
-            label: Products
-            label_singular: product
-            widget: list
-            summary: '{{fields.name}} — ₦{{fields.price}}'
-            fields:
-              - { name: name, label: Name, widget: string }
-              - name: id
-                label: ID
-                widget: string
-                pattern: ['^[a-z0-9-]+$', 'Lowercase letters, numbers and hyphens only']
-                hint: >-
-                  Lowercase, hyphenated, no spaces. This also names the photo
-                  files, so avoid changing it once photos are in place.
-              - name: cat
-                label: Collection
-                widget: select
-                options: [wavy, bouncy, bonestraight, deepwave, pixie-curls]
-              - { name: price, label: Price (₦), widget: number, value_type: int, min: 0 }
-              - name: old
-                label: Was price (₦)
-                widget: number
-                value_type: int
-                required: false
-                hint: Shows as a crossed-out price. Leave empty for no discount.
-              - { name: length, label: Length, widget: string, hint: 'e.g. 20"' }
-              - { name: texture, label: Texture, widget: string }
-              - { name: density, label: Density, widget: string, hint: 'e.g. 180%' }
-              - name: tag
-                label: Badge
-                widget: select
-                required: false
-                options: ['Best Seller', 'New In', 'Sale', "Editor's Pick", 'Signature']
-                hint: The small label on the card. Leave empty for none.
-              - name: tag_dark
-                label: Dark badge
-                widget: boolean
-                default: false
-                required: false
-              - { name: rating, label: Rating, widget: number, value_type: float, min: 0, max: 5, step: 0.1 }
-              - { name: reviews, label: Review count, widget: number, value_type: int, min: 0 }
+    label_singular: Product
+    folder: data/products
+    extension: json
+    format: json
+    create: true
+    delete: true
+    slug: '{{fields.id}}'
+    summary: '{{name}} — ₦{{price}}'
+    sortable_fields: [order, name, price]
+    description: >-
+      Every piece in the shop. Add a product here, then upload its photos
+      under Photos, named product-<id>-1.jpg through -4.jpg.
+    fields:
+      - name: name
+        label: Product name
+        widget: string
+        hint: What shoppers see, e.g. Silk Straight.
+
+      - name: id
+        label: Short ID
+        widget: string
+        pattern: ['^[a-z0-9-]+$', 'Lowercase letters, numbers and hyphens only — no spaces']
+        hint: >-
+          Lowercase and hyphenated, e.g. silk-straight. This names the photo
+          files, so try not to change it once photos are uploaded.
+
+      - name: order
+        label: Position in the shop
+        widget: number
+        value_type: int
+        default: 100
+        hint: Lower numbers come first. The first four also fill Best Sellers.
+
+      - name: cat
+        label: Collection
+        widget: select
+        options: [wavy, bouncy, bonestraight, deepwave, pixie-curls]
+
+      - name: price
+        label: Price (₦)
+        widget: number
+        value_type: int
+        min: 0
+        hint: Numbers only — no commas or ₦ sign.
+
+      - name: old
+        label: Was price (₦)
+        widget: number
+        value_type: int
+        required: false
+        hint: Shows crossed out beside the price. Leave empty if not on offer.
+
+      - { name: length, label: Length, widget: string, hint: 'e.g. 20"' }
+      - { name: texture, label: Texture, widget: string, hint: 'e.g. Bonestraight' }
+      - { name: density, label: Density, widget: string, hint: 'e.g. 180%' }
+
+      - name: tag
+        label: Badge
+        widget: select
+        required: false
+        options: ['Best Seller', 'New In', 'Sale', "Editor's Pick", 'Signature']
+        hint: The small label on the card. Leave empty for none.
+
+      - name: tag_dark
+        label: Dark badge
+        widget: boolean
+        default: false
+        required: false
+        hint: Charcoal badge instead of white. Suits New In and Signature.
+
+      - name: rating
+        label: Rating out of 5
+        widget: number
+        value_type: float
+        min: 0
+        max: 5
+        step: 0.1
+        default: 4.9
+
+      - name: reviews
+        label: Number of reviews
+        widget: number
+        value_type: int
+        min: 0
+        default: 0
 
   # ---------------------------------------------------------------- settings
   - name: settings

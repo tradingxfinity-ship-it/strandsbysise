@@ -1,0 +1,15 @@
+{
+  "order": 30,
+  "id": "body-wave-luxe",
+  "name": "Body Wave Luxe",
+  "cat": "wavy",
+  "price": 245000,
+  "old": 275000,
+  "rating": 4.9,
+  "reviews": 141,
+  "length": "24\"",
+  "texture": "Wavy",
+  "density": "180%",
+  "tag": null,
+  "tag_dark": false
+}

@@ -1,0 +1,15 @@
+{
+  "order": 70,
+  "id": "deep-wave",
+  "name": "Deep Wave Dream",
+  "cat": "deepwave",
+  "price": 232000,
+  "old": null,
+  "rating": 4.8,
+  "reviews": 64,
+  "length": "22\"",
+  "texture": "Deepwave",
+  "density": "200%",
+  "tag": null,
+  "tag_dark": false
+}

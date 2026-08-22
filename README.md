@@ -25,7 +25,7 @@ admin/              The admin panel served at /admin
 api/                Sign-in handlers for the panel (no secrets in here)
 
 data/settings.json  Phone, WhatsApp, email, socials, announcement bar
-data/products.json  The catalogue
+data/products/      One JSON file per product
 templates/          Editable sources for every page
 build.py            Rebuilds every page from data/ + templates/ (see §4)
 tools-generate-placeholders.py   Fills empty image slots (never overwrites)
@@ -82,18 +82,22 @@ pages. You'll just have to update the header and footer on each one by hand.
 
 ### Adding or editing a product
 
-Open `data/products.json`. Each product is one entry:
+Easiest is the admin panel — Products → New Product. To do it by hand, add a file to
+`data/products/`, named after the product's id:
 
 ```json
 {
-  "id": "silk-straight", "name": "Silk Straight", "cat": "bonestraight",
+  "order": 10, "id": "silk-straight", "name": "Silk Straight", "cat": "bonestraight",
   "price": 185000, "old": null, "rating": 4.9, "reviews": 128,
   "length": "20\"", "texture": "Bonestraight", "density": "180%",
   "tag": "Best Seller", "tag_dark": false
 }
 ```
 
-- `id` — lowercase, hyphenated. Also decides the image filename (below).
+- `order` — lower numbers come first in the shop. The first four also fill the
+  Best Sellers row on the home page.
+- `id` — lowercase, hyphenated. Also decides the image filename (below), and the
+  file it's stored in.
 - `cat` — one of `wavy`, `bouncy`, `bonestraight`, `deepwave`, `pixie-curls`.
   This is what the shop filters and the home page collections use.
 - `price` — plain number, no commas or currency symbol.

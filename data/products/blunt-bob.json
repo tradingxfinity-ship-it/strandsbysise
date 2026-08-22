@@ -1,0 +1,15 @@
+{
+  "order": 40,
+  "id": "blunt-bob",
+  "name": "Blunt Bob",
+  "cat": "bonestraight",
+  "price": 135000,
+  "old": null,
+  "rating": 4.7,
+  "reviews": 73,
+  "length": "12\"",
+  "texture": "Bonestraight",
+  "density": "150%",
+  "tag": "Editor's Pick",
+  "tag_dark": false
+}

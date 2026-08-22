@@ -1,0 +1,15 @@
+{
+  "order": 80,
+  "id": "pixie-chic",
+  "name": "Pixie Chic",
+  "cat": "pixie-curls",
+  "price": 112000,
+  "old": 135000,
+  "rating": 4.6,
+  "reviews": 41,
+  "length": "8\"",
+  "texture": "Pixie Curls",
+  "density": "150%",
+  "tag": "Sale",
+  "tag_dark": false
+}

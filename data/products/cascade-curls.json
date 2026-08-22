@@ -1,0 +1,15 @@
+{
+  "order": 20,
+  "id": "cascade-curls",
+  "name": "Cascade Curls",
+  "cat": "bouncy",
+  "price": 215000,
+  "old": null,
+  "rating": 4.8,
+  "reviews": 96,
+  "length": "22\"",
+  "texture": "Bouncy",
+  "density": "200%",
+  "tag": "New In",
+  "tag_dark": true
+}

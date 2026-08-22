@@ -1,0 +1,15 @@
+{
+  "order": 50,
+  "id": "closure-classic",
+  "name": "Closure Classic",
+  "cat": "bouncy",
+  "price": 165000,
+  "old": null,
+  "rating": 4.8,
+  "reviews": 88,
+  "length": "18\"",
+  "texture": "Bouncy",
+  "density": "180%",
+  "tag": null,
+  "tag_dark": false
+}

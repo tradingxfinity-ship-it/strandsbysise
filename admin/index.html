@@ -42,6 +42,42 @@
   }
   @keyframes spin { to { transform: rotate(360deg); } }
   .boot small { font-size: .82rem; max-width: 34ch; line-height: 1.6; }
+
+  /* ---- Brand the panel -------------------------------------------------
+     Decap's internals use generated class names, so this stays to broad,
+     stable things: type, page colour, and our own greeting bar. If a future
+     Decap release changes its markup, the panel still works — it just looks
+     a little more like stock Decap. */
+  body { font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif; }
+  h1, h2, h3, [class*="CardHeading"] {
+    font-family: "Playfair Display", Georgia, serif !important;
+    font-weight: 500 !important;
+  }
+
+  /* The greeting bar. Ours, not Decap's, so it can't break. */
+  .sbs-bar {
+    position: sticky; top: 0; z-index: 9999;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; flex-wrap: wrap;
+    padding: .85rem clamp(1rem, 3vw, 2rem);
+    background: linear-gradient(120deg, #fff9f5, #fdeef5 60%, #f8f0e4);
+    border-bottom: 1px solid rgba(212,175,55,.35);
+  }
+  .sbs-bar__hello {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 1.15rem; color: #2b2b2b;
+  }
+  .sbs-bar__hello b { font-weight: 500; }
+  .sbs-bar__hint { font-size: .8rem; color: #8b8280; }
+  .sbs-bar__links { display: flex; gap: .5rem; flex-wrap: wrap; }
+  .sbs-bar a {
+    font-size: .78rem; font-weight: 600; letter-spacing: .04em;
+    text-decoration: none; padding: .5rem .9rem; border-radius: 999px;
+    border: 1px solid rgba(43,43,43,.14); color: #2b2b2b; background: #fff;
+  }
+  .sbs-bar a:hover { border-color: #d4af37; color: #b8942a; }
+  .sbs-bar a.is-primary { background: #d4af37; border-color: #d4af37; color: #fff; }
+  .sbs-bar a.is-primary:hover { background: #b8942a; color: #fff; }
 </style>
 </head>
 <body>
@@ -67,7 +103,7 @@
         clearTimeout(stall);
         boot.style.transition = 'opacity .4s ease';
         boot.style.opacity = '0';
-        setTimeout(function () { boot.remove(); }, 450);
+        setTimeout(function () { boot.remove(); addGreeting(); }, 450);
       }
     }, 200);
 
@@ -80,6 +116,48 @@
         "the site itself is unaffected — only this panel is.";
       boot.querySelector('.boot__ring').style.animation = 'none';
     }, 15000);
+
+    /* Greets whoever is signed in, by their GitHub name. Sits above the
+       panel rather than inside it, so no Decap update can dislodge it. */
+    function addGreeting() {
+      if (document.querySelector('.sbs-bar')) return;
+
+      var name = 'there';
+      try {
+        var raw = localStorage.getItem('decap-cms-user') || localStorage.getItem('netlify-cms-user');
+        var user = raw && JSON.parse(raw);
+        if (user) name = (user.name || user.login || 'there').split(' ')[0];
+      } catch (e) { /* not signed in yet — the generic greeting is fine */ }
+
+      var hour = new Date().getHours();
+      var part = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+
+      var bar = document.createElement('div');
+      bar.className = 'sbs-bar';
+      bar.innerHTML =
+        '<div>' +
+          '<div class="sbs-bar__hello">' + part + ', <b></b></div>' +
+          '<div class="sbs-bar__hint">Changes go live about a minute after you press Publish.</div>' +
+        '</div>' +
+        '<div class="sbs-bar__links">' +
+          '<a class="is-primary" href="/" target="_blank" rel="noopener">View the site</a>' +
+          '<a href="https://github.com/tradingxfinity-ship-it/strandsbysise/actions" target="_blank" rel="noopener">Publishing status</a>' +
+        '</div>';
+      bar.querySelector('b').textContent = name;
+      document.body.insertBefore(bar, document.body.firstChild);
+    }
+
+    /* The name only lands in storage after sign-in, so try again once the
+       user has logged in rather than only at first paint. */
+    setInterval(function () {
+      var bar = document.querySelector('.sbs-bar');
+      if (!bar) { addGreeting(); return; }
+      var b = bar.querySelector('b');
+      if (b && b.textContent === 'there') {
+        bar.remove();
+        addGreeting();
+      }
+    }, 3000);
   })();
 </script>
 </body>

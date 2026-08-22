@@ -4,7 +4,7 @@
 Content lives in `data/`, not in code:
 
     data/settings.json   phone, WhatsApp, email, socials, announcement bar
-    data/products.json   the catalogue
+    data/products/*.json one file per product
 
 Both are plain files the admin panel at /admin edits and commits. Every
 page is generated from `templates/`, so nothing needs hand-editing to
@@ -64,7 +64,23 @@ def load(name):
 
 
 SETTINGS = load("settings.json")
-PRODUCTS = load("products.json")
+
+
+def load_products():
+    """One JSON file per product, so the admin panel gets a real
+    'New Product' button. Sorted by the `order` field the owner controls;
+    ties fall back to name so the output is never arbitrary."""
+    folder = os.path.join(ROOT, "data", "products")
+    items = []
+    for name in sorted(os.listdir(folder)):
+        if not name.endswith(".json"):
+            continue
+        with open(os.path.join(folder, name)) as fh:
+            items.append(json.load(fh))
+    return sorted(items, key=lambda p: (p.get("order", 9999), p.get("name", "")))
+
+
+PRODUCTS = load_products()
 
 SETTINGS = dict(SETTINGS)
 # The admin types the announcement as plain text; any currency amount in it
