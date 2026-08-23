@@ -1,0 +1,17 @@
+{
+  "weight_kg": 0.4,
+  "length": "22”",
+  "old": 650000,
+  "density": "350%",
+  "price": 600000,
+  "name": " Cola 🍇 brown wavy",
+  "order": 4,
+  "cat": "wavy",
+  "tag": "Sale",
+  "reviews": 2,
+  "tag_dark": false,
+  "id": "cola-wavy",
+  "texture": "Wavy ",
+  "image": "/assets/img/img_1705.jpeg",
+  "rating": 4.9
+}
