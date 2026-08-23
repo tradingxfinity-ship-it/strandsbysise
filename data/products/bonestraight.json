@@ -1,0 +1,17 @@
+{
+  "weight_kg": 0.4,
+  "length": "28”",
+  "old": 630000,
+  "density": "250",
+  "price": 580000,
+  "name": "Cajun bonestraight ",
+  "order": 5,
+  "cat": "bonestraight",
+  "tag": "Sale",
+  "reviews": 2,
+  "tag_dark": false,
+  "id": "bonestraight",
+  "texture": "Virgin Straight ",
+  "image": "/assets/img/img_1604.jpeg",
+  "rating": 4.9
+}
