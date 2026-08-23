@@ -1,0 +1,16 @@
+{
+  "weight_kg": 0.4,
+  "length": "18”",
+  "old": "",
+  "density": "300%",
+  "price": 280000,
+  "name": "Pixie curls",
+  "order": 7,
+  "cat": "pixie-curls",
+  "reviews": 1,
+  "tag_dark": false,
+  "id": "pixie-curl",
+  "texture": "Curly",
+  "image": "/assets/img/img_1587.jpeg",
+  "rating": 4.9
+}
