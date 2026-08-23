@@ -1,0 +1,17 @@
+{
+  "weight_kg": 0.4,
+  "length": "18”",
+  "old": 850000,
+  "density": "300%",
+  "price": 920000,
+  "name": "Raw blonde bounce ",
+  "order": 4,
+  "cat": "bouncy",
+  "tag": "Sale",
+  "reviews": 2,
+  "tag_dark": false,
+  "id": "blonde-bounce",
+  "texture": "Raw bounce ",
+  "image": "/assets/img/img_0937.jpeg",
+  "rating": 4.9
+}
