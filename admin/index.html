@@ -133,6 +133,24 @@
         '</div>';
       bar.querySelector('b').textContent = name;
       document.body.insertBefore(bar, document.body.firstChild);
+
+      /* Decap's own Publish toolbar is fixed to the very top of the screen
+         while editing an entry. Our greeting bar is pinned there too, at a
+         higher layer, so on that screen it would sit on top of Publish and
+         hide it — worst on a phone, where the greeting wraps to two rows.
+         So show the greeting only on the list/dashboard screens and step
+         aside the moment an entry is open. */
+      syncBar();
+      window.addEventListener('hashchange', syncBar);
+    }
+
+    /* Editing an entry looks like #/collections/products/entries/blunt-bob
+       or .../new; anything else is a list/dashboard screen. */
+    function syncBar() {
+      var bar = document.querySelector('.sbs-bar');
+      if (!bar) return;
+      var editing = /\/(entries\/|new(\/|$))/.test(location.hash);
+      bar.style.display = editing ? 'none' : '';
     }
 
     /* Fetched once; the bar is redrawn if it rendered before this landed. */
