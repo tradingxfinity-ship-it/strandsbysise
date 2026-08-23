@@ -1,0 +1,17 @@
+{
+  "weight_kg": 0.4,
+  "length": "18”",
+  "old": 700000,
+  "density": "300%",
+  "price": 630000,
+  "name": "Raw bouncy",
+  "order": 3,
+  "cat": "bouncy",
+  "tag": "Sale",
+  "reviews": 0,
+  "tag_dark": false,
+  "id": "donor-bounce",
+  "texture": "Raw bouncy ",
+  "image": "/assets/img/b56a0561-091b-423a-adcb-674dfd2aab00.jpeg",
+  "rating": 4.9
+}
