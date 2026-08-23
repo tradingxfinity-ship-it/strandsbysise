@@ -22,6 +22,21 @@ Check it worked: open <https://strandsbysise.vercel.app/api/checkout> in a brows
 
 **Never put the key in this repo.** Vercel's settings only.
 
+## 1b. Switch on order emails — so an order actually reaches you
+
+The webhook is built (`api/paystack-webhook.js`); it just needs an email service.
+Without this, orders arrive silently and only live in the Paystack dashboard.
+
+1. Sign up at <https://resend.com>, verify your sending domain, create an API key.
+2. Paystack → Settings → API Keys & Webhooks → set the **Webhook URL** (test and live)
+   to `https://strandsbysise.vercel.app/api/paystack-webhook`.
+3. Vercel → Settings → Environment Variables → add `RESEND_API_KEY`, and optionally
+   `ORDER_EMAIL_TO` (defaults to the address in `settings.json`) and `ORDER_EMAIL_FROM`
+   (defaults to `orders@strandsbysise.com`, must be on your verified Resend domain).
+4. Redeploy, then put a Paystack **test** order through and confirm the email arrives.
+
+See README §8 → "Getting told when an order comes in".
+
 ## 2. Give Sise access to the admin panel — blocks her editing anything
 
 GitHub → this repo → Settings → Collaborators → add her with **Write**.

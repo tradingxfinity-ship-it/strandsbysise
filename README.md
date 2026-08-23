@@ -443,6 +443,31 @@ That is enough for a boutique, and it has real limits: no stock counts, so nothi
 stops the same piece selling twice, and no order status to work through. That's the
 point at which a platform like Shopify starts earning its fee.
 
+### Getting told when an order comes in
+
+You don't have to watch the dashboard. `api/paystack-webhook.js` emails you the full
+order — items, address, phone, delivery, total — the instant a payment succeeds. It
+checks each call is genuinely signed by Paystack before acting.
+
+One-time setup:
+
+1. Sign up at [resend.com](https://resend.com) (free tier is plenty), verify your
+   sending domain, and create an API key.
+2. In Paystack → Settings → API Keys & Webhooks, set the **Webhook URL** to
+   `https://strandsbysise.vercel.app/api/paystack-webhook` (there's a separate slot
+   for test and live — set both).
+3. In Vercel → Settings → Environment Variables, add:
+
+| Name | Value |
+|---|---|
+| `RESEND_API_KEY` | your Resend API key |
+| `ORDER_EMAIL_TO` | where orders should land (defaults to the address in `settings.json`) |
+| `ORDER_EMAIL_FROM` | a "from" address on your verified Resend domain (defaults to `orders@strandsbysise.com`) |
+
+Redeploy. Until `RESEND_API_KEY` is set the payment still goes through and lands in the
+dashboard as always — you just won't get the email. Nothing breaks; you simply fall
+back to the dashboard being the order book.
+
 
 
 ## 9. Delivery
