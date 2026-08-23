@@ -1,0 +1,17 @@
+{
+  "weight_kg": 0.4,
+  "length": "20”",
+  "old": 340000,
+  "density": "250%",
+  "price": 315000,
+  "name": "Burgundy pixie curls",
+  "order": 4,
+  "cat": "pixie-curls",
+  "tag": "Sale",
+  "reviews": 4,
+  "tag_dark": false,
+  "id": "pixie-curl",
+  "texture": "Virgin pixie ",
+  "image": "/assets/img/img_1612.jpeg",
+  "rating": 4.9
+}
