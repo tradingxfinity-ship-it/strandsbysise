@@ -1,0 +1,16 @@
+{
+  "weight_kg": 0.5,
+  "length": "26”",
+  "old": 800000,
+  "density": "300%",
+  "price": 740000,
+  "name": "Ginger erusian curly",
+  "order": 2,
+  "cat": "pixie-curls",
+  "reviews": 2,
+  "tag_dark": false,
+  "id": "erusian-curly",
+  "texture": "Virgin",
+  "image": "/assets/img/img_1611.jpeg",
+  "rating": 4.9
+}
