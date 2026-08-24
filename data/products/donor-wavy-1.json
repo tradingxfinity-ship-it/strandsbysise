@@ -1,0 +1,16 @@
+{
+  "weight_kg": 0.4,
+  "length": "16”",
+  "old": 520000,
+  "density": "300%",
+  "price": 450000,
+  "name": "Raw ginger wavy",
+  "order": 7,
+  "cat": "wavy",
+  "reviews": 0,
+  "tag_dark": false,
+  "id": "donor-wavy",
+  "texture": "Raw wavy ",
+  "image": "/assets/img/img_1727.jpeg",
+  "rating": 4.9
+}
