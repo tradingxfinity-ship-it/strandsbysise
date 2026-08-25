@@ -7,11 +7,13 @@
   "name": "Raw donor bob",
   "order": 2,
   "cat": "bonestraight",
+  "lace": "HD",
   "tag": null,
   "reviews": 2,
   "tag_dark": false,
   "id": "chic-bob",
   "texture": "Straight ",
   "image": "/assets/img/003030ee-6e8e-436b-934c-27ba177a9979.jpeg",
+  "closure": "2 by 4",
   "rating": 4.8
 }
