@@ -1,0 +1,18 @@
+{
+  "weight_kg": 0.4,
+  "length": "20",
+  "density": "250g",
+  "price": 375000,
+  "name": "frontal pixie",
+  "order": 100,
+  "cat": "pixie-curls",
+  "lace": "HD",
+  "tag": "Signature",
+  "reviews": 4,
+  "tag_dark": false,
+  "id": "pixie-curls",
+  "texture": "Virgin curly ",
+  "image": "/assets/img/img_1155.jpeg",
+  "closure": "13 by 4",
+  "rating": 4.9
+}
