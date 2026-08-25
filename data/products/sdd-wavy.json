@@ -6,11 +6,13 @@
   "name": "Burgundy wavy ",
   "order": 100,
   "cat": "wavy",
+  "lace": "Swiss",
   "tag": "Signature",
   "reviews": 2,
   "tag_dark": false,
   "id": "sdd-wavy",
   "texture": "Virgin wavy ",
   "image": "/assets/img/24203c9a-5f79-46e4-a25b-3c8644450ca9.jpeg",
+  "closure": "5 by 5",
   "rating": 4.9
 }
