@@ -1,0 +1,18 @@
+{
+  "weight_kg": 0.4,
+  "length": "30”",
+  "density": "300g",
+  "price": 850000,
+  "name": "Frontal bonestraight ",
+  "order": 10,
+  "cat": "bonestraight",
+  "lace": "HD",
+  "tag": "Sale",
+  "reviews": 2,
+  "tag_dark": false,
+  "id": "bonestraight",
+  "texture": "Virgin straight ",
+  "image": "/assets/img/img_9135.jpeg",
+  "closure": "13 by 6",
+  "rating": 4.9
+}
