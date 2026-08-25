@@ -1,0 +1,18 @@
+{
+  "weight_kg": 0.4,
+  "length": "30”",
+  "density": "250g",
+  "price": 580000,
+  "name": "Pixie curl",
+  "order": 5,
+  "cat": "pixie-curls",
+  "lace": "Swiss",
+  "tag": "Best Seller",
+  "reviews": 3,
+  "tag_dark": false,
+  "id": "pixie-curl",
+  "texture": "Virgin curly ",
+  "image": "/assets/img/img_8347.jpeg",
+  "closure": "5 by 5",
+  "rating": 4.9
+}
