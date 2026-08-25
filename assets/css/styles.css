@@ -2255,8 +2255,10 @@ select.field {
   position: absolute;
   inset: 0;
   overflow: hidden;
+  /* Above the card so the confetti falls in front of it; pointer-events
+     stay off so it never blocks the buttons underneath. */
   pointer-events: none;
-  z-index: 2;
+  z-index: 4;
 }
 .celebrate__card {
   position: relative;
