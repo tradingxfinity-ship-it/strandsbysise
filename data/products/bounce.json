@@ -6,6 +6,7 @@
   "name": "Cajun bounce",
   "order": 100,
   "cat": "bouncy",
+  "lace": "Swiss",
   "tag": "Signature",
   "reviews": 1,
   "tag_dark": false,
