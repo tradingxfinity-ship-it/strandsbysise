@@ -13,5 +13,6 @@
   "id": "pixie-curl",
   "texture": "Pixie Curls",
   "image": "/assets/img/product-pixie-chic-1.jpg",
+  "closure": "5 by 5",
   "rating": 4.6
 }
