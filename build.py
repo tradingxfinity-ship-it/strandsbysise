@@ -347,7 +347,7 @@ def render_product(p):
         "PDP_CLOSURE": attr(p.get("closure", "")),
         "PDP_CLOSURE_ROW": closure_row(p),
         "PDP_META": attr(" · ".join(
-            x for x in ["Natural Black", p.get("length", ""), weight_display(p), p.get("closure", "")] if x)),
+            x for x in ["Natural Black", "HD", p.get("length", ""), weight_display(p), p.get("closure", "")] if x)),
     }
 
     page = PRODUCT_TPL
