@@ -1,0 +1,15 @@
+{
+  "weight_kg": 0.4,
+  "length": "22”",
+  "density": "300%",
+  "price": 750000,
+  "name": "Custom colored bounce ",
+  "order": 10,
+  "cat": "bouncy",
+  "reviews": 0,
+  "tag_dark": false,
+  "id": "bounce",
+  "texture": "Virgin ",
+  "image": "/assets/img/img_1759.jpeg",
+  "rating": 4.9
+}
