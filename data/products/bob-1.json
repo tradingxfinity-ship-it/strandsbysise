@@ -1,0 +1,18 @@
+{
+  "weight_kg": 0.4,
+  "length": "10”",
+  "density": "200g",
+  "price": 230000,
+  "name": "Burgundy Bob ",
+  "order": 3,
+  "cat": "bonestraight",
+  "lace": "Swiss",
+  "tag": "Signature",
+  "reviews": 2,
+  "tag_dark": false,
+  "id": "bob",
+  "texture": "Virgin straight ",
+  "image": "/assets/img/img_4635.jpeg",
+  "closure": "5 by 5",
+  "rating": 4.9
+}
