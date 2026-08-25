@@ -1,17 +1,18 @@
 {
   "weight_kg": 0.4,
   "length": "14”",
-  "old": 205000,
+  "old": 210000,
   "density": "200g",
-  "price": 185000,
+  "price": 190000,
   "name": "Fringe pixie curls ",
   "order": 7,
   "cat": "pixie-curls",
+  "lace": "Swiss",
   "reviews": 0,
   "tag_dark": false,
   "id": "fringe-pixie",
   "texture": "Virgin pixie",
   "image": "/assets/img/79759527-e2ea-4fd8-a8f2-0d43dcf5845c.jpeg",
-  "closure": "2 by 4",
+  "closure": "4 by 4",
   "rating": 4.9
 }
