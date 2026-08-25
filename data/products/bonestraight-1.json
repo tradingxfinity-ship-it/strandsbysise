@@ -4,7 +4,7 @@
   "old": 530000,
   "density": "200g",
   "price": 500000,
-  "name": "6 by 6 bonestraight ",
+  "name": "Sdd bonestraight ",
   "order": 5,
   "cat": "bonestraight",
   "tag": "Sale",
@@ -13,5 +13,6 @@
   "id": "bonestraight",
   "texture": "Virgin bonestraight ",
   "image": "/assets/img/0e42154e-c975-4fd6-9f61-747daab3a959.jpeg",
+  "closure": "6 by 6",
   "rating": 4.9
 }
