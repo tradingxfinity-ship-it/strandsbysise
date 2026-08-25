@@ -4,7 +4,7 @@
   "old": 650000,
   "density": "300g",
   "price": 600000,
-  "name": "7 by 7 pixie curls",
+  "name": "pixie curls",
   "order": 6,
   "cat": "pixie-curls",
   "tag": null,
@@ -13,5 +13,6 @@
   "id": "pixie-curls",
   "texture": "Pixie curl",
   "image": "/assets/img/img_1601.jpeg",
+  "closure": "6 by 6",
   "rating": 4.8
 }
