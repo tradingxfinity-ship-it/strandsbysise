@@ -7,11 +7,13 @@
   "name": "Brown raw deepwave ",
   "order": 5,
   "cat": "deepwave",
+  "lace": "HD",
   "tag": "Best Seller",
   "reviews": 2,
   "tag_dark": false,
   "id": "donor-deepwave",
   "texture": "Wavy",
   "image": "/assets/img/6e1cbfff-197a-4ac1-80ae-da937b59d6a0.jpeg",
+  "closure": "6 by 6",
   "rating": 4.9
 }
