@@ -1,0 +1,16 @@
+{
+  "weight_kg": 0.4,
+  "length": "12”",
+  "density": "300%",
+  "price": 295000,
+  "name": "Cajun bounce",
+  "order": 100,
+  "cat": "bouncy",
+  "tag": "Signature",
+  "reviews": 1,
+  "tag_dark": false,
+  "id": "bounce",
+  "texture": "Virgin bounce ",
+  "image": "/assets/img/ce02009b-ba52-467f-bb99-913f577dce2a.jpeg",
+  "rating": 4.9
+}
