@@ -1,0 +1,18 @@
+{
+  "weight_kg": 0.4,
+  "length": "12”",
+  "density": "250g",
+  "price": 200000,
+  "name": "frontal curly",
+  "order": 6,
+  "cat": "pixie-curls",
+  "lace": "Swiss",
+  "tag": "Best Seller",
+  "reviews": 3,
+  "tag_dark": false,
+  "id": "pixie",
+  "texture": "Virgin curly",
+  "image": "/assets/img/img_7985.jpeg",
+  "closure": "13 by 4",
+  "rating": 4.9
+}
