@@ -787,19 +787,40 @@
   if (shop) {
     var cards = $$("[data-category]", shop);
     var countEl = $("[data-shop-count]");
-    $$("[data-filter]").forEach(function (btn) {
+    var filterBtns = $$("[data-filter]");
+
+    function applyFilter(cat) {
+      /* Fall back to "all" for an unknown category, so a stale link can't
+         leave the shop showing nothing. */
+      if (!filterBtns.some(function (b) { return b.getAttribute("data-filter") === cat; })) {
+        cat = "all";
+      }
+      filterBtns.forEach(function (b) {
+        b.setAttribute("aria-checked", String(b.getAttribute("data-filter") === cat));
+      });
+      var shown = 0;
+      cards.forEach(function (card) {
+        var match = cat === "all" || card.getAttribute("data-category") === cat;
+        card.style.display = match ? "" : "none";
+        if (match) shown++;
+      });
+      if (countEl) countEl.textContent = shown + (shown === 1 ? " style" : " styles");
+    }
+
+    filterBtns.forEach(function (btn) {
       btn.addEventListener("click", function () {
-        var cat = btn.getAttribute("data-filter");
-        $$("[data-filter]").forEach(function (b) { b.setAttribute("aria-checked", String(b === btn)); });
-        var shown = 0;
-        cards.forEach(function (card) {
-          var match = cat === "all" || card.getAttribute("data-category") === cat;
-          card.style.display = match ? "" : "none";
-          if (match) shown++;
-        });
-        if (countEl) countEl.textContent = shown + (shown === 1 ? " style" : " styles");
+        applyFilter(btn.getAttribute("data-filter"));
       });
     });
+
+    /* The home page links here as shop.html#wavy, so honour that on arrival —
+       and if they switch category by hash while already here. */
+    function filterFromHash() {
+      var cat = (location.hash || "").replace(/^#/, "");
+      if (cat) applyFilter(cat);
+    }
+    filterFromHash();
+    window.addEventListener("hashchange", filterFromHash);
 
     var sortSel = $("[data-sort]");
     if (sortSel) {
