@@ -1,0 +1,17 @@
+{
+  "weight_kg": 0.4,
+  "length": "24”",
+  "old": 1250000,
+  "density": "400%",
+  "price": 1150000,
+  "name": "Custom colored raw wavy",
+  "order": 8,
+  "cat": "wavy",
+  "tag": "Best Seller",
+  "reviews": 1,
+  "tag_dark": false,
+  "id": "custom-wavy",
+  "texture": "Raw wavy ",
+  "image": "/assets/img/a93fbc5c-0560-4da1-bbf2-998178bf70b4.jpeg",
+  "rating": 4.9
+}
