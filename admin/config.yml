@@ -108,6 +108,13 @@ collections:
           The lace closure or frontal size. Pick Custom unit for a
           made-to-order piece. Leave empty to hide it on the product.
 
+      - name: lace
+        label: Lace type
+        widget: select
+        required: false
+        options: ['HD', 'Swiss']
+        hint: The lace grade. Leave empty to hide it on the product.
+
       - name: weight_kg
         label: Shipping weight (kg)
         widget: number

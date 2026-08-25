@@ -47,7 +47,7 @@
     <!-- ============ Product ============ -->
     <div class="pdp" data-product-form data-id="{{PDP_SLUG}}" data-name="{{PDP_NAME}}"
          data-price="{{PDP_PRICE_RAW}}" data-image="{{PDP_IMG}}"
-         data-length="{{PDP_LENGTH}}" data-weight="{{PDP_WEIGHT}}" data-closure="{{PDP_CLOSURE}}">
+         data-length="{{PDP_LENGTH}}" data-weight="{{PDP_WEIGHT}}" data-closure="{{PDP_CLOSURE}}" data-lace="{{PDP_LACE}}">
 
       <!-- Gallery -->
       <div class="gallery" data-reveal="scale">
@@ -101,18 +101,6 @@
           </div>
         </div>
 
-        <!-- Lace type -->
-        <div class="option">
-          <div class="option__head">
-            <span class="label">Lace type</span>
-            <span class="option__value" data-option-value>HD</span>
-          </div>
-          <div class="chips" role="radiogroup" aria-label="Lace type" data-option="lace">
-            <button class="chip" type="button" role="radio" aria-checked="true" tabindex="0" data-value="HD">HD</button>
-            <button class="chip" type="button" role="radio" aria-checked="false" tabindex="-1" data-value="Swiss">Swiss</button>
-          </div>
-        </div>
-
         <!-- Length — fixed to the piece Sise listed, not a chooser -->
         <div class="option option--fixed">
           <div class="option__head">
@@ -128,6 +116,9 @@
             <span class="option__value">{{PDP_WEIGHT}}</span>
           </div>
         </div>
+
+        <!-- Lace — fixed spec, only when Sise set one -->
+        {{PDP_LACE_ROW}}
 
         <!-- Closure — fixed spec, only when Sise set one -->
         {{PDP_CLOSURE_ROW}}
