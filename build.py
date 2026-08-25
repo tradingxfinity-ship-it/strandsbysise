@@ -122,14 +122,15 @@ def stars(rating):
 
 
 def weight_display(p):
-    """The wig's weight, kept in the `density` field (relabelled to
-    Weight (g) in the panel — see admin/config.yml). A plain number gets a
-    'g' suffix; anything else (e.g. a legacy '180%') is shown as-is so it's
-    obvious it still needs updating to grams."""
+    """The wig's weight in grams, kept in the `density` field (relabelled to
+    Weight (g) in the panel — see admin/config.yml). Normalises whatever was
+    typed — "300", "300g", "300 g" — to a tidy "300g"; anything with no
+    number falls through unchanged."""
     v = str(p.get("density", "")).strip()
     if not v:
         return ""
-    return v + " g" if re.fullmatch(r"\d+(?:\.\d+)?", v) else v
+    m = re.match(r"(\d+(?:\.\d+)?)", v)
+    return m.group(1) + "g" if m else v
 
 
 def attr(value):
