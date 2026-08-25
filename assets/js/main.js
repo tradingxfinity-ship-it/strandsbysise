@@ -843,7 +843,9 @@
   /* --- Create a Custom Unit --------------------------------- */
   var custom = $("[data-custom-form]");
   if (custom) {
-    var WA_NUMBER = "2348030000000";
+    /* The real number is injected into data-wa from settings.json at build
+       time, so updating it in the admin panel updates this button too. */
+    var WA_NUMBER = custom.getAttribute("data-wa") || "2348030000000";
     var grades = $("[data-custom-grade]", custom);
     var lengthSel = $("[data-custom-length]", custom);
     var hint = $("[data-grade-hint]", custom);
