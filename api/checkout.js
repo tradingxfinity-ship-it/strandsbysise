@@ -24,7 +24,13 @@ function loadCatalogue() {
   for (const file of fs.readdirSync(dir)) {
     if (!file.endsWith(".json")) continue;
     const p = JSON.parse(fs.readFileSync(path.join(dir, file), "utf8"));
-    byId[p.id] = p;
+    /* Keyed by the FILENAME, not the `id` field. The admin panel's slug is
+       fixed at creation but the `id` field can be edited afterwards, so ids
+       drift and collide; the filename stays unique. The site (cards, cart,
+       product pages) uses this same filename slug as a product's identity. */
+    const slug = file.slice(0, -".json".length);
+    p.slug = slug;
+    byId[slug] = p;
   }
   return byId;
 }
@@ -91,7 +97,7 @@ export default async function handler(req, res) {
     total += amount;
     weight += (Number(product.weight_kg) || 0.4) * qty;
     lines.push({
-      id: product.id,
+      id: product.slug,
       name: product.name,
       options: String(item.meta || "").slice(0, 120),
       qty,
