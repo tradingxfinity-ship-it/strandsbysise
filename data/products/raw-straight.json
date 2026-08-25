@@ -1,0 +1,16 @@
+{
+  "weight_kg": 0.4,
+  "length": "30”",
+  "density": "300%",
+  "price": 950000,
+  "name": "2 toned raw babythin ",
+  "order": 100,
+  "cat": "bonestraight",
+  "tag": "Signature",
+  "reviews": 2,
+  "tag_dark": false,
+  "id": "raw-straight",
+  "texture": "Donor babythin",
+  "image": "/assets/img/803867e4-3a7c-4190-b0d6-5398ff571348.jpeg",
+  "rating": 4.9
+}
