@@ -6,6 +6,7 @@
   "name": "Custom colored bounce ",
   "order": 10,
   "cat": "bouncy",
+  "lace": "HD",
   "reviews": 0,
   "tag_dark": false,
   "id": "bounce",
