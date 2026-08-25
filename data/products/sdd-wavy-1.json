@@ -1,0 +1,16 @@
+{
+  "weight_kg": 0.4,
+  "length": "12”",
+  "density": "300%",
+  "price": 325000,
+  "name": "Sdd wavy ",
+  "order": 5,
+  "cat": "wavy",
+  "tag": "New In",
+  "reviews": 4,
+  "tag_dark": false,
+  "id": "sdd-wavy",
+  "texture": "Virgin wavy ",
+  "image": "/assets/img/68c11b03-58b6-41a4-b301-60aaeec420fc.jpeg",
+  "rating": 4.9
+}
