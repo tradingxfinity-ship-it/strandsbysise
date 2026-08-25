@@ -1,0 +1,16 @@
+{
+  "weight_kg": 0.4,
+  "length": "24”",
+  "density": "300%",
+  "price": 750000,
+  "name": "Burgundy raw wavy ",
+  "order": 10,
+  "cat": "wavy",
+  "tag": "Signature",
+  "reviews": 2,
+  "tag_dark": false,
+  "id": "burgundy-wavy",
+  "texture": "Raw wavy",
+  "image": "/assets/img/6462a1c7-ae3c-4813-827e-d55567be6001.jpeg",
+  "rating": 4.9
+}
