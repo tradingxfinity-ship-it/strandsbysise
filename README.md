@@ -332,6 +332,28 @@ the WhatsApp number, the announcement bar and the Hair Bank link, from a phone o
 laptop. Saving commits to GitHub, a workflow rebuilds the pages, and Vercel publishes.
 About a minute end to end.
 
+### Keeping deployments under the free-tier limit
+
+Every save makes **two** commits — Sise's data commit, then the workflow's "Rebuild
+pages" commit — and Vercel's Hobby (free) tier deploys each push, so a busy editing
+day can hit its daily deployment cap and stop publishing. Two things keep that in
+check:
+
+1. The build workflow's `concurrency` group collapses a burst of quick saves into a
+   single rebuild (and so a single deploy) instead of one per save — already in
+   `.github/workflows/build.yml`, nothing to do.
+2. A one-time **Vercel setting** skips deploying the raw data commits (the pages they
+   change are served by the rebuild deploy that follows anyway). In the Vercel project
+   → **Settings → Git → Ignored Build Step**, set it to:
+   ```sh
+   git diff --quiet HEAD^ HEAD -- ':(exclude)data' && exit 0 || exit 1
+   ```
+   That means: if a commit changed nothing outside `data/`, skip the build. Together
+   these turn a flurry of edits into roughly one deploy instead of a dozen.
+
+If deployments ever stall mid-day, it's the daily cap — it resets on its own, or a
+Vercel **Redeploy** on the latest commit pushes it through.
+
 ### One-time setup
 
 Two steps, both on your own accounts. **I can't do these — they involve a secret that

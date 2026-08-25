@@ -6,6 +6,13 @@
 #
 # Deliberately does NOT change how Vercel deploys: if this workflow ever
 # fails, the site keeps serving the last good HTML rather than going down.
+#
+# The `concurrency` group below collapses a burst of quick saves into ONE
+# rebuild: when several content commits land in a row, only the newest run
+# finishes and the older in-flight ones are cancelled. That means one
+# rebuild commit — and so one Vercel deploy — for a flurry of edits, instead
+# of one per save. It pairs with the Vercel "Ignored Build Step" (see
+# README) that skips deploying the raw data commits themselves.
 name: Build site
 
 on:
@@ -20,6 +27,12 @@ on:
       - 'assets/js/**'
       - 'build.py'
   workflow_dispatch:
+
+# One rebuild at a time; a newer content push cancels an older, still-running
+# rebuild so a run of quick edits produces a single deploy, not a pile.
+concurrency:
+  group: build-site
+  cancel-in-progress: true
 
 permissions:
   contents: write
@@ -43,8 +56,18 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if git diff --quiet -- '*.html'; then
             echo "No page changes — nothing to commit."
-          else
-            git add -- '*.html'
-            git commit -m "Rebuild pages from content changes"
-            git push
+            exit 0
           fi
+          git add -- '*.html'
+          git commit -m "Rebuild pages from content changes"
+          # A content commit may have landed while we were building; rebase
+          # onto it and retry rather than failing the push.
+          for attempt in 1 2 3; do
+            if git push; then
+              exit 0
+            fi
+            echo "Push rejected (attempt $attempt) — rebasing on latest and retrying."
+            git pull --rebase --autostash origin main || true
+          done
+          echo "Could not push after retries; the next content change will rebuild."
+          exit 1
