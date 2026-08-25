@@ -1,0 +1,18 @@
+{
+  "weight_kg": 0.4,
+  "length": "10”",
+  "density": "200g",
+  "price": 145000,
+  "name": "Cajun Bob ",
+  "order": 3,
+  "cat": "bonestraight",
+  "lace": "Swiss",
+  "tag": "Best Seller",
+  "reviews": 7,
+  "tag_dark": false,
+  "id": "bob",
+  "texture": "Virgin straight ",
+  "image": "/assets/img/img_5230.jpeg",
+  "closure": "2 by 4",
+  "rating": 4.9
+}
