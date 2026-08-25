@@ -1,0 +1,18 @@
+{
+  "weight_kg": 0.4,
+  "length": "30”",
+  "density": "300g",
+  "price": 1150000,
+  "name": "Custom colored deepwave ",
+  "order": 6,
+  "cat": "deepwave",
+  "lace": "HD",
+  "tag": "Best Seller",
+  "reviews": 1,
+  "tag_dark": false,
+  "id": "deepwave",
+  "texture": "Raw curly",
+  "image": "/assets/img/img_5780.jpeg",
+  "closure": "9 by 6",
+  "rating": 4.9
+}
