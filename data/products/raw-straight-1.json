@@ -1,0 +1,18 @@
+{
+  "weight_kg": 0.4,
+  "length": "18”",
+  "density": "250g",
+  "price": 420000,
+  "name": "Raw straight ",
+  "order": 100,
+  "cat": "bonestraight",
+  "lace": "Swiss",
+  "tag": "Editor's Pick",
+  "reviews": 1,
+  "tag_dark": false,
+  "id": "raw-straight",
+  "texture": "Raw straight ",
+  "image": "/assets/img/img_1877.jpeg",
+  "closure": "5 by 5",
+  "rating": 4.9
+}
