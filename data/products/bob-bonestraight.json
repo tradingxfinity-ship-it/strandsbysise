@@ -1,0 +1,19 @@
+{
+  "weight_kg": 0.4,
+  "length": "10”",
+  "old": 210000,
+  "density": "200g",
+  "price": 190000,
+  "name": "bob bonestraight ",
+  "order": 100,
+  "cat": "bonestraight",
+  "lace": "Swiss",
+  "tag": "Best Seller",
+  "reviews": 12,
+  "tag_dark": false,
+  "id": "bob-bonestraight",
+  "texture": "Virgin straight ",
+  "image": "/assets/img/img_9769.jpeg",
+  "closure": "5 by 5",
+  "rating": 4.9
+}
