@@ -46,7 +46,8 @@
 
     <!-- ============ Product ============ -->
     <div class="pdp" data-product-form data-id="{{PDP_SLUG}}" data-name="{{PDP_NAME}}"
-         data-price="{{PDP_PRICE_RAW}}" data-image="{{PDP_IMG}}">
+         data-price="{{PDP_PRICE_RAW}}" data-image="{{PDP_IMG}}"
+         data-length="{{PDP_LENGTH}}" data-weight="{{PDP_WEIGHT}}">
 
       <!-- Gallery -->
       <div class="gallery" data-reveal="scale">
@@ -100,32 +101,19 @@
           </div>
         </div>
 
-        <!-- Length -->
-        <div class="option">
+        <!-- Length — fixed to the piece Sise listed, not a chooser -->
+        <div class="option option--fixed">
           <div class="option__head">
             <span class="label">Length</span>
-            <span class="option__value" data-option-value>20"</span>
-          </div>
-          <div class="chips" role="radiogroup" aria-label="Length" data-option="length">
-            <button class="chip" type="button" role="radio" aria-checked="false" tabindex="-1" data-value='14"'>14"</button>
-            <button class="chip" type="button" role="radio" aria-checked="false" tabindex="-1" data-value='16"'>16"</button>
-            <button class="chip" type="button" role="radio" aria-checked="false" tabindex="-1" data-value='18"'>18"</button>
-            <button class="chip" type="button" role="radio" aria-checked="true" tabindex="0" data-value='20"'>20"</button>
-            <button class="chip" type="button" role="radio" aria-checked="false" tabindex="-1" data-value='24"'>24"</button>
-            <button class="chip" type="button" role="radio" aria-checked="false" tabindex="-1" data-value='26"'>26"</button>
+            <span class="option__value">{{PDP_LENGTH}}</span>
           </div>
         </div>
 
-        <!-- Density -->
-        <div class="option">
+        <!-- Weight — fixed spec -->
+        <div class="option option--fixed">
           <div class="option__head">
-            <span class="label">Density</span>
-            <span class="option__value" data-option-value>180% — Full</span>
-          </div>
-          <div class="chips" role="radiogroup" aria-label="Density" data-option="density">
-            <button class="chip" type="button" role="radio" aria-checked="false" tabindex="-1" data-value="150% — Natural">150% — Natural</button>
-            <button class="chip" type="button" role="radio" aria-checked="true" tabindex="0" data-value="180% — Full">180% — Full</button>
-            <button class="chip" type="button" role="radio" aria-checked="false" tabindex="-1" data-value="200% — Very Full">200% — Very Full</button>
+            <span class="label">Weight (g)</span>
+            <span class="option__value">{{PDP_WEIGHT}}</span>
           </div>
         </div>
 
@@ -311,7 +299,7 @@
     <span>{{PDP_NAME}}</span>
   </div>
   <button class="btn btn--gold" type="button" data-add-to-cart data-id="{{PDP_SLUG}}" data-name="{{PDP_NAME}}"
-          data-price="{{PDP_PRICE_RAW}}" data-image="{{PDP_IMG}}" data-meta='Natural Black · 20" · 180% — Full'>Add to Cart</button>
+          data-price="{{PDP_PRICE_RAW}}" data-image="{{PDP_IMG}}" data-meta='Natural Black · {{PDP_LENGTH}} · {{PDP_WEIGHT}}'>Add to Cart</button>
 </div>
 
 {{FOOTER}}

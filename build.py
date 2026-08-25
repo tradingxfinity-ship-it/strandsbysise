@@ -121,6 +121,17 @@ def stars(rating):
     return "★" * full + "☆" * (5 - full)
 
 
+def weight_display(p):
+    """The wig's weight, kept in the `density` field (relabelled to
+    Weight (g) in the panel — see admin/config.yml). A plain number gets a
+    'g' suffix; anything else (e.g. a legacy '180%') is shown as-is so it's
+    obvious it still needs updating to grams."""
+    v = str(p.get("density", "")).strip()
+    if not v:
+        return ""
+    return v + " g" if re.fullmatch(r"\d+(?:\.\d+)?", v) else v
+
+
 def attr(value):
     """Escape a value going into a double-quoted HTML attribute.
 
@@ -152,7 +163,8 @@ def product_card(p, order):
         cls = "product-card__tag product-card__tag--dark" if p.get("tag_dark") else "product-card__tag"
         tag = '<span class="%s">%s</span>' % (cls, attr(p["tag"]))
     old = '<s>%s</s>' % naira(p["old"]) if p.get("old") else ""
-    meta = "%s · %s density" % (p.get("length", ""), p.get("density", ""))
+    weight = weight_display(p)
+    meta = " · ".join(x for x in (p.get("length", ""), weight) if x)
     url = product_url(p)
 
     # Built with the real values, not placeholders: this string is inserted
@@ -175,7 +187,7 @@ def product_card(p, order):
             <ul class="spec-list">
               <li class="spec">{length} length</li>
               <li class="spec">{texture}</li>
-              <li class="spec">{density} density</li>
+              <li class="spec">{weight}</li>
             </ul>
             <div class="product-card__foot">
               <span class="price">{price_f}{old}</span>
@@ -187,7 +199,7 @@ def product_card(p, order):
         url=attr(url), img=attr(img), name=attr(p["name"]),
         tag=tag, heart=HEART, stars=stars(p["rating"]), reviews=attr(p["reviews"]),
         length=attr(p.get("length", "")), texture=attr(p.get("texture", "")),
-        density=attr(p.get("density", "")), price_f=naira(p["price"]), old=old, actions=actions)
+        weight=attr(weight), price_f=naira(p["price"]), old=old, actions=actions)
 
 
 PRODUCT_GRID = "\n\n".join(product_card(p, i) for i, p in enumerate(PRODUCTS))
@@ -310,6 +322,8 @@ def render_product(p):
         "PDP_RATING": attr(p["rating"]),
         "PDP_REVIEWS": attr(p["reviews"]),
         "PDP_STARS": stars(p["rating"]),
+        "PDP_LENGTH": attr(p.get("length", "")),
+        "PDP_WEIGHT": attr(weight_display(p) or "—"),
     }
 
     page = PRODUCT_TPL

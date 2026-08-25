@@ -113,7 +113,8 @@
 
     <!-- ============ Product ============ -->
     <div class="pdp" data-product-form data-id="frontal-pixie-1" data-name="24” frontal pixie"
-         data-price="450000" data-image="assets/img/img_7805.jpeg">
+         data-price="450000" data-image="assets/img/img_7805.jpeg"
+         data-length="24" data-weight="300%">
 
       <!-- Gallery -->
       <div class="gallery" data-reveal="scale">
@@ -167,32 +168,19 @@
           </div>
         </div>
 
-        <!-- Length -->
-        <div class="option">
+        <!-- Length — fixed to the piece Sise listed, not a chooser -->
+        <div class="option option--fixed">
           <div class="option__head">
             <span class="label">Length</span>
-            <span class="option__value" data-option-value>20"</span>
-          </div>
-          <div class="chips" role="radiogroup" aria-label="Length" data-option="length">
-            <button class="chip" type="button" role="radio" aria-checked="false" tabindex="-1" data-value='14"'>14"</button>
-            <button class="chip" type="button" role="radio" aria-checked="false" tabindex="-1" data-value='16"'>16"</button>
-            <button class="chip" type="button" role="radio" aria-checked="false" tabindex="-1" data-value='18"'>18"</button>
-            <button class="chip" type="button" role="radio" aria-checked="true" tabindex="0" data-value='20"'>20"</button>
-            <button class="chip" type="button" role="radio" aria-checked="false" tabindex="-1" data-value='24"'>24"</button>
-            <button class="chip" type="button" role="radio" aria-checked="false" tabindex="-1" data-value='26"'>26"</button>
+            <span class="option__value">24</span>
           </div>
         </div>
 
-        <!-- Density -->
-        <div class="option">
+        <!-- Weight — fixed spec -->
+        <div class="option option--fixed">
           <div class="option__head">
-            <span class="label">Density</span>
-            <span class="option__value" data-option-value>180% — Full</span>
-          </div>
-          <div class="chips" role="radiogroup" aria-label="Density" data-option="density">
-            <button class="chip" type="button" role="radio" aria-checked="false" tabindex="-1" data-value="150% — Natural">150% — Natural</button>
-            <button class="chip" type="button" role="radio" aria-checked="true" tabindex="0" data-value="180% — Full">180% — Full</button>
-            <button class="chip" type="button" role="radio" aria-checked="false" tabindex="-1" data-value="200% — Very Full">200% — Very Full</button>
+            <span class="label">Weight (g)</span>
+            <span class="option__value">300%</span>
           </div>
         </div>
 
@@ -377,12 +365,12 @@
             <ul class="spec-list">
               <li class="spec">22” length</li>
               <li class="spec">Raw wavy</li>
-              <li class="spec">400% density</li>
+              <li class="spec">400%</li>
             </ul>
             <div class="product-card__foot">
               <span class="price">₦1,150,000<s>₦1,250,000</s></span>
               <button class="btn btn--dark btn--sm" data-add-to-cart data-id="donor-wavy" data-name="Raw baby highlights wavy "
-                      data-price="1150000" data-image="assets/img/img_1703.jpeg" data-meta="22” · 400% density">Add to Cart</button>
+                      data-price="1150000" data-image="assets/img/img_1703.jpeg" data-meta="22” · 400%">Add to Cart</button>
             </div>
           </div>
         </article>
@@ -399,12 +387,12 @@
             <ul class="spec-list">
               <li class="spec">26” length</li>
               <li class="spec">Virgin</li>
-              <li class="spec">300% density</li>
+              <li class="spec">300%</li>
             </ul>
             <div class="product-card__foot">
               <span class="price">₦740,000<s>₦800,000</s></span>
               <button class="btn btn--dark btn--sm" data-add-to-cart data-id="erusian-curly" data-name="Ginger erusian curly"
-                      data-price="740000" data-image="assets/img/img_1611.jpeg" data-meta="26” · 300% density">Add to Cart</button>
+                      data-price="740000" data-image="assets/img/img_1611.jpeg" data-meta="26” · 300%">Add to Cart</button>
             </div>
           </div>
         </article>
@@ -421,12 +409,12 @@
             <ul class="spec-list">
               <li class="spec">28” length</li>
               <li class="spec">Wavy</li>
-              <li class="spec">300% density</li>
+              <li class="spec">300%</li>
             </ul>
             <div class="product-card__foot">
               <span class="price">₦900,000<s>₦980,000</s></span>
               <button class="btn btn--dark btn--sm" data-add-to-cart data-id="frontal-glam" data-name="Raw deepwave "
-                      data-price="900000" data-image="assets/img/4125a2e9-5d7f-4b8b-89a7-1ce8ba8f1f5c.jpeg" data-meta="28” · 300% density">Add to Cart</button>
+                      data-price="900000" data-image="assets/img/4125a2e9-5d7f-4b8b-89a7-1ce8ba8f1f5c.jpeg" data-meta="28” · 300%">Add to Cart</button>
             </div>
           </div>
         </article>
@@ -443,12 +431,12 @@
             <ul class="spec-list">
               <li class="spec">10” length</li>
               <li class="spec">Straight </li>
-              <li class="spec">150 density</li>
+              <li class="spec">150 g</li>
             </ul>
             <div class="product-card__foot">
               <span class="price">₦225,000<s>₦250,000</s></span>
               <button class="btn btn--dark btn--sm" data-add-to-cart data-id="closure-classic" data-name="Raw donor bob"
-                      data-price="225000" data-image="assets/img/003030ee-6e8e-436b-934c-27ba177a9979.jpeg" data-meta="10” · 150 density">Add to Cart</button>
+                      data-price="225000" data-image="assets/img/003030ee-6e8e-436b-934c-27ba177a9979.jpeg" data-meta="10” · 150 g">Add to Cart</button>
             </div>
           </div>
         </article>
@@ -464,7 +452,7 @@
     <span>24” frontal pixie</span>
   </div>
   <button class="btn btn--gold" type="button" data-add-to-cart data-id="frontal-pixie-1" data-name="24” frontal pixie"
-          data-price="450000" data-image="assets/img/img_7805.jpeg" data-meta='Natural Black · 20" · 180% — Full'>Add to Cart</button>
+          data-price="450000" data-image="assets/img/img_7805.jpeg" data-meta='Natural Black · 24 · 300%'>Add to Cart</button>
 </div>
 
 <footer class="footer">
@@ -553,6 +541,6 @@
   </div>
 </div>
 
-<script src="assets/js/main.js?v=18118e83" defer></script>
+<script src="assets/js/main.js?v=561571b6" defer></script>
 </body>
 </html>

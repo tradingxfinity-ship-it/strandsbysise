@@ -97,7 +97,7 @@ collections:
 
       - { name: length, label: Length, widget: string, hint: 'e.g. 20"' }
       - { name: texture, label: Texture, widget: string, hint: 'e.g. Bonestraight' }
-      - { name: density, label: Density, widget: string, hint: 'e.g. 180%' }
+      - { name: density, label: Weight (g), widget: string, hint: "The wig's weight in grams, e.g. 320" }
 
       - name: weight_kg
         label: Shipping weight (kg)
