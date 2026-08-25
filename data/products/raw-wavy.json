@@ -1,0 +1,16 @@
+{
+  "weight_kg": 0.4,
+  "length": "22”",
+  "density": "300%",
+  "price": 800000,
+  "name": " 2 toned raw wavy ",
+  "order": 6,
+  "cat": "wavy",
+  "tag": "Signature",
+  "reviews": 1,
+  "tag_dark": false,
+  "id": "raw-wavy",
+  "texture": "Raw wavy",
+  "image": "/assets/img/3e01e727-008e-43fb-a2b9-377b30c118b0.jpeg",
+  "rating": 4.9
+}
