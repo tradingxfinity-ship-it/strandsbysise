@@ -1,0 +1,16 @@
+{
+  "weight_kg": 0.4,
+  "length": "30”",
+  "density": "300%",
+  "price": 1150000,
+  "name": "Custom colored deepwave ",
+  "order": 3,
+  "cat": "deepwave",
+  "tag": "Signature",
+  "reviews": 1,
+  "tag_dark": false,
+  "id": "raw-deepwave",
+  "texture": "Raw deepwave ",
+  "image": "/assets/img/e8838bba-7719-46d8-bc3d-d5b1711ff6b0.jpeg",
+  "rating": 4.9
+}
