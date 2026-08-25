@@ -1,0 +1,18 @@
+{
+  "weight_kg": 0.4,
+  "length": "10”",
+  "density": "250g",
+  "price": 230000,
+  "name": "Piano bonestraight ",
+  "order": 10,
+  "cat": "bonestraight",
+  "lace": "Swiss",
+  "tag": "Sale",
+  "reviews": 2,
+  "tag_dark": false,
+  "id": "bonestraight",
+  "texture": "Virgin straight ",
+  "image": "/assets/img/img_2073.jpeg",
+  "closure": "5 by 5",
+  "rating": 4.9
+}
