@@ -1,0 +1,17 @@
+{
+  "weight_kg": 0.4,
+  "length": "16”",
+  "density": "200g",
+  "price": 290000,
+  "name": "frontal pixie",
+  "order": 100,
+  "cat": "pixie-curls",
+  "tag": "Best Seller",
+  "reviews": 7,
+  "tag_dark": false,
+  "id": "frontal-pixie",
+  "texture": "Virgin curly ",
+  "image": "/assets/img/img_1267.jpeg",
+  "closure": "13 by 4",
+  "rating": 4.9
+}
