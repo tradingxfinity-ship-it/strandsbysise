@@ -1,0 +1,16 @@
+{
+  "weight_kg": 0.4,
+  "length": "24”",
+  "density": "400%",
+  "price": 650000,
+  "name": "24” burgundy wavy",
+  "order": 9,
+  "cat": "wavy",
+  "tag": "Best Seller",
+  "reviews": 2,
+  "tag_dark": false,
+  "id": "burgundy-wavy",
+  "texture": "Virgin wavy ",
+  "image": "/assets/img/img_7808.jpeg",
+  "rating": 4.9
+}
