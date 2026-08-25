@@ -917,7 +917,8 @@
         "Hair grade: " + pick("grade"),
         "Hair type: " + pick("type"),
         "Length: " + val("#cu-length"),
-        "Weight: " + val("#cu-weight")
+        "Weight: " + val("#cu-weight"),
+        "Closure: " + val("#cu-closure")
       ];
       var notes = val("#cu-notes");
       if (notes) lines.push("Notes: " + notes);
