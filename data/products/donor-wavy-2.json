@@ -13,5 +13,6 @@
   "id": "donor-wavy",
   "texture": "Raw wavy",
   "image": "/assets/img/img_1727.jpeg",
+  "closure": "5 by 5",
   "rating": 4.9
 }
