@@ -1,0 +1,18 @@
+{
+  "weight_kg": 0.4,
+  "length": "14",
+  "density": "300g",
+  "price": 450000,
+  "name": "Raw blonde",
+  "order": 3,
+  "cat": "bouncy",
+  "lace": "HD",
+  "tag": "Editor's Pick",
+  "reviews": 1,
+  "tag_dark": false,
+  "id": "blonde-bounce",
+  "texture": "Raw bouncy ",
+  "image": "/assets/img/img_0673.jpeg",
+  "closure": "6 by 6",
+  "rating": 4.9
+}
