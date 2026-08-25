@@ -971,4 +971,57 @@
 
   /* --- Footer year ------------------------------------------ */
   $$("[data-year]").forEach(function (el) { el.textContent = String(new Date().getFullYear()); });
+
+  /* --- Anniversary popup ------------------------------------ */
+  /* Shown once per browsing session, so moving between pages doesn't
+     re-trigger it but a fresh visit does. */
+  var celebrate = $("[data-celebrate]");
+  if (celebrate) {
+    var SEEN = "sbs_anniv_seen";
+    var already = false;
+    try { already = sessionStorage.getItem(SEEN) === "1"; } catch (err) { /* private mode */ }
+
+    var openCelebrate = function () {
+      celebrate.hidden = false;
+      document.body.classList.add("is-locked");
+      try { sessionStorage.setItem(SEEN, "1"); } catch (err) { /* private mode */ }
+      var closeBtn = $(".celebrate__close", celebrate);
+      if (closeBtn) closeBtn.focus();
+      launchConfetti();
+    };
+    var closeCelebrate = function () {
+      celebrate.hidden = true;
+      document.body.classList.remove("is-locked");
+    };
+
+    function launchConfetti() {
+      if (reduceMotion) return;
+      var canvas = $("[data-confetti]", celebrate);
+      if (!canvas) return;
+      var colors = ["#d4af37", "#b8942a", "#fdeef5", "#f6c9dc", "#2b2b2b", "#ffffff", "#e8c877"];
+      for (var i = 0; i < 110; i++) {
+        var p = document.createElement("span");
+        p.className = "confetti";
+        p.style.left = Math.random() * 100 + "%";
+        p.style.background = colors[i % colors.length];
+        p.style.setProperty("--dur", (2.4 + Math.random() * 2.4).toFixed(2) + "s");
+        p.style.setProperty("--delay", (Math.random() * 0.9).toFixed(2) + "s");
+        p.style.setProperty("--drift", Math.round((Math.random() * 2 - 1) * 140) + "px");
+        p.style.setProperty("--rot", Math.round(360 + Math.random() * 720) + "deg");
+        if (i % 3 === 0) p.style.borderRadius = "50%";
+        canvas.appendChild(p);
+      }
+      /* Take the pieces back out once they've fallen. */
+      setTimeout(function () { canvas.innerHTML = ""; }, 7000);
+    }
+
+    $$("[data-celebrate-close]").forEach(function (b) {
+      b.addEventListener("click", closeCelebrate);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !celebrate.hidden) closeCelebrate();
+    });
+
+    if (!already) setTimeout(openCelebrate, 700);
+  }
 })();
