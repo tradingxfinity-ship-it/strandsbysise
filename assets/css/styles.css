@@ -1781,6 +1781,25 @@ select.field {
 }
 .page-head__inner { position: relative; z-index: 1; max-width: 680px; margin-inline: auto; }
 
+/* Shop hero: hero-3 faded into a dark ground, the same treatment as the
+   Hair Bank panel. Scoped to a modifier so the contact page keeps its light
+   header. Layer order is veil, photo, ground: the veil keeps the type
+   legible, and the ground underneath means the hero never depends on the
+   image loading. hero-3 is the landscape shot and is already downloaded for
+   the home slideshow, so this costs no extra request. */
+.page-head--shop {
+  background:
+    linear-gradient(165deg, rgba(22, 19, 18, 0.84) 0%, rgba(22, 19, 18, 0.9) 100%),
+    url("../img/hero-3.jpg") center 28% / cover no-repeat,
+    var(--dark-ground);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+}
+.page-head--shop h1 { color: #fff; }
+.page-head--shop .lede { color: rgba(255, 255, 255, 0.78); }
+.page-head--shop .eyebrow { color: var(--gold); }
+/* The light decorative orbs read as smudges on the dark ground. */
+.page-head--shop .orb { display: none; }
+
 .split {
   display: grid;
   grid-template-columns: 1fr 1fr;
