@@ -289,7 +289,7 @@
           name: form.getAttribute("data-name"),
           price: Number(form.getAttribute("data-price")),
           image: form.getAttribute("data-image"),
-          meta: [selected("color"), form.getAttribute("data-length"), form.getAttribute("data-weight")].filter(Boolean).join(" · "),
+          meta: [selected("color"), form.getAttribute("data-length"), form.getAttribute("data-weight"), form.getAttribute("data-closure")].filter(Boolean).join(" · "),
           qty: qtyInput ? Math.max(1, parseInt(qtyInput.value, 10) || 1) : 1
         };
       } else {

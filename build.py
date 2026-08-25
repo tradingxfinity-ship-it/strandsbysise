@@ -165,7 +165,9 @@ def product_card(p, order):
         tag = '<span class="%s">%s</span>' % (cls, attr(p["tag"]))
     old = '<s>%s</s>' % naira(p["old"]) if p.get("old") else ""
     weight = weight_display(p)
-    meta = " · ".join(x for x in (p.get("length", ""), weight) if x)
+    closure = str(p.get("closure", "")).strip()
+    meta = " · ".join(x for x in (p.get("length", ""), weight, closure) if x)
+    closure_spec = '\n              <li class="spec">%s closure</li>' % attr(closure) if closure else ""
     url = product_url(p)
 
     # Built with the real values, not placeholders: this string is inserted
@@ -188,7 +190,7 @@ def product_card(p, order):
             <ul class="spec-list">
               <li class="spec">{length} length</li>
               <li class="spec">{texture}</li>
-              <li class="spec">{weight}</li>
+              <li class="spec">{weight}</li>{closure_spec}
             </ul>
             <div class="product-card__foot">
               <span class="price">{price_f}{old}</span>
@@ -200,7 +202,8 @@ def product_card(p, order):
         url=attr(url), img=attr(img), name=attr(p["name"]),
         tag=tag, heart=HEART, stars=stars(p["rating"]), reviews=attr(p["reviews"]),
         length=attr(p.get("length", "")), texture=attr(p.get("texture", "")),
-        weight=attr(weight), price_f=naira(p["price"]), old=old, actions=actions)
+        weight=attr(weight), closure_spec=closure_spec,
+        price_f=naira(p["price"]), old=old, actions=actions)
 
 
 PRODUCT_GRID = "\n\n".join(product_card(p, i) for i, p in enumerate(PRODUCTS))
@@ -302,6 +305,22 @@ def eyebrow(p):
     return "%s · %s" % (p["tag"], label) if p.get("tag") else label
 
 
+def closure_row(p):
+    """The fixed 'Closure' spec on the product page — only when Sise set one,
+    so pieces without a closure simply don't show the row."""
+    closure = str(p.get("closure", "")).strip()
+    if not closure:
+        return ""
+    return (
+        '<div class="option option--fixed">\n'
+        '          <div class="option__head">\n'
+        '            <span class="label">Closure</span>\n'
+        '            <span class="option__value">%s</span>\n'
+        '          </div>\n'
+        '        </div>'
+    ) % attr(closure)
+
+
 def render_product(p):
     img = product_img(p)
     old = "<s>%s</s>" % naira(p["old"]) if p.get("old") else ""
@@ -325,6 +344,10 @@ def render_product(p):
         "PDP_STARS": stars(p["rating"]),
         "PDP_LENGTH": attr(p.get("length", "")),
         "PDP_WEIGHT": attr(weight_display(p) or "—"),
+        "PDP_CLOSURE": attr(p.get("closure", "")),
+        "PDP_CLOSURE_ROW": closure_row(p),
+        "PDP_META": attr(" · ".join(
+            x for x in ["Natural Black", p.get("length", ""), weight_display(p), p.get("closure", "")] if x)),
     }
 
     page = PRODUCT_TPL

@@ -47,7 +47,7 @@
     <!-- ============ Product ============ -->
     <div class="pdp" data-product-form data-id="{{PDP_SLUG}}" data-name="{{PDP_NAME}}"
          data-price="{{PDP_PRICE_RAW}}" data-image="{{PDP_IMG}}"
-         data-length="{{PDP_LENGTH}}" data-weight="{{PDP_WEIGHT}}">
+         data-length="{{PDP_LENGTH}}" data-weight="{{PDP_WEIGHT}}" data-closure="{{PDP_CLOSURE}}">
 
       <!-- Gallery -->
       <div class="gallery" data-reveal="scale">
@@ -116,6 +116,9 @@
             <span class="option__value">{{PDP_WEIGHT}}</span>
           </div>
         </div>
+
+        <!-- Closure — fixed spec, only when Sise set one -->
+        {{PDP_CLOSURE_ROW}}
 
         <!-- Quantity -->
         <div class="option">
@@ -299,7 +302,7 @@
     <span>{{PDP_NAME}}</span>
   </div>
   <button class="btn btn--gold" type="button" data-add-to-cart data-id="{{PDP_SLUG}}" data-name="{{PDP_NAME}}"
-          data-price="{{PDP_PRICE_RAW}}" data-image="{{PDP_IMG}}" data-meta='Natural Black · {{PDP_LENGTH}} · {{PDP_WEIGHT}}'>Add to Cart</button>
+          data-price="{{PDP_PRICE_RAW}}" data-image="{{PDP_IMG}}" data-meta='{{PDP_META}}'>Add to Cart</button>
 </div>
 
 {{FOOTER}}

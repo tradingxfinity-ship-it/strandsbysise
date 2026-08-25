@@ -99,6 +99,15 @@ collections:
       - { name: texture, label: Texture, widget: string, hint: 'e.g. Bonestraight' }
       - { name: density, label: Weight (g), widget: string, hint: "The wig's weight in grams, e.g. 320" }
 
+      - name: closure
+        label: Closure type
+        widget: select
+        required: false
+        options: ['5 by 5', '6 by 6', '9 by 6', '13 by 4', '13 by 6', 'Custom unit']
+        hint: >-
+          The lace closure or frontal size. Pick Custom unit for a
+          made-to-order piece. Leave empty to hide it on the product.
+
       - name: weight_kg
         label: Shipping weight (kg)
         widget: number
