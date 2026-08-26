@@ -973,6 +973,45 @@
     });
   }
 
+  /* --- Reels (tap a muted clip for sound) ------------------- */
+  var reels = $$("[data-reel]");
+  if (reels.length) {
+    /* Play each muted clip only while it's on screen — reliable autoplay
+       across browsers, and no wasted bandwidth on off-screen video. */
+    if ("IntersectionObserver" in window) {
+      var reelObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          var v = $("video", entry.target);
+          if (!v) return;
+          if (entry.isIntersecting) {
+            var p = v.play();
+            if (p && p.catch) p.catch(function () {});
+          } else {
+            v.pause();
+          }
+        });
+      }, { threshold: 0.4 });
+      reels.forEach(function (reel) { reelObserver.observe(reel); });
+    }
+
+    reels.forEach(function (reel) {
+      var video = $("video", reel);
+      if (!video) return;
+      reel.addEventListener("click", function () {
+        var turnOn = video.muted;
+        /* Only one clip plays sound at a time. */
+        reels.forEach(function (other) {
+          var v = $("video", other);
+          if (v && other !== reel) { v.muted = true; other.classList.remove("is-unmuted"); }
+        });
+        video.muted = !turnOn;
+        reel.classList.toggle("is-unmuted", turnOn);
+        var p = video.play();
+        if (p && p.catch) p.catch(function () { /* autoplay/interaction guard */ });
+      });
+    });
+  }
+
   /* --- Footer year ------------------------------------------ */
   $$("[data-year]").forEach(function (el) { el.textContent = String(new Date().getFullYear()); });
 
