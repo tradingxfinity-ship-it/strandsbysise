@@ -1,0 +1,18 @@
+{
+  "weight_kg": 0.4,
+  "length": "20”",
+  "density": "300g",
+  "price": 820000,
+  "name": "Custom colored wavy",
+  "order": 8,
+  "cat": "wavy",
+  "lace": "HD",
+  "tag": "Best Seller",
+  "reviews": 2,
+  "tag_dark": false,
+  "id": "wavy",
+  "texture": "Raw wavy",
+  "image": "/assets/img/img_1812.jpeg",
+  "closure": "6 by 6",
+  "rating": 4.9
+}
