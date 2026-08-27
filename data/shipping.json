@@ -1,13 +1,6 @@
 {
   "_note": "Delivery options and rates. Prices in naira. International rates are the Parcels Nigeria express table (3-5 business days). Bands are 'up to and including' the weight shown, matched in order.",
-
   "local": [
-    {
-      "id": "test-free",
-      "label": "Free delivery (test)",
-      "detail": "Temporary — remove after go-live test",
-      "price": 0
-    },
     {
       "id": "benin",
       "label": "Benin City",
@@ -21,40 +14,243 @@
       "price": 15000
     }
   ],
-
   "international": {
     "label": "International",
     "detail": "3–5 business days",
     "packaging_fee": 2500,
     "packaging_note": "Includes packaging. Import duty is charged by the destination country and paid by the recipient.",
     "zones": [
-      { "id": "uk-ireland",   "label": "UK & Ireland" },
-      { "id": "west-africa",  "label": "West Africa" },
-      { "id": "rest-africa",  "label": "Rest of Africa" },
-      { "id": "usa-canada",   "label": "USA & Canada" },
-      { "id": "europe",       "label": "Europe" },
-      { "id": "arab",         "label": "Middle East" },
-      { "id": "asia",         "label": "Asia" },
-      { "id": "caribbean",    "label": "Caribbean" }
+      {
+        "id": "uk-ireland",
+        "label": "UK & Ireland"
+      },
+      {
+        "id": "west-africa",
+        "label": "West Africa"
+      },
+      {
+        "id": "rest-africa",
+        "label": "Rest of Africa"
+      },
+      {
+        "id": "usa-canada",
+        "label": "USA & Canada"
+      },
+      {
+        "id": "europe",
+        "label": "Europe"
+      },
+      {
+        "id": "arab",
+        "label": "Middle East"
+      },
+      {
+        "id": "asia",
+        "label": "Asia"
+      },
+      {
+        "id": "caribbean",
+        "label": "Caribbean"
+      }
     ],
     "bands": [
-      { "up_to_kg": 2,   "rates": [72000, 78500, 84500, 84500, 96000, 104500, 113000, 117500] },
-      { "up_to_kg": 2.5, "rates": [104000, 110000, 122500, 123000, 134000, 144000, 153000, 164500] },
-      { "up_to_kg": 3,   "rates": [116500, 130500, 148500, 149500, 146000, 265000, 169000, 205500] },
-      { "up_to_kg": 3.5, "rates": [123500, 148000, 171000, 164500, 153500, 273500, 178000, 215500] },
-      { "up_to_kg": 4,   "rates": [136500, 172000, 200500, 186000, 167500, 288500, 194000, 232000] },
-      { "up_to_kg": 4.5, "rates": [143000, 189500, 223000, 201500, 175000, 297000, 203000, 242000] },
-      { "up_to_kg": 5,   "rates": [153000, 210500, 249000, 220000, 185500, 308500, 215500, 255500] },
-      { "up_to_kg": 6,   "rates": [190000, 251000, 290000, 263500, 228500, 354500, 263500, 310500] },
-      { "up_to_kg": 7,   "rates": [210000, 274500, 313500, 289000, 253500, 383000, 294500, 349000] },
-      { "up_to_kg": 8,   "rates": [236500, 305000, 343500, 320500, 285500, 418000, 331500, 393500] },
-      { "up_to_kg": 9,   "rates": [264000, 336000, 374500, 352500, 318000, 454000, 370000, 439000] }
+      {
+        "up_to_kg": 2,
+        "rates": [
+          72000,
+          78500,
+          84500,
+          84500,
+          96000,
+          104500,
+          113000,
+          117500
+        ]
+      },
+      {
+        "up_to_kg": 2.5,
+        "rates": [
+          104000,
+          110000,
+          122500,
+          123000,
+          134000,
+          144000,
+          153000,
+          164500
+        ]
+      },
+      {
+        "up_to_kg": 3,
+        "rates": [
+          116500,
+          130500,
+          148500,
+          149500,
+          146000,
+          265000,
+          169000,
+          205500
+        ]
+      },
+      {
+        "up_to_kg": 3.5,
+        "rates": [
+          123500,
+          148000,
+          171000,
+          164500,
+          153500,
+          273500,
+          178000,
+          215500
+        ]
+      },
+      {
+        "up_to_kg": 4,
+        "rates": [
+          136500,
+          172000,
+          200500,
+          186000,
+          167500,
+          288500,
+          194000,
+          232000
+        ]
+      },
+      {
+        "up_to_kg": 4.5,
+        "rates": [
+          143000,
+          189500,
+          223000,
+          201500,
+          175000,
+          297000,
+          203000,
+          242000
+        ]
+      },
+      {
+        "up_to_kg": 5,
+        "rates": [
+          153000,
+          210500,
+          249000,
+          220000,
+          185500,
+          308500,
+          215500,
+          255500
+        ]
+      },
+      {
+        "up_to_kg": 6,
+        "rates": [
+          190000,
+          251000,
+          290000,
+          263500,
+          228500,
+          354500,
+          263500,
+          310500
+        ]
+      },
+      {
+        "up_to_kg": 7,
+        "rates": [
+          210000,
+          274500,
+          313500,
+          289000,
+          253500,
+          383000,
+          294500,
+          349000
+        ]
+      },
+      {
+        "up_to_kg": 8,
+        "rates": [
+          236500,
+          305000,
+          343500,
+          320500,
+          285500,
+          418000,
+          331500,
+          393500
+        ]
+      },
+      {
+        "up_to_kg": 9,
+        "rates": [
+          264000,
+          336000,
+          374500,
+          352500,
+          318000,
+          454000,
+          370000,
+          439000
+        ]
+      }
     ],
     "per_kg_bands": [
-      { "up_to_kg": 15, "rates": [27500, 35000, 38900, 36800, 33400, 47300, 39100, 46800] },
-      { "up_to_kg": 20, "rates": [26500, 33100, 35600, 33600, 32100, 41900, 37600, 44800] },
-      { "up_to_kg": 30, "rates": [27900, 32400, 34300, 31300, 33600, 42000, 39300, 47100] },
-      { "up_to_kg": 40, "rates": [32800, 31200, 33200, 36800, 39200, 46600, 45900, 54800] }
+      {
+        "up_to_kg": 15,
+        "rates": [
+          27500,
+          35000,
+          38900,
+          36800,
+          33400,
+          47300,
+          39100,
+          46800
+        ]
+      },
+      {
+        "up_to_kg": 20,
+        "rates": [
+          26500,
+          33100,
+          35600,
+          33600,
+          32100,
+          41900,
+          37600,
+          44800
+        ]
+      },
+      {
+        "up_to_kg": 30,
+        "rates": [
+          27900,
+          32400,
+          34300,
+          31300,
+          33600,
+          42000,
+          39300,
+          47100
+        ]
+      },
+      {
+        "up_to_kg": 40,
+        "rates": [
+          32800,
+          31200,
+          33200,
+          36800,
+          39200,
+          46600,
+          45900,
+          54800
+        ]
+      }
     ],
     "quote_above_kg": 40,
     "quote_note": "Over 40kg is quoted individually — please contact us."
