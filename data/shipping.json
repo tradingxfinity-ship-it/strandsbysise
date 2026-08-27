@@ -3,6 +3,12 @@
 
   "local": [
     {
+      "id": "test-free",
+      "label": "Free delivery (test)",
+      "detail": "Temporary — remove after go-live test",
+      "price": 0
+    },
+    {
       "id": "benin",
       "label": "Benin City",
       "detail": "Within Benin City",
